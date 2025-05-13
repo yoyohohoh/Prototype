@@ -16,17 +16,18 @@ public class UIManager : MonoBehaviour
     private Dictionary<string, GameObject> uiLookup;
 
     void Awake()
-    {
+    {      
         uiLookup = new Dictionary<string, GameObject>();
         foreach (GameObject uiObj in uiObjs)
         {
             uiLookup[uiObj.name] = uiObj;
-            if(uiObj != uiObjs[0])
+            
+            if (uiObj != uiObjs[0])
             {
                 uiObj.SetActive(false);
             }
         }
-            
+
     }
 
     public void ShowUI(string uiName)
@@ -34,12 +35,12 @@ public class UIManager : MonoBehaviour
         if (uiLookup.TryGetValue(uiName, out GameObject uiObj))
         {
             uiObj.SetActive(true);
-            uiObjs[0].SetActive(false);
         }
         else
         {
             Debug.LogWarning($"UI panel '{uiName}' not found.");
         }
+
     }
 
     public void HideUI(string uiName)
@@ -47,7 +48,6 @@ public class UIManager : MonoBehaviour
         if (uiLookup.TryGetValue(uiName, out GameObject uiObj))
         {
             uiObj.SetActive(false);
-            uiObjs[0].SetActive(true);
         }
         else
         {

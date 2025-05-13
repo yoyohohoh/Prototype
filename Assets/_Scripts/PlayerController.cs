@@ -10,19 +10,40 @@ public class PlayerController : MonoBehaviour
     [Header("Joystick")]
     [SerializeField] private Joystick _joystick;
 
+    [Header("HUD")]
+    [SerializeField] public PlayerData _playerData;
+
+    public static PlayerController Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _controller = GetComponent<CharacterController>();
         if (_controller == null)
         {
             Debug.LogError("CharacterController component is missing from the GameObject.");
         }
+
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        _playerData = GameSaveManager.Instance().LoadPlayerData();
+        if(_playerData == null)
+        {
+            _playerData = new PlayerData();
+        }
     }
 
     // Update is called once per frame

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
+  m_Name: Quest1
+  m_EditorClassIdentifier: 
+  _questStatus: 0
+  _questID: 1
+  _questName: Trial of Evasion
+  _questDescription: Prove your worth by avoiding four NPCs for 30 seconds. You'll
+    be rewarded with a super star.
+  _questHp: 0
+  _questXp: 100
+  _questReward: {fileID: 6667449828456994001, guid: 4f6196b824962654a897b45fc868f38a, type: 3}

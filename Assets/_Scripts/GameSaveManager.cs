@@ -19,19 +19,49 @@ public class GameSaveManager
     }
 
     string path;
+    string pathFolder = $"{Application.persistentDataPath}/";
     public void SavePlayerData(PlayerData data)
     {
         string timeStamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string json = JsonUtility.ToJson(data);
-        path = $"{Application.persistentDataPath}/{timeStamp}.json";
+        path = $"{pathFolder}/{timeStamp}.json";
 
         File.WriteAllText(path, json);
         Debug.Log("Player data saved to " + path);
     }
     public PlayerData LoadPlayerData()
     {
-        string json = File.ReadAllText(path);
-        PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-        return data;
+        string[] files = Directory.GetFiles(pathFolder, "*.json");
+        if (files.Length > 0)
+        {
+            path = files[files.Length - 1];
+            string json = File.ReadAllText(path);
+            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            return data;
+        }
+        else
+        {
+            Debug.Log("No save file found.");
+            return null;
+        }
     }
+
+    public void DeleteSaveData()
+    {
+        string[] files = Directory.GetFiles(pathFolder, "*.json");
+
+        if (files.Length > 0)
+        {
+            foreach (string file in files)
+            {
+                File.Delete(file);
+                Debug.Log("Deleted save file: " + file);
+            }
+        }
+        else
+        {
+            Debug.Log("No save file found to delete.");
+        }
+    }
+
 }

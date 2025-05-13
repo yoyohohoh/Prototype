@@ -5,15 +5,21 @@
 // Redistribution or modification must include proper attribution.
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
+using UnityEngine;
 
-using System.Collections.Generic;
-
-[System.Serializable]
-public class PlayerData
+public enum WeaponStatus
 {
-    public string name;
-    public int level;
-    public float hp;
-    public float xp;
-    public List<string> checkPoint;
+    NotAvailable,
+    Available,
+}
+
+public class Weapon : MonoBehaviour
+{
+    public WeaponStatus _weaponStatus;
+
+    public int _weaponID;
+    public string _weaponName;
+    public string _weaponDescription;
+
+    public float _weaponDamage;
 }
