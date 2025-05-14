@@ -6,6 +6,7 @@
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
 
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelConfig", menuName = "Scriptable Objects/LevelConfig")]
@@ -15,7 +16,7 @@ public class LevelConfig : ScriptableObject
     public string levelName;
     public string levelDescription;
 
-    public int numberOfNPCs;
-    public int numberOfItems;
+    public List<ObjCount> _npcList;
+    public List<ObjCount> _itemList;
     public QuestSet questSet;
 }
