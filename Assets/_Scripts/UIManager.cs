@@ -54,4 +54,5 @@ public class UIManager : MonoBehaviour
             Debug.LogWarning($"UI panel '{uiName}' not found.");
         }
     }
+
 }
