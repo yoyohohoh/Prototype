@@ -3,18 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ButtonImageColorChange : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Color pressedFrameColor;
     public Color pressedImageColor;
     public float rotationSpeed = 300f;
+    public bool isPressed = false;
 
     private Image _frame;
     private Image _image;
     private GameObject _ring;
     private Color _originalFrameColor;
     private Color _originalImageColor;
-    private bool _isPressed = false;
+
 
     void Start()
     {
@@ -39,12 +40,12 @@ public class ButtonImageColorChange : MonoBehaviour, IPointerDownHandler, IPoint
     {
         if (_ring != null)
         {
-            if (_isPressed)
+            if (isPressed)
             {
                 _ring.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);
             }
 
-            _ring.GetComponent<Image>().enabled = _isPressed;
+            _ring.GetComponent<Image>().enabled = isPressed;
         }
     }
 
@@ -52,7 +53,7 @@ public class ButtonImageColorChange : MonoBehaviour, IPointerDownHandler, IPoint
     {
         if (_ring != null)
         {
-            _isPressed = true;
+            isPressed = true;
         }
         if (_frame != null)
         {
@@ -68,7 +69,7 @@ public class ButtonImageColorChange : MonoBehaviour, IPointerDownHandler, IPoint
     {
         if (_ring != null)
         {
-            _isPressed = false;
+            isPressed = false;
             _ring.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
         }
         if (_frame != null)
