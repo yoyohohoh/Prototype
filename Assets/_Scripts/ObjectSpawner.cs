@@ -35,12 +35,12 @@ public class ObjectSpawner : MonoBehaviour
             {
                 Transform center = _spawnField.transform;
 
-                int width = (int)((Mathf.Abs(center.localScale.x) * 10)/3) * 3;
-                int depth = (int)((Mathf.Abs(center.localScale.z) * 10) / 3) * 3;
+                int width = (int)(Mathf.Abs(center.localScale.x) /3) * 3;
+                int depth = (int)(Mathf.Abs(center.localScale.z) / 3) * 3;
                 float randomX = Random.Range(-width / 2f, width / 2f);
                 float randomZ = Random.Range(-depth / 2f, depth / 2f);
 
-                Vector3 spawnPosition = new Vector3(randomX, 1.0f, randomZ);
+                Vector3 spawnPosition = new Vector3(randomX, 0.0f, randomZ);
                 Instantiate(itemCount.prefab, spawnPosition, Quaternion.identity);
             }
         }
