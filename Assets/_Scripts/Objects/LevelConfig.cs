@@ -17,6 +17,7 @@ public class LevelConfig : ScriptableObject
     public string levelDescription;
 
     public List<ObjCount> _npcList;
-    public List<ObjCount> _itemList;
+    public List<ObjCount> _collectibleList;
+    public List<ObjCount> _consumableList;
     public QuestSet questSet;
 }

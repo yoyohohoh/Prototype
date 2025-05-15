@@ -26,4 +26,5 @@ public class Item : MonoBehaviour
 
     public float _itemHp;
     public float _itemXp;
+
 }

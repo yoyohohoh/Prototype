@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------------
+// Created by: yobisaboy
+// This code is original and owned by yobisaboy. 
+// Use requires logo inclusion and credit in-game and on publishing platforms.
+// Redistribution or modification must include proper attribution.
+// Contact: yobisaboy@gmail.com
+// -----------------------------------------------------------------------------
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,19 +19,12 @@ public class ObjCount
 public class ObjectSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _spawnField;
-
-    [SerializeField] private bool isNPC, isItem;
     [SerializeField] private List<ObjCount> _objList;
 
     void Awake()
     {
         LevelConfig levelConfig = GameObject.Find("LevelManager").GetComponent<LevelManager>()._levelConfig;
-        if(isItem)
-        { _objList = levelConfig._itemList; }
-        else if (isNPC)
-        { _objList = levelConfig._npcList; }
-        else
-        { Debug.LogError("ObjectSpawner: No object type selected."); }
+        _objList = levelConfig._collectibleList;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
