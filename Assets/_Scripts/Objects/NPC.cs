@@ -5,26 +5,27 @@
 // Redistribution or modification must include proper attribution.
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
-
 using UnityEngine;
 
-public enum ItemStatus
+public enum NPCStatus
 {
-    NotAvailable,
-    Available,
-    PickedUp,
-    Used
+    Idle,
+    Patrol,
+    Attack,
+    Dead
 }
 
-public class Item : MonoBehaviour
+public class NPC : MonoBehaviour
 {
-    public ItemStatus _itemStatus;
+    public NPCStatus _npcStatus;
 
-    public int _itemID;
-    public string _itemName;
-    public string _itemDescription;
-    public Sprite _itemIcon;
+    public int _npcID;
+    public string _npcName;
+    public string _npcDescription;
 
-    public float _itemHp;
-    public float _itemXp;
+    public int _npcLevel;
+    public float _npcHp;
+
+    public float _npcDamage => Mathf.Clamp(_npcLevel, 1, 99) * (Mathf.Clamp(_npcHp, 0, 100) / 100f);
 }
+

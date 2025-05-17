@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7526717420716145108}
   m_Layer: 10
   m_Name: BasicItem
-  m_TagString: Item
+  m_TagString: Collectible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemStatus: 1
   _itemID: 0
-  _itemName: Super Star
-  _itemDescription: A star that restores 50 HP.
-  _itemHp: 5
-  _itemXp: 0
+  _itemName: Wood
+  _itemDescription: A wood that gives 5 XP.
+  _itemHp: 0
+  _itemXp: 5

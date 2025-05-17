@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4623462637532811837}
   m_Layer: 10
   m_Name: SuperItem
-  m_TagString: Item
+  m_TagString: Consumable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   _itemStatus: 1
   _itemID: 0
   _itemName: Super Star
-  _itemDescription: A star that restores 50 HP.
+  _itemDescription: A star that restores 5 HP.
   _itemHp: 5
   _itemXp: 0
 --- !u!1001 &2046298537732005045

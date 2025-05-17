@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Weapon
   - Item
+  - NPC
+  - Collectible
+  - Consumable
+  - GridSlot
   layers:
   - Default
   - TransparentFX

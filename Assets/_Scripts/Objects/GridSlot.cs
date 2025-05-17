@@ -8,23 +8,11 @@
 
 using UnityEngine;
 
-public enum ItemStatus
+public class GridSlot : MonoBehaviour
 {
-    NotAvailable,
-    Available,
-    PickedUp,
-    Used
-}
-
-public class Item : MonoBehaviour
-{
-    public ItemStatus _itemStatus;
-
-    public int _itemID;
-    public string _itemName;
-    public string _itemDescription;
-    public Sprite _itemIcon;
-
-    public float _itemHp;
-    public float _itemXp;
+    public string slotName;
+    public int row;
+    public int column;
+    public bool isEmpty = true;
+    public bool isWeapon;
 }
