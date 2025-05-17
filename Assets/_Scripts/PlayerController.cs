@@ -9,7 +9,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : PersistentSingleton<PlayerController>
 {
     [Header("Movements")]
     [SerializeField] public float _speed;
@@ -30,28 +30,18 @@ public class PlayerController : MonoBehaviour
     [Header("HUD")]
     [SerializeField] public PlayerData _playerData;
     [SerializeField] private float _currentSpeed;
+    [SerializeField] private Transform weaponHolder;
 
-    public static PlayerController Instance { get; private set; }
-
-    private void Awake()
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         _controller = GetComponent<CharacterController>();
         if (_controller == null)
         {
             Debug.LogError("CharacterController component is missing from the GameObject.");
         }
 
-        if(_controlPanel)
+        if (_controlPanel)
         {
             _joystick = _controlPanel.transform.Find("Movement").GetComponent<Joystick>();
             _attackButton = _controlPanel.transform.Find("Attack").GetComponent<ButtonInteraction>();
@@ -63,11 +53,7 @@ public class PlayerController : MonoBehaviour
                 Debug.LogError("One or more control buttons are missing from the control panel.");
             }
         }
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
         _playerData = GameSaveManager.Instance().LoadPlayerData();
         if(_playerData == null)
         {
@@ -94,4 +80,10 @@ public class PlayerController : MonoBehaviour
         return isDashing ? _dashForce * _speed : _speed;
     }
 
+    public void PutWeapon(GameObject weapon)
+    {
+        weapon.transform.SetParent(weaponHolder);
+        weapon.transform.localPosition = Vector3.zero;
+        weapon.transform.localRotation = Quaternion.identity;
+    }
 }

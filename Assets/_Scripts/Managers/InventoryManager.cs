@@ -7,9 +7,11 @@
 // -----------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : PersistentSingleton<InventoryManager>
 {
     private List<GridSlot> items;
     private List<GridSlot> weapons;
@@ -17,17 +19,18 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private List<string> itemList;
     [SerializeField] private List<string> weaponList;
 
-    void Awake()
+    void Start()
     {
         // Initialize the lists
         items = new List<GridSlot>();
         weapons = new List<GridSlot>();
 
-        itemList = new List<string>();
-        weaponList = new List<string>();
-
         // Find all GridSlot components in the scene
-        GridSlot[] allGridSlots = FindObjectsOfType<GridSlot>();
+        GridSlot[] allGridSlots = Object
+            .FindObjectsByType<GridSlot>(FindObjectsSortMode.None)
+            .OrderBy(slot => slot.row)
+            .ThenBy(slot => slot.column)
+            .ToArray();
 
         foreach (GridSlot slot in allGridSlots)
         {
@@ -42,20 +45,60 @@ public class InventoryManager : MonoBehaviour
                 itemList.Add(slot.slotName);
             }
         }
+
+        CopyToList();
     }
 
-    public void AddItem(string type, string itemName)
+    void CopyToList()
     {
-        List<GridSlot> targetList = type == "weapon" ? weapons : items;
-        List<string> targetNameList = type == "weapon" ? weaponList : itemList;
+        itemList.Clear();
+        weaponList.Clear();
+        foreach (GridSlot slot in items)
+        {
+            itemList.Add(slot.slotName);
+        }
+        foreach (GridSlot slot in weapons)
+        {
+            weaponList.Add(slot.slotName);
+        }
+    }
+
+    public void AddItem(GameObject itemObj)
+    {
+        List<GridSlot> targetList = new List<GridSlot>();
+        string name = "";
+        Sprite icon = null;
+
+        if (itemObj.GetComponent<Item>())
+        {
+            targetList = items;
+            name = itemObj.GetComponent<Item>()._name;
+            icon = itemObj.GetComponent<Item>()._icon;
+        }
+        else if (itemObj.GetComponent<Weapon>())
+        {
+            targetList = weapons;
+            name = itemObj.GetComponent<Weapon>()._name;
+            icon = itemObj.GetComponent<Weapon>()._icon;
+        }
 
         foreach (GridSlot slot in targetList)
         {
             if (slot.isEmpty)
             {
-                slot.slotName = itemName;
+                slot.slotName = name;
                 slot.isEmpty = false;
-                targetNameList.Add(itemName);
+                slot.icon = icon;
+                if(itemObj.CompareTag("Consumable"))
+                {
+                    slot.hp = itemObj.GetComponent<Item>()._hp;
+                }
+                else if (itemObj.CompareTag("Weapon"))
+                {
+                    slot.weapon = itemObj;
+                    itemObj.gameObject.SetActive(false);
+                }
+                CopyToList();
                 break;
             }
         }
@@ -64,15 +107,14 @@ public class InventoryManager : MonoBehaviour
     public void RemoveItem(GridSlot itemToRemove)
     {
         List<GridSlot> targetList = itemToRemove.isWeapon ? weapons : items;
-        List<string> targetNameList = itemToRemove.isWeapon ? weaponList : itemList;
 
         foreach (GridSlot slot in targetList)
         {
             if (slot.row == itemToRemove.row && slot.column == itemToRemove.column)
             {
-                targetNameList.Remove(slot.slotName);
                 slot.slotName = "none";
                 slot.isEmpty = true;
+                CopyToList();
                 break;
             }
         }

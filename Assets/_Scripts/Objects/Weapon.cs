@@ -17,9 +17,10 @@ public class Weapon : MonoBehaviour
 {
     public WeaponStatus _weaponStatus;
 
-    public int _weaponID;
-    public string _weaponName;
-    public string _weaponDescription;
+    public int _id;
+    public string _name;
+    public string _description;
+    public Sprite _icon;
 
-    public float _weaponDamage;
+    public float _damage;
 }

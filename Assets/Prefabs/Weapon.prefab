@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4724924875573249080}
   - component: {fileID: 4450671019517129990}
   - component: {fileID: 941056745827240674}
+  - component: {fileID: 7773410005251512405}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Weapon
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6005448348429958617}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -104,7 +105,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -125,10 +126,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponStatus: 1
-  _weaponID: 0
-  _weaponName: Iron Sword
-  _weaponDescription: A basic sword forged from iron. Reliable for close combat.
-  _weaponDamage: 10
+  _id: 0
+  _name: Iron Sword
+  _description: It is a basic weapon.
+  _icon: {fileID: 21300000, guid: 341e9e1a366537e47bf2bc4b096de207, type: 3}
+  _damage: 10
+--- !u!114 &7773410005251512405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6005448348429958617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5bc1a653efd204682f99994b8551ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2748875861819664426
 PrefabInstance:
   m_ObjectHideFlags: 0

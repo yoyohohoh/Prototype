@@ -18,13 +18,13 @@ public enum ItemStatus
 
 public class Item : MonoBehaviour
 {
-    public ItemStatus _itemStatus;
+    public ItemStatus _status;
 
-    public int _itemID;
-    public string _itemName;
-    public string _itemDescription;
-    public Sprite _itemIcon;
+    public int _id;
+    public string _name;
+    public string _description;
+    public Sprite _icon;
 
-    public float _itemHp;
-    public float _itemXp;
+    public float _hp;
+    public float _xp;
 }
