@@ -20,7 +20,7 @@ public class PlayerData
 
     public PlayerData()
     {
-        name = "Player";
+        name = "Yobisaboy";
         level = 1;
         hp = 100f;
         xp = 0f;

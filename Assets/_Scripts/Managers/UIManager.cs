@@ -21,7 +21,7 @@ public class UIManager : PersistentSingleton<UIManager>
         foreach (GameObject uiObj in uiObjs)
         {
             uiLookup[uiObj.name] = uiObj;
-            
+
             if (uiObj != uiObjs[0])
             {
                 uiObj.SetActive(false);
