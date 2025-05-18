@@ -70,6 +70,7 @@ public class PlayerController : Subject
         _currentSpeed = GetCurrentSpeed(_dashButton.isPressed);
         _velocity = new Vector3(_direction.x * _currentSpeed * Time.fixedDeltaTime, 0.0f, _direction.y * _currentSpeed * Time.fixedDeltaTime);
         Movement(_velocity);
+        
     }
 
     void Movement(Vector3 velocity)
@@ -93,7 +94,7 @@ public class PlayerController : Subject
     {
         _playerData.hp += hpAdded;
         _playerData.xp += xpAdded;
-
+        _playerData.hp = UnityEngine.Mathf.Clamp(_playerData.hp, 0f, 100f);
         NotifyObservers(_playerData);
     }
 

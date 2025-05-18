@@ -7,6 +7,7 @@
 // -----------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class PlayerData
@@ -28,5 +29,7 @@ public class PlayerData
         inventory = new List<GridSlot>();
     }
     public float maxXp => level * 100f;
+    // if hp greater than 100 return 100, if hp less than 0, return 0
+
 
 }

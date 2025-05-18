@@ -9,13 +9,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static System.Net.Mime.MediaTypeNames;
 
 public class HUDManager : PersistentSingleton<HUDManager>, IObserver
 {
     [Header("HUD")]
     [SerializeField] private GameObject hudPanel;
-    [SerializeField] private TextMeshProUGUI hpTxt;
-    [SerializeField] private TextMeshProUGUI xpTxt;
 
     [Header("Player Data")]
     [SerializeField] private GameObject playerDataPanel;
@@ -44,14 +43,7 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
         maxXp = playerData.maxXp;
 
         UpdateHUD(hudPanel);
-        UpdateHUDText(hpTxt, ((int)hp).ToString(), "100");
-        UpdateHUDText(xpTxt, ((int)xp).ToString(), ((int)maxXp).ToString());
         UpdateHUD(playerDataPanel);
-    }
-
-    public void UpdateHUDText(TextMeshProUGUI text, string currentValue, string maxValue)
-    {
-        text.text = $"{currentValue}/{maxValue}";
     }
 
     public void UpdateHUD(GameObject panel)
@@ -60,12 +52,18 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
         TextMeshProUGUI levelTxt = panel.transform.Find("Level").GetComponent<TextMeshProUGUI>();
         Slider hpBar = panel.transform.Find("HP").GetComponent<Slider>();
         Slider xpBar = panel.transform.Find("XP").GetComponent<Slider>();
+        TextMeshProUGUI hpTxt = panel.transform.Find("HPTxt").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI xpTxt = panel.transform.Find("XPTxt").GetComponent<TextMeshProUGUI>();
 
         nameTxt.text = playerName;
         levelTxt.text = $"lv. {level}";
-        hpBar.value = hp;
+
         hpBar.maxValue = 100f;
+        hpBar.value = hp;
+        hpTxt.text = $"{hpBar.value}/{hpBar.maxValue}";
+
         xpBar.maxValue = maxXp;
         xpBar.value = xp;
+        xpTxt.text = $"{xpBar.value}/{xpBar.maxValue}";
     }
 }
