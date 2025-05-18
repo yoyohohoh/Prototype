@@ -1,15 +1,24 @@
+// -----------------------------------------------------------------------------
+// Created by: yobisaboy
+// This code is original and owned by yobisaboy. 
+// Use requires logo inclusion and credit in-game and on publishing platforms.
+// Redistribution or modification must include proper attribution.
+// Contact: yobisaboy@gmail.com
+// -----------------------------------------------------------------------------
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class HUDManager : PersistentSingleton<HUDManager>, IObserver
 {
-    [SerializeField] private GameObject playerDataPanel;
-    TextMeshProUGUI nameTxt;
-    TextMeshProUGUI levelTxt;
-    Slider hpBar;
-    Slider xpBar;
+    [Header("HUD")]
+    [SerializeField] private GameObject hudPanel;
+    [SerializeField] private TextMeshProUGUI hpTxt;
+    [SerializeField] private TextMeshProUGUI xpTxt;
 
+    [Header("Player Data")]
+    [SerializeField] private GameObject playerDataPanel;
     
     private string playerName;
     private int level;
@@ -34,21 +43,23 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
         xp = playerData.xp;
         maxXp = playerData.maxXp;
 
-        UpdateHUD();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
+        UpdateHUD(hudPanel);
+        UpdateHUDText(hpTxt, ((int)hp).ToString(), "100");
+        UpdateHUDText(xpTxt, ((int)xp).ToString(), ((int)maxXp).ToString());
+        UpdateHUD(playerDataPanel);
     }
 
-    // Update is called once per frame
-    public void UpdateHUD()
+    public void UpdateHUDText(TextMeshProUGUI text, string currentValue, string maxValue)
     {
-        nameTxt = playerDataPanel.transform.Find("Name").GetComponent<TextMeshProUGUI>();
-        levelTxt = playerDataPanel.transform.Find("Level").GetComponent<TextMeshProUGUI>();
-        hpBar = playerDataPanel.transform.Find("HP").GetComponent<Slider>();
-        xpBar = playerDataPanel.transform.Find("XP").GetComponent<Slider>();
+        text.text = $"{currentValue}/{maxValue}";
+    }
+
+    public void UpdateHUD(GameObject panel)
+    {
+        TextMeshProUGUI nameTxt = panel.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI levelTxt = panel.transform.Find("Level").GetComponent<TextMeshProUGUI>();
+        Slider hpBar = panel.transform.Find("HP").GetComponent<Slider>();
+        Slider xpBar = panel.transform.Find("XP").GetComponent<Slider>();
 
         nameTxt.text = playerName;
         levelTxt.text = $"lv. {level}";
@@ -56,6 +67,5 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
         hpBar.maxValue = 100f;
         xpBar.maxValue = maxXp;
         xpBar.value = xp;
-
     }
 }
