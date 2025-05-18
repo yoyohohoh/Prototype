@@ -16,7 +16,7 @@ public class PlayerData
     public float hp;
     public float xp;
     public List<string> checkPoint;
-    public List<Item> inventory;
+    public List<GridSlot> inventory;
 
     public PlayerData()
     {
@@ -25,6 +25,6 @@ public class PlayerData
         hp = 100f;
         xp = 0f;
         checkPoint = new List<string>();
-        inventory = new List<Item>();
+        inventory = new List<GridSlot>();
     }
 }

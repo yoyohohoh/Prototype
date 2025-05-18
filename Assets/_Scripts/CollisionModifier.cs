@@ -15,7 +15,6 @@ public class CollisionModifier : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        Debug.Log("Collision with Player detected!");
         PlayerData playerData = other.gameObject.GetComponent<PlayerController>()._playerData;
         
         if (this.CompareTag("Collectible"))
@@ -23,14 +22,11 @@ public class CollisionModifier : MonoBehaviour
             Item thisItem = this.GetComponent<Item>();
             playerData.hp += thisItem._hp;
             playerData.xp += thisItem._xp;
-            // Add to Inventory
             InventoryManager.Instance.AddItem(this.gameObject);
         }
 
         if (this.CompareTag("Consumable") || this.CompareTag("Weapon"))
         {
-            Item thisItem = this.GetComponent<Item>();
-            // Add to Inventory
             InventoryManager.Instance.AddItem(this.gameObject);
         }
 

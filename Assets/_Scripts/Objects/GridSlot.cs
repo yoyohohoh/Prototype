@@ -12,13 +12,14 @@ using UnityEngine.UI;
 public class GridSlot : MonoBehaviour
 {
     public string slotName;
+    public Sprite icon;
     public int row;
     public int column;
     public bool isEmpty = true;
     public bool isWeapon;
-    public Sprite icon;
-    public float hp;
-    public GameObject weapon;
+
+    public GameObject item;
+
 
     void Update()
     {
@@ -34,12 +35,11 @@ public class GridSlot : MonoBehaviour
     {
         if (isWeapon)
         {
-            PlayerController.Instance.PutWeapon(weapon);
-            weapon.gameObject.SetActive(true);
+            item.GetComponent<Weapon>().SetStatus(WeaponStatus.Equipped);
         }
         else
         {
-            PlayerController.Instance._playerData.hp += hp;
+            item.GetComponent<Item>().SetStatus(ItemStatus.Used);
             InventoryManager.Instance.RemoveItem(this);
         }
     }

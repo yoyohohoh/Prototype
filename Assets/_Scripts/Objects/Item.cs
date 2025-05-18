@@ -27,4 +27,42 @@ public class Item : MonoBehaviour
 
     public float _hp;
     public float _xp;
+
+    public void SetStatus(ItemStatus newStatus)
+    {
+        switch(newStatus)
+        {
+            case ItemStatus.NotAvailable:
+                _status = ItemStatus.NotAvailable;
+                gameObject.SetActive(false);
+                break;
+
+            case ItemStatus.Available:
+                _status = ItemStatus.Available;
+                gameObject.SetActive(true);
+                break;
+
+            case ItemStatus.PickedUp:
+                _status = ItemStatus.PickedUp;
+                gameObject.SetActive(false);
+                break;
+
+            case ItemStatus.Used:
+                _status = ItemStatus.Used;
+                PlayerController.Instance._playerData.hp += _hp;
+                PlayerController.Instance._playerData.xp += _xp;
+                Invoke("ReuseThisItem", 10f);
+                break;
+
+            default:
+                Debug.LogError("Invalid item status: " + newStatus);
+                break;
+        }
+    }
+
+    void ReuseThisItem()
+    {
+        gameObject.SetActive(true);
+        _status = ItemStatus.Available;
+    }
 }

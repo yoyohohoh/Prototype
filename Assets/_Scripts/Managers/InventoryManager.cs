@@ -71,15 +71,19 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
         if (itemObj.GetComponent<Item>())
         {
+            Item item = itemObj.GetComponent<Item>();
             targetList = items;
-            name = itemObj.GetComponent<Item>()._name;
-            icon = itemObj.GetComponent<Item>()._icon;
+            name = item._name;
+            icon = item._icon;
+            item.SetStatus(ItemStatus.PickedUp);
         }
         else if (itemObj.GetComponent<Weapon>())
         {
+            Weapon weapon = itemObj.GetComponent<Weapon>();
             targetList = weapons;
-            name = itemObj.GetComponent<Weapon>()._name;
-            icon = itemObj.GetComponent<Weapon>()._icon;
+            name = weapon._name;
+            icon = weapon._icon;
+            weapon.SetStatus(WeaponStatus.PickedUp);
         }
 
         foreach (GridSlot slot in targetList)
@@ -89,15 +93,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 slot.slotName = name;
                 slot.isEmpty = false;
                 slot.icon = icon;
-                if(itemObj.CompareTag("Consumable"))
-                {
-                    slot.hp = itemObj.GetComponent<Item>()._hp;
-                }
-                else if (itemObj.CompareTag("Weapon"))
-                {
-                    slot.weapon = itemObj;
-                    itemObj.gameObject.SetActive(false);
-                }
+                slot.item = itemObj;
                 CopyToList();
                 break;
             }
