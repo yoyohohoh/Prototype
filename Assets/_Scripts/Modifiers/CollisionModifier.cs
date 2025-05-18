@@ -20,8 +20,7 @@ public class CollisionModifier : MonoBehaviour
         if (this.CompareTag("Collectible"))
         {
             Item thisItem = this.GetComponent<Item>();
-            playerData.hp += thisItem._hp;
-            playerData.xp += thisItem._xp;
+            PlayerController.Instance.UpdatePlayerData(thisItem._hp, thisItem._xp);
             InventoryManager.Instance.AddItem(this.gameObject);
         }
 

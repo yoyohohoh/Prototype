@@ -49,8 +49,7 @@ public class Item : MonoBehaviour
 
             case ItemStatus.Used:
                 _status = ItemStatus.Used;
-                PlayerController.Instance._playerData.hp += _hp;
-                PlayerController.Instance._playerData.xp += _xp;
+                PlayerController.Instance.UpdatePlayerData(_hp, _xp);
                 Invoke("ReuseThisItem", 10f);
                 break;
 

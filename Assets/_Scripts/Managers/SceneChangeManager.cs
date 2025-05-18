@@ -8,7 +8,7 @@
 
 using UnityEngine;
 
-public class SceneChangeManager : MonoBehaviour
+public class SceneChangeManager : PersistentSingleton<SceneChangeManager>
 {
     public void LoadSceneByName(string sceneName)
     {

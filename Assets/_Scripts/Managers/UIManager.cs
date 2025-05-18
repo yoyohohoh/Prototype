@@ -9,13 +9,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : PersistentSingleton<UIManager>
 {
     public GameObject[] uiObjs;
 
     private Dictionary<string, GameObject> uiLookup;
 
-    void Awake()
+    void Start()
     {      
         uiLookup = new Dictionary<string, GameObject>();
         foreach (GameObject uiObj in uiObjs)

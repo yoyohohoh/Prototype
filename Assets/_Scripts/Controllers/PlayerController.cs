@@ -9,7 +9,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : PersistentSingleton<PlayerController>
+public class PlayerController : Subject
 {
     [Header("Movements")]
     [SerializeField] public float _speed;
@@ -59,6 +59,8 @@ public class PlayerController : PersistentSingleton<PlayerController>
         {
             _playerData = new PlayerData();
         }
+
+        UpdatePlayerData(0f, 0f);
     }
 
     // Update is called once per frame
@@ -85,5 +87,20 @@ public class PlayerController : PersistentSingleton<PlayerController>
         weapon.transform.SetParent(weaponHolder);
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
+    }
+
+    public void UpdatePlayerData(float hpAdded, float xpAdded)
+    {
+        _playerData.hp += hpAdded;
+        _playerData.xp += xpAdded;
+
+        NotifyObservers(_playerData);
+    }
+
+    public void UpdatePlayerData(int level)
+    {
+        _playerData.level = level;
+
+        NotifyObservers(_playerData);
     }
 }

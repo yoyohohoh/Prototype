@@ -6,6 +6,8 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] public bool isDebug = false;
     [SerializeField] public bool position = false;
     [SerializeField] public bool rotation = false;
+
+    public bool isLevelUp = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +38,11 @@ public class DebugHelper : MonoBehaviour
                     Debug.LogWarning("Tracking object is null.");
                 }
             }
+        }
+
+        if(isLevelUp)
+        {
+            PlayerController.Instance.UpdatePlayerData(2);
         }
 
     }

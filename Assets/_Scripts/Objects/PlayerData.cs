@@ -27,4 +27,6 @@ public class PlayerData
         checkPoint = new List<string>();
         inventory = new List<GridSlot>();
     }
+    public float maxXp => level * 100f;
+
 }
