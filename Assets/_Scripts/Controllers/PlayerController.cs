@@ -12,12 +12,15 @@ using UnityEngine.UI;
 public class PlayerController : Subject
 {
     [Header("Movements")]
+    private CharacterController _controller;
+    [SerializeField] private bool isGround = false;
+    private Vector2 _direction;
+    [SerializeField] private Vector3 _velocity;
     [SerializeField] public float _speed;
     [SerializeField] public float _dashForce;
     [SerializeField] public float _jumpForce;
-    private Vector2 _direction;
-    [SerializeField] private Vector3 _velocity;
-    private CharacterController _controller;
+    [SerializeField] public float _damage;
+    [SerializeField] public float _attackForce;
 
     [Header("Control")]
     [SerializeField] GameObject _controlPanel;
@@ -30,6 +33,7 @@ public class PlayerController : Subject
     [Header("HUD")]
     [SerializeField] public PlayerData _playerData;
     [SerializeField] private float _currentSpeed;
+    [SerializeField] private float _currentDamage;
     [SerializeField] private Transform weaponHolder;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -70,17 +74,36 @@ public class PlayerController : Subject
         _currentSpeed = GetCurrentSpeed(_dashButton.isPressed);
         _velocity = new Vector3(_direction.x * _currentSpeed * Time.fixedDeltaTime, 0.0f, _direction.y * _currentSpeed * Time.fixedDeltaTime);
         Movement(_velocity);
-        
-    }
 
+        if(_jumpButton.isPressed)
+        { 
+            Jump(isGround); 
+        }
+
+        _currentDamage = GetAttackForce(_skillButton.isPressed);
+        
+        if(_attackButton.isPressed)
+        {
+            Attack(_currentDamage);
+        }
+        else if (_skillButton.isPressed)
+        {
+            Skill(_currentDamage);
+        }
+
+
+    }
+    float GetCurrentSpeed(bool isDashing)
+    {
+        return isDashing ? _dashForce * _speed : _speed;
+    }
     void Movement(Vector3 velocity)
     {
         _controller.Move(velocity);
     }
-
-    float GetCurrentSpeed(bool isDashing)
+    public void Jump(bool isGround)
     {
-        return isDashing ? _dashForce * _speed : _speed;
+        Debug.Log("Jump");
     }
 
     public void PutWeapon(GameObject weapon)
@@ -90,6 +113,19 @@ public class PlayerController : Subject
         weapon.transform.localRotation = Quaternion.identity;
     }
 
+    float GetAttackForce(bool isSkilling)
+    {
+        return isSkilling ? _attackForce * _damage: _damage;
+    }
+    public void Attack(float damage)
+    {
+        Debug.Log("Attack");
+    }
+
+    public void Skill(float damage)
+    {
+        Debug.Log("Skill");
+    }
     public void UpdatePlayerData(float hpAdded, float xpAdded)
     {
         _playerData.hp += hpAdded;
