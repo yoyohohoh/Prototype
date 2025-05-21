@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -27,9 +28,10 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
     [Header("Variables")]
     public float rotationSpeed = 300f;
     public float progressTime = 1.0f;
+    public int progressPartsCount;
     public bool isProgressCompleted;
 
-    public int count;
+    private Coroutine progressCoroutine;
 
     void Start()
     {
@@ -56,14 +58,14 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
             _skillRing = transform.Find("SkillRing").gameObject;
             _skillRing.SetActive(isProgress);
 
-            Transform parent = _progress.transform;
-            progressParts = new GameObject[parent.childCount];
-            for (int i = 0; i < parent.childCount; i++)
+            progressPartsCount = _progress.transform.childCount;
+            progressParts = new GameObject[progressPartsCount];
+            for (int i = 0; i < progressPartsCount; i++)
             {
-                progressParts[i] = parent.GetChild(i).gameObject;
+                progressParts[i] = _progress.transform.GetChild(i).gameObject;
             }
 
-            StartCoroutine(ProgressControl(progressTime));
+            progressCoroutine = StartCoroutine(ProgressControl(progressTime));
         }
     }
 
@@ -78,15 +80,14 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (isProgress)
         {
             ButtonRotation(_skillRing, isPressed && isProgressCompleted);
+            isProgressCompleted = progressParts.All(part => part.activeSelf);
         }
-
     }
 
     IEnumerator ProgressControl(float waitingTime)
     {
-        if (isProgress)
-        {
-            
+        if (isProgress && !isProgressCompleted)
+        {            
             foreach (GameObject part in progressParts)
             {
                 part.SetActive(false);
@@ -96,25 +97,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
             {
                 part.SetActive(true);
                 yield return new WaitForSeconds(waitingTime);
-            }
-            isProgressCompleted = true;
-        }
-    }
-
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (isProgress)
-        {
-            StopCoroutine(ProgressControl(0f));
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (isProgress)
-        {
-            StartCoroutine(ProgressControl(progressTime));
+            }           
         }
     }
 
@@ -122,8 +105,38 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
     {
         button.GetComponent<Image>().enabled = isActive;
         if(isActive)
-        { button.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime); }
+        { 
+            button.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);           
+        }
     }
+    void ResetFireRing()
+    {
+        if (isPressed)
+        {
+            StopFireRing();
+        }
+    }
+    public void StopFireRing()
+    {
+        if (isProgress)
+        {
+            isProgressCompleted = false;
+            if (progressCoroutine != null)
+            {
+                StopCoroutine(progressCoroutine);
+            }
+            foreach (GameObject part in progressParts)
+            {
+                part.SetActive(false);
+            }
+            if(!isPressed)
+            {
+                progressCoroutine = StartCoroutine(ProgressControl(progressTime));
+            }
+            
+        }
+    }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
@@ -134,6 +147,18 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (_image != null)
         {
             _image.color = pressedImageColor;
+        }
+
+        if (isProgress)
+        {
+            if(!isProgressCompleted)
+            {
+                StopFireRing();
+            }
+            else if (isProgressCompleted)
+            {
+                Invoke("ResetFireRing", progressTime * _progress.transform.childCount);
+            }               
         }
     }
 
@@ -151,6 +176,11 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         if (isRing)
         {
             _ring.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
+        }
+
+        if (isProgress)
+        {
+            StopFireRing();
         }
     }
 }

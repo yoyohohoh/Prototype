@@ -86,9 +86,10 @@ public class PlayerController : Subject
         {
             Attack(_currentDamage);
         }
-        else if (_skillButton.isPressed)
+        else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
             Skill(_currentDamage);
+            
         }
 
 
@@ -125,6 +126,11 @@ public class PlayerController : Subject
     public void Skill(float damage)
     {
         Debug.Log("Skill");
+    }
+
+    public void ResetSkill()
+    {
+        Debug.Log("SkillStop");
     }
     public void UpdatePlayerData(float hpAdded, float xpAdded)
     {
