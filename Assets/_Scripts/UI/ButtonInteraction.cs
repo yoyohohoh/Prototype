@@ -101,12 +101,12 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
     }
 
-    void ButtonRotation(GameObject button, bool isActive)
+    void ButtonRotation(GameObject buttonRing, bool isActive)
     {
-        button.GetComponent<Image>().enabled = isActive;
+        buttonRing.GetComponent<Image>().enabled = isActive;
         if(isActive)
         { 
-            button.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);           
+            buttonRing.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);           
         }
     }
     void ResetFireRing()

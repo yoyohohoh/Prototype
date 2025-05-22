@@ -38,6 +38,7 @@ Transform:
   - {fileID: 661812183379064627}
   - {fileID: 831258460268263781}
   - {fileID: 4757067328126588689}
+  - {fileID: 4309830746847143749}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4972756649327565803
@@ -154,10 +155,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUnparentOnAwake: 1
+  isGround: 0
+  _velocity: {x: 0, y: 0, z: 0}
   _speed: 10
   _dashForce: 2
   _jumpForce: 5
-  _velocity: {x: 0, y: 0, z: 0}
+  _damage: 10
+  _attackForce: 5
   _controlPanel: {fileID: 0}
   _playerData:
     name: Player
@@ -167,7 +171,9 @@ MonoBehaviour:
     checkPoint: []
     inventory: []
   _currentSpeed: 0
+  _currentDamage: 0
   weaponHolder: {fileID: 4757067328126588689}
+  attackTarget: {fileID: 0}
 --- !u!1 &2420172996213630169
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +428,38 @@ Transform:
   m_GameObject: {fileID: 4498296402554880539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: 0, z: 0.6}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5392614530861336487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7587547775137040975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4309830746847143749}
+  m_Layer: 7
+  m_Name: Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4309830746847143749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7587547775137040975}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,7 +481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &831258460268263781
 Transform:
   m_ObjectHideFlags: 0

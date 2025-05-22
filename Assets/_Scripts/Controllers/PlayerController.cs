@@ -33,8 +33,10 @@ public class PlayerController : Subject
     [Header("HUD")]
     [SerializeField] public PlayerData _playerData;
     [SerializeField] private float _currentSpeed;
-    [SerializeField] private float _currentDamage;
+    public float _currentDamage;
     [SerializeField] private Transform weaponHolder;
+    bool isWeaponEquipped = false;
+    [SerializeField] private Transform attackTarget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,7 +61,7 @@ public class PlayerController : Subject
         }
 
         _playerData = GameSaveManager.Instance().LoadPlayerData();
-        if(_playerData == null)
+        if (_playerData == null)
         {
             _playerData = new PlayerData();
         }
@@ -75,23 +77,26 @@ public class PlayerController : Subject
         _velocity = new Vector3(_direction.x * _currentSpeed * Time.fixedDeltaTime, 0.0f, _direction.y * _currentSpeed * Time.fixedDeltaTime);
         Movement(_velocity);
 
-        if(_jumpButton.isPressed)
-        { 
-            Jump(isGround); 
+        if (_jumpButton.isPressed)
+        {
+            Jump(isGround);
         }
 
         _currentDamage = GetAttackForce(_skillButton.isPressed);
-        
-        if(_attackButton.isPressed)
+
+        if (_attackButton.isPressed)
         {
             Attack(_currentDamage);
         }
         else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
             Skill(_currentDamage);
-            
         }
 
+        if(!_attackButton.isPressed)
+        {
+            ProjectilePoolManager.Instance.ResetAttack();
+        }
 
     }
     float GetCurrentSpeed(bool isDashing)
@@ -112,15 +117,17 @@ public class PlayerController : Subject
         weapon.transform.SetParent(weaponHolder);
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.identity;
+        isWeaponEquipped = true;
     }
 
     float GetAttackForce(bool isSkilling)
     {
-        return isSkilling ? _attackForce * _damage: _damage;
+        return isSkilling ? _attackForce * _damage : _damage;
     }
     public void Attack(float damage)
     {
-        Debug.Log("Attack");
+        if(isWeaponEquipped)
+        { ProjectilePoolManager.Instance.Initiate(weaponHolder, attackTarget); }
     }
 
     public void Skill(float damage)

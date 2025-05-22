@@ -24,9 +24,17 @@ public class CollisionModifier : MonoBehaviour
             InventoryManager.Instance.AddItem(this.gameObject);
         }
 
-        if (this.CompareTag("Consumable") || this.CompareTag("Weapon"))
+        if (this.CompareTag("Consumable"))
         {
             InventoryManager.Instance.AddItem(this.gameObject);
+        }
+
+        if (this.CompareTag("Weapon"))
+        {
+            if(this.GetComponent<Weapon>()._status == WeaponStatus.Available)
+            {
+                InventoryManager.Instance.AddItem(this.gameObject);
+            }          
         }
 
         if (this.CompareTag("NPC"))
