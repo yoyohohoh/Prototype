@@ -120,10 +120,12 @@ GameObject:
   - component: {fileID: 6154567822099099042}
   - component: {fileID: 3801538341980523308}
   - component: {fileID: 1722353308192018774}
+  - component: {fileID: 1520582922773528777}
   - component: {fileID: 3442068175292185757}
+  - component: {fileID: 2846050881058020096}
   m_Layer: 0
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +215,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -221,6 +223,24 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1520582922773528777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855795043566248839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48af05535eeb164498a0781c291e9849, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _npcStatus: 0
+  _npcID: 0
+  _npcName: NPC
+  _npcDescription: This is an NPC.
+  _npcLevel: 1
+  _npcHp: 100
 --- !u!114 &3442068175292185757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +251,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bad01376be81c54b9e13dec601ae006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2846050881058020096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7855795043566248839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db5bc1a653efd204682f99994b8551ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8824107732953919759

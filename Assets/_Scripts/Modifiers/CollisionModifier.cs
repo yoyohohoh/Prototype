@@ -14,8 +14,6 @@ public class CollisionModifier : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-
-        PlayerData playerData = other.gameObject.GetComponent<PlayerController>()._playerData;
         
         if (this.CompareTag("Collectible"))
         {
@@ -40,7 +38,7 @@ public class CollisionModifier : MonoBehaviour
         if (this.CompareTag("NPC"))
         {
             NPC thisNPC = this.GetComponent<NPC>();
-            playerData.hp -= thisNPC._npcDamage;
+            PlayerController.Instance.UpdatePlayerData(-thisNPC._npcDamage, 0f);
         }
     }
 

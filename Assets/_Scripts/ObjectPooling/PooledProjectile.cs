@@ -36,4 +36,13 @@ public class PooledProjectile : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("NPC"))
+        {
+            other.gameObject.GetComponent<NPC>()._npcHp -= _damage;
+            ProjectilePoolManager.Instance.ReturnToPool(this);
+        }
+    }
 }
