@@ -950,6 +950,11 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!4 &98726915 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3106857203194369780, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
+  m_PrefabInstance: {fileID: 8515797034339955686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &110412066
 GameObject:
   m_ObjectHideFlags: 0
@@ -11912,11 +11917,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449331049}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1480103163 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4309830746847143749, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
-  m_PrefabInstance: {fileID: 8515797034339955686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1501156303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17999,17 +17999,13 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3270239645571611989, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
-      propertyPath: attackTarget
+      propertyPath: skillTarget
       value: 
-      objectReference: {fileID: 1480103163}
+      objectReference: {fileID: 98726915}
     - target: {fileID: 3270239645571611989, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
       propertyPath: _controlPanel
       value: 
       objectReference: {fileID: 477320872}
-    - target: {fileID: 4757067328126588689, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 5392614530861336487, guid: 1f00ed47b6e6bef48beb4adb254187a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

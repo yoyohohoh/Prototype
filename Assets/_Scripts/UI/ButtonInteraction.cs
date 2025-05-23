@@ -80,7 +80,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
         if (isProgress)
         {
-            ButtonRotation(_skillRing, isPressed && isProgressCompleted);
+            ButtonRotation(_skillRing, isPressed && isProgressCompleted && PlayerController.Instance.isWeaponEquipped);
             isProgressCompleted = progressParts.All(part => part.activeSelf);
         }
     }

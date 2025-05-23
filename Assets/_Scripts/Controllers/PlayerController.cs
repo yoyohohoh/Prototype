@@ -35,8 +35,9 @@ public class PlayerController : Subject
     [SerializeField] private float _currentSpeed;
     public float _currentDamage;
     [SerializeField] private Transform weaponHolder;
-    bool isWeaponEquipped = false;
+    public bool isWeaponEquipped = false;
     [SerializeField] private Transform attackTarget;
+    [SerializeField] private Transform skillTarget;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -86,14 +87,14 @@ public class PlayerController : Subject
 
         if (_attackButton.isPressed)
         {
-            Attack(_currentDamage);
+            Attack(_currentDamage, attackTarget);
         }
         else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
-            Skill(_currentDamage);
+            Attack(_currentDamage, skillTarget);
         }
 
-        if(!_attackButton.isPressed)
+        if(!_attackButton.isPressed && !_skillButton.isPressed)
         {
             ProjectilePoolManager.Instance.ResetAttack();
         }
@@ -124,21 +125,12 @@ public class PlayerController : Subject
     {
         return isSkilling ? _attackForce * _damage : _damage;
     }
-    public void Attack(float damage)
+    public void Attack(float damage, Transform target)
     {
         if(isWeaponEquipped)
-        { ProjectilePoolManager.Instance.Initiate(weaponHolder, attackTarget); }
+        { ProjectilePoolManager.Instance.Initiate(weaponHolder, target); }
     }
 
-    public void Skill(float damage)
-    {
-        Debug.Log("Skill");
-    }
-
-    public void ResetSkill()
-    {
-        Debug.Log("SkillStop");
-    }
     public void UpdatePlayerData(float hpAdded, float xpAdded)
     {
         _playerData.hp += hpAdded;

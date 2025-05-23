@@ -39,6 +39,7 @@ Transform:
   - {fileID: 831258460268263781}
   - {fileID: 4757067328126588689}
   - {fileID: 4309830746847143749}
+  - {fileID: 3106857203194369780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4972756649327565803
@@ -161,7 +162,7 @@ MonoBehaviour:
   _dashForce: 2
   _jumpForce: 5
   _damage: 10
-  _attackForce: 5
+  _attackForce: 2
   _controlPanel: {fileID: 0}
   _playerData:
     name: Player
@@ -173,7 +174,8 @@ MonoBehaviour:
   _currentSpeed: 0
   _currentDamage: 0
   weaponHolder: {fileID: 4757067328126588689}
-  attackTarget: {fileID: 0}
+  attackTarget: {fileID: 4309830746847143749}
+  skillTarget: {fileID: 0}
 --- !u!1 &2420172996213630169
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +430,38 @@ Transform:
   m_GameObject: {fileID: 4498296402554880539}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9, z: 0.9}
+  m_LocalPosition: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5392614530861336487}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6159646070887041703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3106857203194369780}
+  m_Layer: 7
+  m_Name: SkillTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3106857203194369780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159646070887041703}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -444,7 +477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4309830746847143749}
   m_Layer: 7
-  m_Name: Target
+  m_Name: AttackTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
