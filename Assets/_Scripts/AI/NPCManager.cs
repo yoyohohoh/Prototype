@@ -5,27 +5,20 @@
 // Redistribution or modification must include proper attribution.
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
+
 using UnityEngine;
 
-public enum NPCStatus
+public class NPCManager : MonoBehaviour
 {
-    Idle,
-    Patrol,
-    Attack,
-    Dead
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }
-
-public class NPC : MonoBehaviour
-{
-    public NPCStatus _npcStatus = NPCStatus.Idle;
-
-    public int _npcID;
-    public string _npcName;
-    public string _npcDescription;
-
-    public int _npcLevel;
-    public float _npcHp;
-
-    public float _npcDamage => Mathf.Clamp(_npcLevel, 1, 99) * (Mathf.Clamp(_npcHp, 0, 100) / 100f);
-}
-

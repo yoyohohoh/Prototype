@@ -10,6 +10,7 @@ TagManager:
   - Collectible
   - Consumable
   - GridSlot
+  - Bullet
   layers:
   - Default
   - TransparentFX

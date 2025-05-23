@@ -1,16 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCStateBase : MonoBehaviour
+public abstract class NPCStateBase
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected NPCController npcController;
+
+    public NPCStateBase(NPCController npcController)
     {
-        
+        this.npcController = npcController;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void Enter();
+    public abstract void Exit();
+    public abstract void Update();
 }
+
+
+
