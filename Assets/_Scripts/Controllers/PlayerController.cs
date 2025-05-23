@@ -23,7 +23,7 @@ public class PlayerController : Subject
     [SerializeField] public float _attackForce;
 
     [Header("Control")]
-    [SerializeField] GameObject _controlPanel;
+    public GameObject _controlPanel;
     private Joystick _joystick;
     private ButtonInteraction _attackButton;
     private ButtonInteraction _jumpButton;

@@ -47,12 +47,12 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
 
         if (transform.Find("Ring"))
-        { 
+        {
             _ring = transform.Find("Ring").gameObject;
             _ring.SetActive(isRing);
         }
-        if(transform.Find("Progress"))
-        { 
+        if (transform.Find("Progress"))
+        {
             _progress = transform.Find("Progress").gameObject;
             _progress.SetActive(isProgress);
             _skillRing = transform.Find("SkillRing").gameObject;
@@ -71,6 +71,7 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     void Update()
     {
+        ButtonColorChange(isPressed);
 
         if (isRing)
         {
@@ -84,10 +85,36 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
     }
 
+    void ButtonColorChange(bool isPressed)
+    {
+        if (isPressed)
+        {
+            if (_frame != null)
+            {
+                _frame.color = pressedFrameColor;
+            }
+            if (_image != null)
+            {
+                _image.color = pressedImageColor;
+            }
+        }
+        else
+        {
+            if (_frame != null)
+            {
+                _frame.color = _originalFrameColor;
+            }
+            if (_image != null)
+            {
+                _image.color = _originalImageColor;
+            }
+        }
+    }
+
     IEnumerator ProgressControl(float waitingTime)
     {
         if (isProgress && !isProgressCompleted)
-        {            
+        {
             foreach (GameObject part in progressParts)
             {
                 part.SetActive(false);
@@ -97,16 +124,16 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
             {
                 part.SetActive(true);
                 yield return new WaitForSeconds(waitingTime);
-            }           
+            }
         }
     }
 
     void ButtonRotation(GameObject buttonRing, bool isActive)
     {
         buttonRing.GetComponent<Image>().enabled = isActive;
-        if(isActive)
-        { 
-            buttonRing.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);           
+        if (isActive)
+        {
+            buttonRing.GetComponent<RectTransform>().Rotate(0f, 0f, -rotationSpeed * Time.deltaTime);
         }
     }
     void ResetFireRing()
@@ -129,50 +156,35 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
             {
                 part.SetActive(false);
             }
-            if(!isPressed)
+            if (!isPressed)
             {
                 progressCoroutine = StartCoroutine(ProgressControl(progressTime));
             }
-            
+
         }
     }
-    
+
     public void OnPointerDown(PointerEventData eventData)
     {
         isPressed = true;
-        if (_frame != null)
-        {
-            _frame.color = pressedFrameColor;
-        }
-        if (_image != null)
-        {
-            _image.color = pressedImageColor;
-        }
 
         if (isProgress)
         {
-            if(!isProgressCompleted)
+            if (!isProgressCompleted)
             {
                 StopFireRing();
             }
             else if (isProgressCompleted)
             {
                 Invoke("ResetFireRing", progressTime * _progress.transform.childCount);
-            }               
+            }
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         isPressed = false;
-        if (_frame != null)
-        {
-            _frame.color = _originalFrameColor;
-        }
-        if (_image != null)
-        {
-            _image.color = _originalImageColor;
-        }
+
         if (isRing)
         {
             _ring.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
