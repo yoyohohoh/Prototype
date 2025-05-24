@@ -8,6 +8,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -51,24 +52,20 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         {
             foreach (GridSlotData slotData in _playerDataInventory)
             {
-                GridSlot slot = new GridSlot
+                foreach (GridSlot gridSlot in allGridSlots)
                 {
-                    slotName = slotData.slotName,
-                    icon = slotData.icon,
-                    row = slotData.row,
-                    column = slotData.column,
-                    isEmpty = slotData.isEmpty,
-                    isWeapon = slotData.isWeapon,
-                    item = null
-                };
-                foreach(GridSlot gridSlot in allGridSlots)
-                {
-                    if (gridSlot.row == slot.row && gridSlot.column == slot.column && gridSlot.isWeapon == slotData.isWeapon)
+                    if (gridSlot.row == slotData.row && gridSlot.column == slotData.column && gridSlot.isWeapon == slotData.isWeapon)
                     {
                         gridSlot.slotName = slotData.slotName;
                         gridSlot.icon = slotData.icon;
                         gridSlot.isEmpty = slotData.isEmpty;
-                        gridSlot.item = null;
+                        gridSlot.item = Resources.Load<GameObject>($"Prefabs/{slotData.itemName}");
+                        if (!gridSlot.isEmpty && gridSlot.isWeapon)
+                        {
+                            GameObject weapon = Instantiate(gridSlot.item, new Vector3(0, 0, 0), Quaternion.identity);
+                            weapon.gameObject.GetComponent<Weapon>().SetStatus(WeaponStatus.PickedUp);
+                            gridSlot.item = weapon;
+                        }
                     }
                 }
             }

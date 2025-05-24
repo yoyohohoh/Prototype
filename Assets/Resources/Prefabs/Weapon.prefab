@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2241542471663842549
 Transform:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0a061c007fdcb4789e4e8c70aab37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponStatus: 1
+  _status: 2
   _id: 0
   _name: Iron Sword
   _description: It is a basic weapon.

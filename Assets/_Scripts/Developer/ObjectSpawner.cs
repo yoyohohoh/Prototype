@@ -42,7 +42,8 @@ public class ObjectSpawner : MonoBehaviour
                 float randomZ = Random.Range(-depth / 2f, depth / 2f);
 
                 Vector3 spawnPosition = new Vector3(randomX, 0.0f, randomZ);
-                Instantiate(itemCount.prefab, spawnPosition, Quaternion.identity);
+                GameObject itemObj = Instantiate(itemCount.prefab, spawnPosition, Quaternion.identity);
+                itemObj.name = itemCount.prefab.name;
             }
         }
     }

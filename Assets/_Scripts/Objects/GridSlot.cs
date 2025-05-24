@@ -46,6 +46,13 @@ public class GridSlot : MonoBehaviour
     {
         if (isWeapon)
         {
+            foreach (GridSlot gridSlot in InventoryManager.Instance.weapons)
+            {
+                if (!gridSlot.isEmpty)
+                {
+                    gridSlot.item.GetComponent<Weapon>().SetStatus(WeaponStatus.PickedUp);
+                }
+            }
             item.GetComponent<Weapon>().SetStatus(WeaponStatus.Equipped);
         }
         else
