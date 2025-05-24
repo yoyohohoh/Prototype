@@ -13,8 +13,8 @@ using UnityEngine;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
-    private List<GridSlot> items;
-    private List<GridSlot> weapons;
+    public List<GridSlot> items;
+    public List<GridSlot> weapons;
 
     [SerializeField] private List<string> itemList;
     [SerializeField] private List<string> weaponList;
@@ -45,6 +45,11 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 itemList.Add(slot.slotName);
             }
         }
+        Debug.Log($"InventoryController: {PlayerController.Instance._playerData.items[0].isEmpty}");
+        //foreach (GridSlot slot in PlayerController.Instance._playerData.items)
+        //{
+        //    AddItem(slot.item);
+        //}
 
         CopyToList();
     }

@@ -62,6 +62,7 @@ public class PlayerController : Subject
         }
 
         _playerData = GameSaveManager.Instance().LoadPlayerData();
+        Debug.Log($"PlayerController: {PlayerController.Instance._playerData.items[0].isEmpty}");
         if (_playerData == null)
         {
             _playerData = new PlayerData();

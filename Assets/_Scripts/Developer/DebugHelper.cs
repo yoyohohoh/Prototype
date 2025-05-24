@@ -6,6 +6,10 @@ public class DebugHelper : MonoBehaviour
     [SerializeField] public bool isDebug = false;
     [SerializeField] public bool position = false;
     [SerializeField] public bool rotation = false;
+    [SerializeField] public bool gameSave = false;
+    [SerializeField] public bool gameLoad = false;
+    bool isSave = false;
+    bool isLoad = false;
 
     public bool isLevelUp = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,10 +44,19 @@ public class DebugHelper : MonoBehaviour
             }
         }
 
-        if(isLevelUp)
+        if (isLevelUp)
         {
             PlayerController.Instance.UpdatePlayerData(2);
         }
 
+        if (gameSave && !isSave)
+        {
+            LevelManager.Instance.GameSave();
+            isSave = true;
+        }
+        if (gameLoad && !isLoad)
+        {
+            PlayerController.Instance._playerData = GameSaveManager.Instance().LoadPlayerData();
+        }
     }
 }

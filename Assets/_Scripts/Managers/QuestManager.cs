@@ -12,6 +12,7 @@ using UnityEngine;
 
 public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 {
+    [SerializeField] GameObject questPanel; 
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
     private int playerLevel;
@@ -30,6 +31,10 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         UpdateQuest(playerLevel);
     }
 
+    void UpdatePanel()
+    {
+
+    }
     void UpdateQuest(int playerLevel)
     {
         Debug.Log($"Player Level: {playerLevel}");
