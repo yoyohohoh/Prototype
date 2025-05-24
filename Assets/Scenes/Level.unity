@@ -4479,6 +4479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUnparentOnAwake: 1
+  questPanel: {fileID: 0}
   _questSets:
   - {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
   - {fileID: 11400000, guid: 36bab284df40c614c9473f95654c03a8, type: 2}
@@ -8362,6 +8363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c5807383d4b91a4889524e77f8b10a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoUnparentOnAwake: 1
   _levelConfig: {fileID: 11400000, guid: 9788c5e238a88934b944696cb2be129a, type: 2}
 --- !u!4 &996291039
 Transform:
@@ -10567,6 +10569,8 @@ MonoBehaviour:
   isDebug: 0
   position: 0
   rotation: 0
+  gameSave: 0
+  gameLoad: 0
   isLevelUp: 0
 --- !u!4 &1274360464
 Transform:
@@ -16772,6 +16776,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUnparentOnAwake: 1
+  items: []
+  weapons: []
   itemList: []
   weaponList: []
 --- !u!1 &2083688127

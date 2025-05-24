@@ -45,11 +45,34 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 itemList.Add(slot.slotName);
             }
         }
-        Debug.Log($"InventoryController: {PlayerController.Instance._playerData.items[0].isEmpty}");
-        //foreach (GridSlot slot in PlayerController.Instance._playerData.items)
-        //{
-        //    AddItem(slot.item);
-        //}
+
+        List<GridSlotData> _playerDataInventory = GameSaveManager.Instance().LoadPlayerData().inventory;
+        if (_playerDataInventory != null)
+        {
+            foreach (GridSlotData slotData in _playerDataInventory)
+            {
+                GridSlot slot = new GridSlot
+                {
+                    slotName = slotData.slotName,
+                    icon = slotData.icon,
+                    row = slotData.row,
+                    column = slotData.column,
+                    isEmpty = slotData.isEmpty,
+                    isWeapon = slotData.isWeapon,
+                    item = null
+                };
+                foreach(GridSlot gridSlot in allGridSlots)
+                {
+                    if (gridSlot.row == slot.row && gridSlot.column == slot.column && gridSlot.isWeapon == slotData.isWeapon)
+                    {
+                        gridSlot.slotName = slotData.slotName;
+                        gridSlot.icon = slotData.icon;
+                        gridSlot.isEmpty = slotData.isEmpty;
+                        gridSlot.item = null;
+                    }
+                }
+            }
+        }
 
         CopyToList();
     }

@@ -42,6 +42,13 @@ public class PlayerController : Subject
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _playerData = GameSaveManager.Instance().LoadPlayerData();
+
+        if (_playerData == null)
+        {
+            _playerData = new PlayerData();
+        }
+
         _controller = GetComponent<CharacterController>();
         if (_controller == null)
         {
@@ -59,13 +66,6 @@ public class PlayerController : Subject
             {
                 Debug.LogError("One or more control buttons are missing from the control panel.");
             }
-        }
-
-        _playerData = GameSaveManager.Instance().LoadPlayerData();
-        Debug.Log($"PlayerController: {PlayerController.Instance._playerData.items[0].isEmpty}");
-        if (_playerData == null)
-        {
-            _playerData = new PlayerData();
         }
 
         UpdatePlayerData(0f, 0f);

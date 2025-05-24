@@ -22,6 +22,36 @@ public class GameSaveManager
     string pathFolder = $"{Application.persistentDataPath}/";
     public void SavePlayerData(PlayerData data)
     {
+        foreach(GridSlot slot in InventoryManager.Instance.items)
+        {
+            GridSlotData slotData = new GridSlotData
+            {
+                slotName = slot.slotName,
+                icon = slot.icon,
+                row = slot.row,
+                column = slot.column,
+                isEmpty = slot.isEmpty,
+                isWeapon = slot.isWeapon,
+                itemName = slot.item != null ? slot.item.name : null
+            };
+            data.inventory.Add(slotData);
+        }
+
+        foreach (GridSlot slot in InventoryManager.Instance.weapons)
+        {
+            GridSlotData slotData = new GridSlotData
+            {
+                slotName = slot.slotName,
+                icon = slot.icon,
+                row = slot.row,
+                column = slot.column,
+                isEmpty = slot.isEmpty,
+                isWeapon = slot.isWeapon,
+                itemName = slot.item != null ? slot.item.name : null
+            };
+            data.inventory.Add(slotData);
+        }
+
         string timeStamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string json = JsonUtility.ToJson(data);
         path = $"{pathFolder}/{timeStamp}.json";

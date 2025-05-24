@@ -5,9 +5,20 @@
 // Redistribution or modification must include proper attribution.
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
-
 using UnityEngine;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class GridSlotData
+{
+    public string slotName;
+    public Sprite icon;
+    public int row;
+    public int column;
+    public bool isEmpty = true;
+    public bool isWeapon;
+    public string itemName;
+}
 
 public class GridSlot : MonoBehaviour
 {
