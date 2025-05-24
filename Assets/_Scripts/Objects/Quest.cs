@@ -10,7 +10,6 @@ using UnityEngine;
 
 public enum QuestStatus
 {
-    NotAvailable,
     OnProgress,
     Done
 }
@@ -18,15 +17,25 @@ public enum QuestStatus
 [CreateAssetMenu(fileName = "Quest", menuName = "Scriptable Objects/Quest")]
 public class Quest : ScriptableObject
 {
-    public QuestStatus _questStatus;
+    public QuestStatus _questStatus = QuestStatus.OnProgress;
 
     public int _questID;
     public string _questName;
     public string _questDescription;
 
-    public float _questHp;
-    public float _questXp;
+    [Header("Requirements")]
+    public GameObject _checkPoint;
+    public int _checkPointCount;
+    public GameObject _questCollectable;
+    public int _questCollectCount;
+    public GameObject _questEnemy;
+    public int _questKillCount;
+
+    [Header("Reward")]
+    public float _hpReward;
+    public float _xpReward;
     public GameObject _questReward;
+
 }
 
 

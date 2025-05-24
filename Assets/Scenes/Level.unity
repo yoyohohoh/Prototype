@@ -4479,6 +4479,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUnparentOnAwake: 1
+  _questSets:
+  - {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
+  - {fileID: 11400000, guid: 36bab284df40c614c9473f95654c03a8, type: 2}
+  - {fileID: 11400000, guid: 9d26f4226d346064c8206f14cab1be6b, type: 2}
+  currentQuestSetList: []
 --- !u!1 &606899140
 GameObject:
   m_ObjectHideFlags: 0

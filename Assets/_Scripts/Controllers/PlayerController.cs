@@ -136,6 +136,12 @@ public class PlayerController : Subject
         _playerData.hp += hpAdded;
         _playerData.xp += xpAdded;
         _playerData.hp = UnityEngine.Mathf.Clamp(_playerData.hp, 0f, 100f);
+
+        if (_playerData.xp >= _playerData.maxXp)
+        {
+            _playerData.xp = 0f;
+            _playerData.level++;
+        }
         NotifyObservers(_playerData);
     }
 

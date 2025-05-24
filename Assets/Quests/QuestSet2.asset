@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d28abc1040eae7d48a8363c5ac92ab29, type: 3}
-  m_Name: QuestSet0
+  m_Name: QuestSet2
   m_EditorClassIdentifier: 
-  _questSetID: 0
-  _questSetName: The First Step
+  _questSetStatus: 0
+  _questLevel: 2
+  _questSetName: The Second Step
   _quests:
   - {fileID: 11400000, guid: ba4409ed441cc4645842e462ae8e89bb, type: 2}
   - {fileID: 11400000, guid: 0cd0aa9ad846a8b4e824da354b416a87, type: 2}

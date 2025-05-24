@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d28abc1040eae7d48a8363c5ac92ab29, type: 3}
+  m_Name: QuestSet1
+  m_EditorClassIdentifier: 
+  _questSetStatus: 0
+  _questLevel: 1
+  _questSetName: The First Step
+  _quests:
+  - {fileID: 11400000, guid: ba4409ed441cc4645842e462ae8e89bb, type: 2}
+  - {fileID: 11400000, guid: 0cd0aa9ad846a8b4e824da354b416a87, type: 2}
+  - {fileID: 11400000, guid: 5ad3f9067d1f250489ed88a325aa1998, type: 2}

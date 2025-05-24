@@ -6,10 +6,18 @@
 // -----------------------------------------------------------------------------
 
 using UnityEngine;
+public enum QuestSetStatus
+{
+    NotAvailable,
+    Available,
+    Completed
+}
+
 [CreateAssetMenu(fileName = "QuestSet", menuName = "Scriptable Objects/QuestSet")]
 public class QuestSet : ScriptableObject
 {
-    public int _questSetID;
+    public QuestSetStatus _questSetStatus = QuestSetStatus.NotAvailable;
+    public int _questLevel;
     public string _questSetName;
     public Quest[] _quests;
 }
