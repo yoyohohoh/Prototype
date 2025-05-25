@@ -12,6 +12,7 @@ public class DebugHelper : MonoBehaviour
     bool isLoad = false;
 
     public bool isLevelUp = false;
+    bool isLevelUpDone = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -44,9 +45,10 @@ public class DebugHelper : MonoBehaviour
             }
         }
 
-        if (isLevelUp)
+        if (isLevelUp && !isLevelUpDone)
         {
             PlayerController.Instance.UpdatePlayerData(2);
+            isLevelUpDone = true;
         }
 
         if (gameSave && !isSave)

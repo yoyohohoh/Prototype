@@ -17,6 +17,12 @@ MonoBehaviour:
   _questName: Trial of Evasion
   _questDescription: Prove your worth by avoiding four NPCs for 30 seconds. You'll
     be rewarded with a super star.
-  _questHp: 0
-  _questXp: 100
+  _checkPoint: {fileID: 0}
+  _checkPointCount: 0
+  _questCollectable: {fileID: 0}
+  _questCollectCount: 0
+  _questEnemy: {fileID: 0}
+  _questKillCount: 0
+  _hpReward: 0
+  _xpReward: 0
   _questReward: {fileID: 6667449828456994001, guid: 4f6196b824962654a897b45fc868f38a, type: 3}
