@@ -11,6 +11,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 {
@@ -18,12 +19,13 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     [SerializeField] GameObject questPanel;
     [SerializeField] GameObject questsContentPanel;
     [SerializeField] GameObject questsPrefab;
+    [SerializeField] TextMeshProUGUI questsCountText;
 
     [Header("Scroll Bar")]
     [SerializeField] Scrollbar questsScrollbar;
-    [SerializeField] float questsScrollbarMinY = 66f;
-    [SerializeField] float questsScrollbarMaxY = 66f;
-    [SerializeField] float questsScrollbarPosY = 300f;
+    [SerializeField] float questsScrollbarMinY = 0f;
+    [SerializeField] float questsScrollbarMaxY = -300f;
+    [SerializeField] float questsScrollbarPosY = 0f;
     [SerializeField] float questsScrollbarSpacing = 300f;
 
     [Header("Quest Details")]
@@ -44,6 +46,28 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         playerLevel = playerData.level;
         UpdateQuest(playerLevel);
     }
+    void Start()
+    {
+        
+    }
+    void Update()
+    {
+        List<QuestStatus> statuses = new List<QuestStatus>();
+
+        foreach (QuestSet questSet in currentQuestSetList)
+        {
+            foreach (Quest quest in questSet._quests)
+            {
+                statuses.Add(quest._questStatus);
+            }
+        }
+
+        int progressCount = statuses.Count(status => status == QuestStatus.OnProgress);
+        int totalCount = statuses.Count;
+
+        questsCountText.text = $"{progressCount}/{totalCount}";
+
+    }
 
     void UpdatePanel(QuestSet currentQuestSet)
     {
@@ -56,7 +80,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             RectTransform questRT = newQuest.GetComponent<RectTransform>();
             questRT.localScale = Vector3.one;
             questRT.anchoredPosition = new Vector2(0f, questsScrollbarPosY);
-            questsScrollbarMaxY += questsScrollbarSpacing/4;
+            questsScrollbarMaxY += questsScrollbarSpacing;
             questsScrollbarPosY -= questsScrollbarSpacing;
         }
     }
@@ -84,6 +108,6 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
                 UpdatePanel(questSet);
             }
         }
-        
+
     }
 }

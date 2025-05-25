@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d28abc1040eae7d48a8363c5ac92ab29, type: 3}
   m_Name: QuestSet2
   m_EditorClassIdentifier: 
-  _questSetStatus: 0
+  _questSetStatus: 1
   _questLevel: 2
   _questSetName: The Second Step
   _quests:

@@ -4648,10 +4648,11 @@ MonoBehaviour:
   questPanel: {fileID: 967483140}
   questsContentPanel: {fileID: 1186085309}
   questsPrefab: {fileID: 8189278181712718932, guid: ed1fccb318bc891499862fbdfca8a6d6, type: 3}
+  questsCountText: {fileID: 1218941879}
   questsScrollbar: {fileID: 1276601465}
-  questsScrollbarMinY: -219
-  questsScrollbarMaxY: 234
-  questsScrollbarPosY: 300
+  questsScrollbarMinY: 0
+  questsScrollbarMaxY: -300
+  questsScrollbarPosY: 0
   questsScrollbarSpacing: 300
   _questSets:
   - {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
@@ -9672,11 +9673,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 453724941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 66}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 2700, y: 300}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1186085311
 MonoBehaviour:
   m_ObjectHideFlags: 0
