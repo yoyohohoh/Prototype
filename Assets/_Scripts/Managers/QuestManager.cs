@@ -9,10 +9,20 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 {
+    [Header("Panels")]
     [SerializeField] GameObject questPanel; 
+    [SerializeField] GameObject questsContentPanel;
+
+    [Header("Scroll Bar")]
+    [SerializeField] Scrollbar questsScrollbar;
+    [SerializeField] float questsScrollbarMinY = -219f;
+    [SerializeField] float questsScrollbarMaxY = 234f;
+
+    [Header("Quest Details")]
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
     private int playerLevel;
@@ -31,9 +41,12 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         UpdateQuest(playerLevel);
     }
 
-    void UpdatePanel()
+    public void ScrollPanel()
     {
-
+        RectTransform rt = questsContentPanel.GetComponent<RectTransform>();
+        Vector2 pos = rt.anchoredPosition;
+        pos.y = Mathf.Lerp(questsScrollbarMinY, questsScrollbarMaxY, questsScrollbar.value);
+        rt.anchoredPosition = pos;
     }
     void UpdateQuest(int playerLevel)
     {

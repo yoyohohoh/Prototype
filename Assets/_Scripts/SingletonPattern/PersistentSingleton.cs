@@ -17,11 +17,12 @@ public abstract class PersistentSingleton<T> : MonoBehaviour where T : Component
             if (instance == null)
             {
                 instance = Object.FindFirstObjectByType<T>();
-                if (instance == null)
-                {
-                    var go = new GameObject(typeof(T).Name + " Generated");
-                    instance = go.AddComponent<T>();
-                }
+                // Auto generate a new instance if none exists but cause problem of clean up
+                //if (instance == null)
+                //{
+                //    var go = new GameObject(typeof(T).Name + " Generated");
+                //    instance = go.AddComponent<T>();
+                //}
             }
             return instance;
         }
