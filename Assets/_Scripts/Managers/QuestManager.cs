@@ -52,21 +52,29 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     }
     void Update()
     {
-        List<QuestStatus> statuses = new List<QuestStatus>();
+        // tracking if player finish quest
+        // how many checkPoint collected
+        // how many inventory stored
+        // how many npc "dead"
+
+    }
+    void UpdateCount()
+    {
+        List<QuestStatus> questsList = new List<QuestStatus>();
 
         foreach (QuestSet questSet in currentQuestSetList)
         {
             foreach (Quest quest in questSet._quests)
             {
-                statuses.Add(quest._questStatus);
+                questsList.Add((quest._questStatus));
+                questsContentPanel.transform.Find(quest._questName).Find("QuestStatus").GetComponent<Image>().sprite = quest._questStatus == QuestStatus.OnProgress ? Resources.Load<Sprite>("Sprites/blankBadge") : Resources.Load<Sprite>("Sprites/badge");
             }
         }
 
-        int progressCount = statuses.Count(status => status == QuestStatus.OnProgress);
-        int totalCount = statuses.Count;
+        int progressCount = questsList.Count(status => status == QuestStatus.OnProgress);
+        int totalCount = questsList.Count;
 
         questsCountText.text = $"{progressCount}/{totalCount}";
-
     }
 
     void UpdatePanel(QuestSet currentQuestSet)
@@ -74,6 +82,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         foreach (Quest quest in currentQuestSet._quests)
         {
             GameObject newQuest = Instantiate(questsPrefab, questsContentPanel.transform);
+            newQuest.name = quest._questName;
             newQuest.transform.Find("QuestName").GetComponent<TextMeshProUGUI>().text = $"{currentQuestSet._questSetName}: {quest._questName}";
             newQuest.transform.Find("QuestDescription").GetComponent<TextMeshProUGUI>().text = quest._questDescription;
             newQuest.transform.Find("QuestStatus").GetComponent<Image>().sprite = quest._questStatus == QuestStatus.OnProgress ? Resources.Load<Sprite>("Sprites/blankBadge") : Resources.Load<Sprite>("Sprites/badge");
@@ -108,6 +117,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
                 UpdatePanel(questSet);
             }
         }
+        UpdateCount();
 
     }
 }
