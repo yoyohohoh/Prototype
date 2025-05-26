@@ -106,13 +106,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     }
     public void ResetScrollBar()
     {
-        //RectTransform handleRect = questsScrollbar
-        //        .transform.Find("Sliding Area")
-        //        .Find("Handle")
-        //        .GetComponent<RectTransform>();
-
-        //handleRect.anchorMin = new Vector2(0f, 0f);
-        //handleRect.anchorMax = new Vector2(0f, 0.2f);
+        questsScrollbar.value = 0f;
     }
     public void UpdateQuest()
     {
