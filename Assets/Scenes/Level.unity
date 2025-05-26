@@ -822,6 +822,18 @@ MonoBehaviour:
           m_StringArgument: InventoryPanel
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 578500332}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: UpdateQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &59422587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8255,9 +8267,9 @@ RectTransform:
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 909799326}
   - {fileID: 1792145475}
   - {fileID: 2095183475}
+  - {fileID: 909799326}
   m_Father: {fileID: 627321777}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

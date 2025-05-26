@@ -28,6 +28,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     [SerializeField] float questsScrollbarPosY = 0f;
     [SerializeField] float questsScrollbarSpacing = 300f;
 
+
     [Header("Quest Details")]
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
@@ -44,11 +45,11 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     public void OnNotify(PlayerData playerData)
     {
         playerLevel = playerData.level;
-        UpdateQuest(playerLevel);
+        UpdateQuest();
     }
     void Start()
     {
-        
+
     }
     void Update()
     {
@@ -56,6 +57,8 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         // how many checkPoint collected
         // how many inventory stored
         // how many npc "dead"
+
+
 
     }
     void UpdateCount()
@@ -71,7 +74,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             }
         }
 
-        int progressCount = questsList.Count(status => status == QuestStatus.OnProgress);
+        int progressCount = questsList.Count(status => status == QuestStatus.Done);
         int totalCount = questsList.Count;
 
         questsCountText.text = $"{progressCount}/{totalCount}";
@@ -101,22 +104,53 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         pos.y = Mathf.Lerp(questsScrollbarMinY, questsScrollbarMaxY, questsScrollbar.value);
         rt.anchoredPosition = pos;
     }
-    void UpdateQuest(int playerLevel)
+    public void ResetScrollBar()
+    {
+        //RectTransform handleRect = questsScrollbar
+        //        .transform.Find("Sliding Area")
+        //        .Find("Handle")
+        //        .GetComponent<RectTransform>();
+
+        //handleRect.anchorMin = new Vector2(0f, 0f);
+        //handleRect.anchorMax = new Vector2(0f, 0.2f);
+    }
+    public void UpdateQuest()
     {
         Debug.Log($"Player Level: {playerLevel}");
+        currentQuestSetList.Clear();
+        foreach (Transform child in questsContentPanel.transform)
+        {
+            Destroy(child.gameObject);
+            questsScrollbarMinY = 0f;
+            questsScrollbarMaxY = -300f;
+            questsScrollbarPosY = 0f;
+            questsScrollbarSpacing = 300f;
+        }
+
+
         for (int i = 0; i < _questSets.Length; i++)
         {
             var questSet = _questSets[i];
 
-            if (questSet._questLevel <= playerLevel &&
-                questSet._questSetStatus != QuestSetStatus.Available &&
-                !currentQuestSetList.Contains(questSet))
+            if (questSet._questLevel <= playerLevel && questSet._questSetStatus != QuestSetStatus.Completed)
             {
                 questSet._questSetStatus = QuestSetStatus.Available;
-                currentQuestSetList.Add(questSet);
-                UpdatePanel(questSet);
+
+                if (!currentQuestSetList.Contains(questSet))
+                {
+                    currentQuestSetList.Add(questSet);
+                    UpdatePanel(questSet);
+                }
             }
         }
+        foreach(QuestSet questSet in currentQuestSetList)
+        {
+            if (questSet._quests.All(q => q._questStatus == QuestStatus.Done))
+            {
+                questSet._questSetStatus = QuestSetStatus.Completed;
+            }
+        }
+        
         UpdateCount();
 
     }
