@@ -1,6 +1,5 @@
 <img src="https://github.com/yobisaboy/Resume/blob/main/yobisaboyLogo.png" alt="yobisaboy Logo" height="120" />
 
-## Code Usage 
 If you're interested in my code, you're welcome to use it for **non-profit purposes** — just show your support!
 This code is **original** and owned by **yobisaboy**. There may be **third-party assets** involved in the game, please contact the corresponding owners for permission to use them.
 ### Usage Requirements
