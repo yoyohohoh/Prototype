@@ -7,6 +7,6 @@ This code is **original** and owned by **yobisaboy**. There may be **third-party
 - Include the **logo** and give **proper credit** within your game and on any publishing platforms.
 - **Redistribution or modification** must include appropriate attribution to **yobisaboy**.
 ### Contact Me  
-[yobisaboy@gmail.com](mailto:yobisaboy@gmail.com)
+Email: [yobisaboy@gmail.com](mailto:yobisaboy@gmail.com)
 ### Support Me  
 Thank you for your support! If you want, [Buy Me a Coffee!](https://buymeacoffee.com/yobisaboy) 
