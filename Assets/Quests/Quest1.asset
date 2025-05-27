@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
   m_Name: Quest1
   m_EditorClassIdentifier: 
-  _questStatus: 1
+  _questStatus: 0
   _questID: 1
   _questName: Trial of Evasion
   _questDescription: Prove your worth by avoiding four NPCs for 30 seconds. You'll
     be rewarded with a super star.
-  _checkPoint: {fileID: 0}
-  _checkPointCount: 0
+  _checkPoints: []
   _questCollectable: {fileID: 0}
   _questCollectCount: 0
   _questEnemy: {fileID: 0}

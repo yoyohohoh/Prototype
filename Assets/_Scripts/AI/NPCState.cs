@@ -9,7 +9,7 @@ public class IdleState : NPCStateBase
     private Vector3 origin;
     public IdleState(NPCController npcController) : base(npcController)
     {
-        origin = npcController._origin.position;
+        origin = npcController.GetPosition("origin");
     }
 
     public override void Enter()
@@ -38,7 +38,7 @@ public class PatrolState : NPCStateBase
     private Vector3 destination;
     public PatrolState(NPCController npcController) : base(npcController) 
     {
-        destination = npcController._destination.position;
+        destination = npcController.GetPosition("destination");
     }
 
     public override void Enter()
@@ -87,7 +87,7 @@ public class DeadState : NPCStateBase
     private Vector3 origin;
     public DeadState(NPCController npcController) : base(npcController) 
     {
-        origin = npcController._origin.position;
+        origin = npcController.GetPosition("origin");
     }
 
     public override void Enter()

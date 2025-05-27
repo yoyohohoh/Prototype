@@ -11,6 +11,7 @@ TagManager:
   - Consumable
   - GridSlot
   - Bullet
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

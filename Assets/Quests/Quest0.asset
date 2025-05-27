@@ -17,8 +17,9 @@ MonoBehaviour:
   _questName: Initiate's Hunt
   _questDescription: Prove your worth by collecting 5 tems. You'll be rewarded with
     a basic weapon.
-  _checkPoint: {fileID: 0}
-  _checkPointCount: 0
+  _checkPoints:
+  - Checkpoint1
+  - Checkpoint2
   _questCollectable: {fileID: 0}
   _questCollectCount: 0
   _questEnemy: {fileID: 0}

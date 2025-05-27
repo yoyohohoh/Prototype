@@ -6,6 +6,8 @@
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
 
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum QuestStatus
@@ -24,8 +26,7 @@ public class Quest : ScriptableObject
     public string _questDescription;
 
     [Header("Requirements")]
-    public GameObject _checkPoint;
-    public int _checkPointCount;
+    public List<string> _checkPoints; 
     public GameObject _questCollectable;
     public int _questCollectCount;
     public GameObject _questEnemy;

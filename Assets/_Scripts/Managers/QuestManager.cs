@@ -30,9 +30,12 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
 
     [Header("Quest Details")]
+    private int playerLevel;
+    [SerializeField] List<string> checkPointsCollected;
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
-    private int playerLevel;
+
+
     void OnEnable()
     {
         PlayerController.Instance.AddObserver(this);
@@ -54,12 +57,51 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     void Update()
     {
         // tracking if player finish quest
-        // how many checkPoint collected
-        // how many inventory stored
-        // how many npc "dead"
+        // how many checkPoint collected // own storage  list
+
+        // how many inventory stored // items & weapons
+
+        // how many npc "dead" // NPC State
 
 
 
+    }
+    public void AddCheckPoint(GameObject checkpoint)
+    {
+        if (!checkPointsCollected.Contains(checkpoint.name))
+        {
+            checkPointsCollected.Add(checkpoint.name);
+        }
+
+        CheckCheckPoint();
+    }
+
+    void CheckCheckPoint()
+    {
+        bool needUpdateQuest = false;
+
+        foreach (QuestSet questSet in currentQuestSetList)
+        {
+            foreach (Quest quest in questSet._quests)
+            {
+                if (quest._questStatus == QuestStatus.OnProgress)
+                {
+                    if (quest._checkPoints.Any())
+                    {
+                        if (quest._checkPoints.All(cp => checkPointsCollected.Contains(cp)))
+                        {
+                            quest._questStatus = QuestStatus.Done;
+                            needUpdateQuest = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (needUpdateQuest)
+        {
+            UpdateQuest();
+        }
     }
     void UpdateCount()
     {
@@ -112,14 +154,16 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     {
         Debug.Log($"Player Level: {playerLevel}");
         currentQuestSetList.Clear();
-        foreach (Transform child in questsContentPanel.transform)
-        {
-            Destroy(child.gameObject);
-            questsScrollbarMinY = 0f;
-            questsScrollbarMaxY = -300f;
-            questsScrollbarPosY = 0f;
-            questsScrollbarSpacing = 300f;
-        }
+
+            foreach (Transform child in questsContentPanel.transform)
+            {
+                Destroy(child.gameObject);
+                questsScrollbarMinY = 0f;
+                questsScrollbarMaxY = -300f;
+                questsScrollbarPosY = 0f;
+                questsScrollbarSpacing = 300f;
+            }
+        
 
 
         for (int i = 0; i < _questSets.Length; i++)
@@ -137,14 +181,14 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
                 }
             }
         }
-        foreach(QuestSet questSet in currentQuestSetList)
+        foreach (QuestSet questSet in currentQuestSetList)
         {
             if (questSet._quests.All(q => q._questStatus == QuestStatus.Done))
             {
                 questSet._questSetStatus = QuestSetStatus.Completed;
             }
         }
-        
+
         UpdateCount();
 
     }

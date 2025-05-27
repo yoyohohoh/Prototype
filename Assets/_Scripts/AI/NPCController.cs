@@ -5,8 +5,8 @@ using UnityEngine.InputSystem.LowLevel;
 public class NPCController : MonoBehaviour
 {
     private NPCStateBase currentState;
-    public Transform _origin;
-    public Transform _destination;
+    [SerializeField] Transform _origin;
+    [SerializeField] Transform _destination;
 
     public void SetState(NPCStateBase newState)
     {
@@ -19,6 +19,19 @@ public class NPCController : MonoBehaviour
     {
         this.gameObject.transform.position = _origin.position;
         InvokePatrol();
+    }
+
+    public Vector3 GetPosition(string location)
+    {
+        switch(location)
+        {
+            case "origin":
+                return _origin.position;
+            case "destination":
+                return _destination.position;
+            default:
+                return Vector3.zero;
+        }
     }
     public void InvokePatrol()
     {

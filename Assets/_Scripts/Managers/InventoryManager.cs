@@ -14,11 +14,8 @@ using UnityEngine;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
-    public List<GridSlot> items;
-    public List<GridSlot> weapons;
-
-    [SerializeField] private List<string> itemList;
-    [SerializeField] private List<string> weaponList;
+    List<GridSlot> items;
+    List<GridSlot> weapons;
 
     void Start()
     {
@@ -38,16 +35,15 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             if (slot.isWeapon)
             {
                 weapons.Add(slot);
-                weaponList.Add(slot.slotName);
             }
             else
             {
                 items.Add(slot);
-                itemList.Add(slot.slotName);
             }
         }
-
-        List<GridSlotData> _playerDataInventory = GameSaveManager.Instance().LoadPlayerData().inventory;
+        List<GridSlotData> _playerDataInventory = null;
+        if (GameSaveManager.Instance().LoadPlayerData() != null)
+        { _playerDataInventory = GameSaveManager.Instance().LoadPlayerData().inventory; }
         if (_playerDataInventory != null)
         {
             foreach (GridSlotData slotData in _playerDataInventory)
@@ -70,24 +66,20 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 }
             }
         }
-
-        CopyToList();
     }
 
-    void CopyToList()
+    public List<GridSlot> GetList(string listName)
     {
-        itemList.Clear();
-        weaponList.Clear();
-        foreach (GridSlot slot in items)
+        switch (listName)
         {
-            itemList.Add(slot.slotName);
-        }
-        foreach (GridSlot slot in weapons)
-        {
-            weaponList.Add(slot.slotName);
+            case "items":
+                return items;
+            case "weapons":
+                return weapons;
+            default:
+                return null;
         }
     }
-
     public void AddItem(GameObject itemObj)
     {
         List<GridSlot> targetList = new List<GridSlot>();
@@ -119,7 +111,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 slot.isEmpty = false;
                 slot.icon = icon;
                 slot.item = itemObj;
-                CopyToList();
                 break;
             }
         }
@@ -135,7 +126,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             {
                 slot.slotName = "none";
                 slot.isEmpty = true;
-                CopyToList();
                 break;
             }
         }

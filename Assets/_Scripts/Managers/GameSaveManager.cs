@@ -22,7 +22,7 @@ public class GameSaveManager
     string pathFolder = $"{Application.persistentDataPath}/";
     public void SavePlayerData(PlayerData data)
     {
-        foreach(GridSlot slot in InventoryManager.Instance.items)
+        foreach(GridSlot slot in InventoryManager.Instance.GetList("items"))
         {
             GridSlotData slotData = new GridSlotData
             {
@@ -37,7 +37,7 @@ public class GameSaveManager
             data.inventory.Add(slotData);
         }
 
-        foreach (GridSlot slot in InventoryManager.Instance.weapons)
+        foreach (GridSlot slot in InventoryManager.Instance.GetList("weapons"))
         {
             GridSlotData slotData = new GridSlotData
             {

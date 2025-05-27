@@ -14,7 +14,7 @@ public class CollisionModifier : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
-        
+
         if (this.CompareTag("Collectible"))
         {
             Item thisItem = this.GetComponent<Item>();
@@ -29,16 +29,21 @@ public class CollisionModifier : MonoBehaviour
 
         if (this.CompareTag("Weapon"))
         {
-            if(this.GetComponent<Weapon>()._status == WeaponStatus.Available)
+            if (this.GetComponent<Weapon>()._status == WeaponStatus.Available)
             {
                 InventoryManager.Instance.AddItem(this.gameObject);
-            }          
+            }
         }
 
         if (this.CompareTag("NPC"))
         {
             NPC thisNPC = this.GetComponent<NPC>();
             PlayerController.Instance.UpdatePlayerData(-thisNPC._npcDamage, 0f);
+        }
+
+        if (this.CompareTag("Checkpoint"))
+        {
+            QuestManager.Instance.AddCheckPoint(this.gameObject);
         }
     }
 
