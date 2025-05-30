@@ -31,6 +31,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
     [Header("Quest Details")]
     private int playerLevel;
+    [SerializeField] List<string> npcCollected;
     [SerializeField] List<string> checkPointsCollected;
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
@@ -52,7 +53,18 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     }
     void Start()
     {
-
+        if (GameSaveManager.Instance().LoadPlayerData() != null)
+        {
+            PlayerData playerData = GameSaveManager.Instance().LoadPlayerData();
+            playerLevel = playerData.level;
+            npcCollected = playerData.npcKilled;
+            checkPointsCollected = playerData.checkPoints;
+        }
+        else
+        {
+            npcCollected = new List<string>();
+            checkPointsCollected = new List<string>();
+        }
     }
     void Update()
     {
@@ -66,6 +78,62 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
 
     }
+    public List<string> GetList(string listName)
+    {
+        switch (listName)
+        {
+            case "checkPointsCollected":
+                return checkPointsCollected;
+            case "npcCollected":
+                return npcCollected;
+            default:
+                return null;
+        }
+    }
+
+    public void AddDeadNPC(GameObject npc)
+    {
+        npcCollected.Add(npc.name);
+        CheckDeadNPC();
+    }
+
+    void CheckDeadNPC()
+    {
+        bool needUpdateQuest = false;
+        foreach (QuestSet questSet in currentQuestSetList)
+        {
+            foreach (Quest quest in questSet._quests)
+            {
+                if (quest._questStatus == QuestStatus.OnProgress)
+                {
+                    if (quest._npcKillList.Any())
+                    {
+                        bool allKilled = quest._npcKillList.All(npc => npcCollected.Count(n => n == npc.npc.name) >= npc.killCount);
+
+                        if (allKilled)
+                        {
+                            quest._questStatus = QuestStatus.Done;
+
+                            foreach (NPCKillEntry npc in quest._npcKillList)
+                            {
+                                for (int i = 0; i < npc.killCount; i++)
+                                {
+                                    npcCollected.Remove(npc.npc.name);
+                                }
+                            }
+
+                            needUpdateQuest = true;
+                        }
+                    }
+                }
+            }
+        }
+        if (needUpdateQuest)
+        {
+            UpdateQuest();
+        }
+    }
+
     public void AddCheckPoint(GameObject checkpoint)
     {
         if (!checkPointsCollected.Contains(checkpoint.name))
@@ -155,15 +223,15 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         Debug.Log($"Player Level: {playerLevel}");
         currentQuestSetList.Clear();
 
-            foreach (Transform child in questsContentPanel.transform)
-            {
-                Destroy(child.gameObject);
-                questsScrollbarMinY = 0f;
-                questsScrollbarMaxY = -300f;
-                questsScrollbarPosY = 0f;
-                questsScrollbarSpacing = 300f;
-            }
-        
+        foreach (Transform child in questsContentPanel.transform)
+        {
+            Destroy(child.gameObject);
+            questsScrollbarMinY = 0f;
+            questsScrollbarMaxY = -300f;
+            questsScrollbarPosY = 0f;
+            questsScrollbarSpacing = 300f;
+        }
+
 
 
         for (int i = 0; i < _questSets.Length; i++)
@@ -186,6 +254,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             if (questSet._quests.All(q => q._questStatus == QuestStatus.Done))
             {
                 questSet._questSetStatus = QuestSetStatus.Completed;
+                LevelManager.Instance.GameSave();
             }
         }
 

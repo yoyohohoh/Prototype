@@ -12,18 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
   m_Name: Quest0
   m_EditorClassIdentifier: 
-  _questStatus: 1
+  _questStatus: 0
   _questID: 0
-  _questName: Initiate's Hunt
-  _questDescription: Prove your worth by collecting 5 tems. You'll be rewarded with
-    a basic weapon.
+  _questName: Initiate's Visit
+  _questDescription: Go to Checkpoints 1 and 2, and acquire your first weapon.
   _checkPoints:
   - Checkpoint1
   - Checkpoint2
   _questCollectable: {fileID: 0}
   _questCollectCount: 0
-  _questEnemy: {fileID: 0}
-  _questKillCount: 0
+  _npcKillList: []
   _hpReward: 0
-  _xpReward: 0
+  _xpReward: 100
   _questReward: {fileID: 6005448348429958617, guid: b19be297d5b9ae343801cd815a54e828, type: 3}

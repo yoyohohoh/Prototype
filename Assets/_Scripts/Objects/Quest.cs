@@ -10,6 +10,13 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class NPCKillEntry
+{
+    public GameObject npc;
+    public int killCount;
+}
+
 public enum QuestStatus
 {
     OnProgress,
@@ -29,8 +36,7 @@ public class Quest : ScriptableObject
     public List<string> _checkPoints; 
     public GameObject _questCollectable;
     public int _questCollectCount;
-    public GameObject _questEnemy;
-    public int _questKillCount;
+    public List<NPCKillEntry> _npcKillList;
 
     [Header("Reward")]
     public float _hpReward;

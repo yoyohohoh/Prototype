@@ -16,8 +16,8 @@ public class PlayerData
     public int level;
     public float hp;
     public float xp;
-    public List<string> checkPoint;
-
+    public List<string> checkPoints;
+    public List<string> npcKilled;
     public List<GridSlotData> inventory;
 
 
@@ -27,7 +27,8 @@ public class PlayerData
         level = 1;
         hp = 100f;
         xp = 0f;
-        checkPoint = new List<string>();
+        checkPoints = new List<string>();
+        npcKilled = new List<string>();
         inventory = new List<GridSlotData>();
     }
     public float maxXp => level * 100f;

@@ -51,6 +51,8 @@ public class GameSaveManager
             };
             data.inventory.Add(slotData);
         }
+        data.checkPoints = QuestManager.Instance.GetList("checkPointsCollected");
+        data.npcKilled = QuestManager.Instance.GetList("npcCollected");
 
         string timeStamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string json = JsonUtility.ToJson(data);

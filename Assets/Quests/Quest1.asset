@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _questStatus: 0
   _questID: 1
-  _questName: Trial of Evasion
-  _questDescription: Prove your worth by avoiding four NPCs for 30 seconds. You'll
-    be rewarded with a super star.
+  _questName: Test of Courage
+  _questDescription: "Prove your worth by killing at least one NPC. You\u2019ll be
+    rewarded with a Superstar."
   _checkPoints: []
   _questCollectable: {fileID: 0}
   _questCollectCount: 0
-  _questEnemy: {fileID: 0}
-  _questKillCount: 0
-  _hpReward: 0
-  _xpReward: 0
+  _npcKillList:
+  - npc: {fileID: 7855795043566248839, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
+    killCount: 2
+  _hpReward: 100
+  _xpReward: 50
   _questReward: {fileID: 6667449828456994001, guid: 4f6196b824962654a897b45fc868f38a, type: 3}
