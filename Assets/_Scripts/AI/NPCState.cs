@@ -94,7 +94,7 @@ public class DeadState : NPCStateBase
     {
         npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Dead;
         npcController.gameObject.transform.position = origin;
-        QuestManager.Instance.AddDeadNPC(npcController.gameObject);
+        QuestManager.Instance.AddObjForQuest("npc", npcController.gameObject);
     }
 
     public override void Exit()

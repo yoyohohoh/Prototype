@@ -19,8 +19,7 @@ MonoBehaviour:
   _checkPoints:
   - Checkpoint1
   - Checkpoint2
-  _questCollectable: {fileID: 0}
-  _questCollectCount: 0
+  _itemList: []
   _npcKillList: []
   _hpReward: 0
   _xpReward: 100

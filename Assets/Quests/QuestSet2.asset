@@ -15,5 +15,4 @@ MonoBehaviour:
   _questSetStatus: 0
   _questLevel: 2
   _questSetName: The Second Step
-  _quests:
-  - {fileID: 11400000, guid: 5ad3f9067d1f250489ed88a325aa1998, type: 2}
+  _quests: []

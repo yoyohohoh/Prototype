@@ -22,7 +22,10 @@ public class GameSaveManager
     string pathFolder = $"{Application.persistentDataPath}/";
     public void SavePlayerData(PlayerData data)
     {
-        foreach(GridSlot slot in InventoryManager.Instance.GetList("items"))
+        data.inventory.Clear();
+        data.checkPoints.Clear();
+        data.npcKilled.Clear();
+        foreach (GridSlot slot in InventoryManager.Instance.GetList("items"))
         {
             GridSlotData slotData = new GridSlotData
             {

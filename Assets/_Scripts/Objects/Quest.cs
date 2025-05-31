@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class NPCKillEntry
+public class ObjEntry
 {
-    public GameObject npc;
-    public int killCount;
+    public GameObject obj;
+    public int count;
 }
 
 public enum QuestStatus
@@ -34,9 +34,8 @@ public class Quest : ScriptableObject
 
     [Header("Requirements")]
     public List<string> _checkPoints; 
-    public GameObject _questCollectable;
-    public int _questCollectCount;
-    public List<NPCKillEntry> _npcKillList;
+    public List<ObjEntry> _itemList;
+    public List<ObjEntry> _npcKillList;
 
     [Header("Reward")]
     public float _hpReward;

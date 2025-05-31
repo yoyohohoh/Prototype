@@ -59,6 +59,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                         if (!gridSlot.isEmpty && gridSlot.isWeapon)
                         {
                             GameObject weapon = Instantiate(gridSlot.item, new Vector3(0, 0, 0), Quaternion.identity);
+                            weapon.name = gridSlot.item.name;
                             weapon.gameObject.GetComponent<Weapon>().SetStatus(WeaponStatus.PickedUp);
                             gridSlot.item = weapon;
                         }

@@ -1796,7 +1796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6667449828456994001, guid: 4f6196b824962654a897b45fc868f38a, type: 3}
       propertyPath: m_Name
-      value: Consumable
+      value: SuperItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4867,6 +4867,8 @@ MonoBehaviour:
   questsScrollbarPosY: 0
   questsScrollbarSpacing: 300
   checkPointsCollected: []
+  itemCollected: []
+  npcCollected: []
   _questSets:
   - {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
   - {fileID: 11400000, guid: 36bab284df40c614c9473f95654c03a8, type: 2}
@@ -18112,7 +18114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7095510722484666315, guid: 6ed282c152d976947aeb23248dc549d8, type: 3}
       propertyPath: m_Name
-      value: Collectible
+      value: BasicItem
       objectReference: {fileID: 0}
     - target: {fileID: 7526717420716145108, guid: 6ed282c152d976947aeb23248dc549d8, type: 3}
       propertyPath: _itemIcon

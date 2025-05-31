@@ -18,11 +18,10 @@ MonoBehaviour:
   _questDescription: "Prove your worth by killing at least one NPC. You\u2019ll be
     rewarded with a Superstar."
   _checkPoints: []
-  _questCollectable: {fileID: 0}
-  _questCollectCount: 0
+  _itemList: []
   _npcKillList:
-  - npc: {fileID: 7855795043566248839, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-    killCount: 2
+  - obj: {fileID: 7855795043566248839, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
+    count: 2
   _hpReward: 100
   _xpReward: 50
   _questReward: {fileID: 6667449828456994001, guid: 4f6196b824962654a897b45fc868f38a, type: 3}

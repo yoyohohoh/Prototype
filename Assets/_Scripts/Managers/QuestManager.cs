@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Unity.Android.Gradle.Manifest;
 
 public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 {
@@ -31,8 +32,10 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
     [Header("Quest Details")]
     private int playerLevel;
-    [SerializeField] List<string> npcCollected;
     [SerializeField] List<string> checkPointsCollected;
+    [SerializeField] List<string> itemCollected;
+    [SerializeField] List<string> npcCollected;
+
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
 
@@ -57,13 +60,19 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         {
             PlayerData playerData = GameSaveManager.Instance().LoadPlayerData();
             playerLevel = playerData.level;
-            npcCollected = playerData.npcKilled;
             checkPointsCollected = playerData.checkPoints;
+            npcCollected = playerData.npcKilled;
+            itemCollected = playerData.inventory
+                .Where(slot => !slot.isEmpty)
+                .Select(slot => slot.itemName)
+                .ToList();
+
         }
         else
         {
-            npcCollected = new List<string>();
             checkPointsCollected = new List<string>();
+            npcCollected = new List<string>();
+            itemCollected = new List<string>();
         }
     }
     void Update()
@@ -73,7 +82,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
         // how many inventory stored // items & weapons
 
-        // how many npc "dead" // NPC State
+        // how many objEntry "dead" // NPC State
 
 
 
@@ -86,18 +95,33 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
                 return checkPointsCollected;
             case "npcCollected":
                 return npcCollected;
+            case "itemCollected":
+                return itemCollected;
             default:
                 return null;
         }
     }
-
-    public void AddDeadNPC(GameObject npc)
+    void CheckItems()
     {
-        npcCollected.Add(npc.name);
-        CheckDeadNPC();
+
+    }
+    public void AddObjForQuest(string category, GameObject obj)
+    {
+        switch (category)
+        {
+            case "item":
+                itemCollected.Add(obj.name);
+                CheckCollection("objEntry");
+                break;
+            case "npc":
+                npcCollected.Add(obj.name);
+                CheckCollection("npc");
+                break;
+        }
+        
     }
 
-    void CheckDeadNPC()
+    void CheckCollection(string category)
     {
         bool needUpdateQuest = false;
         foreach (QuestSet questSet in currentQuestSetList)
@@ -106,19 +130,34 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             {
                 if (quest._questStatus == QuestStatus.OnProgress)
                 {
-                    if (quest._npcKillList.Any())
-                    {
-                        bool allKilled = quest._npcKillList.All(npc => npcCollected.Count(n => n == npc.npc.name) >= npc.killCount);
+                    List<ObjEntry> targetList = new List<ObjEntry>();
+                    List<string> collectedList = new List<string>();
 
-                        if (allKilled)
+                    switch(category)
+                    {
+                        case "item":
+                            targetList = quest._itemList;
+                            collectedList = itemCollected;
+                            break;
+                        case "npc":
+                            targetList = quest._npcKillList;
+                            collectedList = npcCollected;
+                            break;
+                    }
+
+                    if (targetList.Any())
+                    {
+                        bool isQuestDone = targetList.All(objEntry => collectedList.Count(n => n == objEntry.obj.name) >= objEntry.count);
+
+                        if (isQuestDone)
                         {
                             quest._questStatus = QuestStatus.Done;
 
-                            foreach (NPCKillEntry npc in quest._npcKillList)
+                            foreach (ObjEntry npc in targetList)
                             {
-                                for (int i = 0; i < npc.killCount; i++)
+                                for (int i = 0; i < npc.count; i++)
                                 {
-                                    npcCollected.Remove(npc.npc.name);
+                                    collectedList.Remove(npc.obj.name);
                                 }
                             }
 
