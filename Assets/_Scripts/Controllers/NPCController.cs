@@ -12,6 +12,23 @@ public class NPCController : MonoBehaviour
     [SerializeField] Transform _origin;
     [SerializeField] Transform _destination;
 
+    
+    public void SetLocation(Location location, Transform transform)
+    {
+        switch(location)
+        {
+            case Location.Origin:
+                _origin = transform;
+                break;
+            case Location.Destination:
+                _destination = transform;
+                break;
+            default:
+                Debug.LogError("Invalid location specified.");
+                break;
+        }
+    }
+
     public void SetState(NPCStateBase newState)
     {
         currentState?.Exit();

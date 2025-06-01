@@ -3208,6 +3208,8 @@ MonoBehaviour:
   objType: 0
   _objList: []
   _spawnField: {fileID: 1142738906}
+  startpoints: []
+  endpoints: []
 --- !u!1 &374954608
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,7 +5706,7 @@ GameObject:
   - component: {fileID: 656879006}
   m_Layer: 0
   m_Name: NPCEndLocation (3)
-  m_TagString: Untagged
+  m_TagString: EndPoint
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6016,7 +6018,7 @@ GameObject:
   - component: {fileID: 669630292}
   m_Layer: 0
   m_Name: NPCStartLocation (1)
-  m_TagString: Untagged
+  m_TagString: StartPoint
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8437,7 +8439,7 @@ GameObject:
   - component: {fileID: 971375264}
   m_Layer: 0
   m_Name: NPCEndLocation (2)
-  m_TagString: Untagged
+  m_TagString: EndPoint
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11603,7 +11605,7 @@ GameObject:
   - component: {fileID: 1308467326}
   m_Layer: 0
   m_Name: NPCEndLocation (1)
-  m_TagString: Untagged
+  m_TagString: EndPoint
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14044,87 +14046,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582922437}
   m_CullTransparentMesh: 1
---- !u!1001 &1595114255
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3442068175292185757, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: _origin
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3442068175292185757, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: _destination
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7855795043566248839, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_Name
-      value: NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 7.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7896772947157045742, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446094198478892042, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_Speed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446094198478892042, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_Radius
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446094198478892042, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_WalkableMask
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8446094198478892042, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
 --- !u!1 &1601901361
 GameObject:
   m_ObjectHideFlags: 0
@@ -17904,7 +17825,7 @@ GameObject:
   - component: {fileID: 2118619372}
   m_Layer: 0
   m_Name: NPCStartLocation (2)
-  m_TagString: Untagged
+  m_TagString: StartPoint
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18875,5 +18796,4 @@ SceneRoots:
   - {fileID: 1223719194}
   - {fileID: 1274360464}
   - {fileID: 1227463328}
-  - {fileID: 1595114255}
   - {fileID: 1419586733}

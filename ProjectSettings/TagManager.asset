@@ -12,6 +12,8 @@ TagManager:
   - GridSlot
   - Bullet
   - Checkpoint
+  - StartPoint
+  - EndPoint
   layers:
   - Default
   - TransparentFX
