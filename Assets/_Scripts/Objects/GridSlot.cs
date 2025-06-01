@@ -46,7 +46,7 @@ public class GridSlot : MonoBehaviour
     {
         if (isWeapon)
         {
-            foreach (GridSlot gridSlot in InventoryManager.Instance.GetList("weapons"))
+            foreach (GridSlot gridSlot in InventoryManager.Instance.GetList(GridSlotType.Weapon))
             {
                 if (!gridSlot.isEmpty)
                 {

@@ -3202,12 +3202,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 373885489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4619a14d6bf9e2e49ba80141bf62b066, type: 3}
+  m_Script: {fileID: 11500000, guid: 428015320849fbe43b5697229c432cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objType: 
+  objType: 0
   _objList: []
-  _spawnField: {fileID: 0}
+  _spawnField: {fileID: 1142738906}
 --- !u!1 &374954608
 GameObject:
   m_ObjectHideFlags: 0
@@ -5703,7 +5703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 656879006}
   m_Layer: 0
-  m_Name: NPCEndPoint (3)
+  m_Name: NPCEndLocation (3)
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6015,7 +6015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669630292}
   m_Layer: 0
-  m_Name: NPCStartPoint (1)
+  m_Name: NPCStartLocation (1)
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8436,7 +8436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 971375264}
   m_Layer: 0
-  m_Name: NPCEndPoint (2)
+  m_Name: NPCEndLocation (2)
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -11602,7 +11602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308467326}
   m_Layer: 0
-  m_Name: NPCEndPoint (1)
+  m_Name: NPCEndLocation (1)
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -15112,7 +15112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5e392e61f47d44abacba4f1dc04b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objType: Collectible
+  objType: 1
+  _objList: []
   _spawnField: {fileID: 1142738906}
 --- !u!114 &1696590340
 MonoBehaviour:
@@ -15126,7 +15127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5e392e61f47d44abacba4f1dc04b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objType: Consumable
+  objType: 2
+  _objList: []
   _spawnField: {fileID: 1142738906}
 --- !u!1001 &1707098720
 PrefabInstance:
@@ -17901,7 +17903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118619372}
   m_Layer: 0
-  m_Name: NPCStartPoint (2)
+  m_Name: NPCStartLocation (2)
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

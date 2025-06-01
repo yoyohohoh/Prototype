@@ -114,11 +114,11 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         {
             case QuestCategory.item:
                 itemCollected.Add(obj.name);
-                CheckCollection("objEntry");
+                CheckCollection(QuestCategory.item);
                 break;
             case QuestCategory.npc:
                 npcCollected.Add(obj.name);
-                CheckCollection("npc");
+                CheckCollection(QuestCategory.npc);
                 break;
         }
         
