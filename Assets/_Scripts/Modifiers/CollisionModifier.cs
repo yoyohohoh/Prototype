@@ -20,13 +20,13 @@ public class CollisionModifier : MonoBehaviour
             Item thisItem = this.GetComponent<Item>();
             PlayerController.Instance.UpdatePlayerData(thisItem._hp, thisItem._xp);
             InventoryManager.Instance.AddItem(this.gameObject);
-            QuestManager.Instance.AddObjForQuest("item", this.gameObject);
+            QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
         }
 
         if (this.CompareTag("Consumable"))
         {
             InventoryManager.Instance.AddItem(this.gameObject);
-            QuestManager.Instance.AddObjForQuest("item", this.gameObject);
+            QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
         }
 
         if (this.CompareTag("Weapon"))
@@ -34,7 +34,7 @@ public class CollisionModifier : MonoBehaviour
             if (this.GetComponent<Weapon>()._status == WeaponStatus.Available)
             {
                 InventoryManager.Instance.AddItem(this.gameObject);
-                QuestManager.Instance.AddObjForQuest("item", this.gameObject);
+                QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
             }
         }
 

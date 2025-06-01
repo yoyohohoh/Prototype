@@ -25,7 +25,7 @@ public class GameSaveManager
         data.inventory.Clear();
         data.checkPoints.Clear();
         data.npcKilled.Clear();
-        foreach (GridSlot slot in InventoryManager.Instance.GetList("items"))
+        foreach (GridSlot slot in InventoryManager.Instance.GetList(GridSlotType.Item))
         {
             GridSlotData slotData = new GridSlotData
             {
@@ -40,7 +40,7 @@ public class GameSaveManager
             data.inventory.Add(slotData);
         }
 
-        foreach (GridSlot slot in InventoryManager.Instance.GetList("weapons"))
+        foreach (GridSlot slot in InventoryManager.Instance.GetList(GridSlotType.Weapon))
         {
             GridSlotData slotData = new GridSlotData
             {
@@ -54,8 +54,8 @@ public class GameSaveManager
             };
             data.inventory.Add(slotData);
         }
-        data.checkPoints = QuestManager.Instance.GetList("checkPointsCollected");
-        data.npcKilled = QuestManager.Instance.GetList("npcCollected");
+        data.checkPoints = QuestManager.Instance.GetList(QuestCategory.checkpoint);
+        data.npcKilled = QuestManager.Instance.GetList(QuestCategory.npc);
 
         string timeStamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
         string json = JsonUtility.ToJson(data);

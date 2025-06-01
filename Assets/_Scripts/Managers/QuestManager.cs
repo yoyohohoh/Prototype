@@ -13,7 +13,12 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using Unity.Android.Gradle.Manifest;
-
+public enum QuestCategory
+{
+    checkpoint,
+    npc,
+    item
+}
 public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 {
     [Header("Panels")]
@@ -38,8 +43,6 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
     [SerializeField] QuestSet[] _questSets;
     [SerializeField] List<QuestSet> currentQuestSetList = new List<QuestSet>();
-
-
     void OnEnable()
     {
         PlayerController.Instance.AddObserver(this);
@@ -87,15 +90,15 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
 
     }
-    public List<string> GetList(string listName)
+    public List<string> GetList(QuestCategory listName)
     {
         switch (listName)
         {
-            case "checkPointsCollected":
+            case QuestCategory.checkpoint:
                 return checkPointsCollected;
-            case "npcCollected":
+            case QuestCategory.npc:
                 return npcCollected;
-            case "itemCollected":
+            case QuestCategory.item:
                 return itemCollected;
             default:
                 return null;
@@ -105,15 +108,15 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     {
 
     }
-    public void AddObjForQuest(string category, GameObject obj)
+    public void AddObjForQuest(QuestCategory category, GameObject obj)
     {
         switch (category)
         {
-            case "item":
+            case QuestCategory.item:
                 itemCollected.Add(obj.name);
                 CheckCollection("objEntry");
                 break;
-            case "npc":
+            case QuestCategory.npc:
                 npcCollected.Add(obj.name);
                 CheckCollection("npc");
                 break;
@@ -121,7 +124,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
         
     }
 
-    void CheckCollection(string category)
+    void CheckCollection(QuestCategory category)
     {
         bool needUpdateQuest = false;
         foreach (QuestSet questSet in currentQuestSetList)
@@ -135,11 +138,11 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
 
                     switch(category)
                     {
-                        case "item":
+                        case QuestCategory.item:
                             targetList = quest._itemList;
                             collectedList = itemCollected;
                             break;
-                        case "npc":
+                        case QuestCategory.npc:
                             targetList = quest._npcKillList;
                             collectedList = npcCollected;
                             break;

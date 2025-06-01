@@ -12,6 +12,11 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum GridSlotType
+{
+    Item,
+    Weapon
+}
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
     List<GridSlot> items;
@@ -69,13 +74,13 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
     }
 
-    public List<GridSlot> GetList(string listName)
+    public List<GridSlot> GetList(GridSlotType listName)
     {
         switch (listName)
         {
-            case "items":
+            case GridSlotType.Item:
                 return items;
-            case "weapons":
+            case GridSlotType.Weapon:
                 return weapons;
             default:
                 return null;

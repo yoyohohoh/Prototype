@@ -15,45 +15,65 @@ public class ObjCount
     public GameObject prefab;
     public int amount;
 }
-
+public enum ObjectType
+{
+    NPC,
+    Collectible,
+    Consumable
+}
 public abstract class ObjectSpawner : MonoBehaviour
 {
-    public string objType;
+    protected LevelManager levelManager => LevelManager.Instance;
+    protected LevelConfig levelConfig => levelManager?._levelConfig;
+    [SerializeField] ObjectType objType;
     public List<ObjCount> _objList;
     public GameObject _spawnField;
 
     protected virtual void Awake()
     {
-        LevelConfig levelConfig = LevelManager.Instance._levelConfig;
-        if (levelConfig != null)
+        if (levelManager)
         {
-            switch (objType)
+            if (levelConfig)
             {
-                case "NPC":
-                    _objList = levelConfig._npcList;
-                    break;
-                case "Collectible":
-                    _objList = levelConfig._collectibleList;
-                    break;
-                case "Consumable":
-                    _objList = levelConfig._consumableList;
-                    break;
-                default:
-                    Debug.LogError("ObjectSpawner: Invalid objType specified.");
-                    break;
-            }
+                switch (objType)
+                {
+                    case ObjectType.NPC:
+                        _objList = levelConfig._npcList;
+                        break;
+                    case ObjectType.Collectible:
+                        _objList = levelConfig._collectibleList;
+                        break;
+                    case ObjectType.Consumable:
+                        _objList = levelConfig._consumableList;
+                        break;
+                    default:
+                        Debug.LogError("ObjectSpawner: Invalid objType specified.");
+                        break;
+                }
 
-        }
-        else
-        {
-            Debug.LogError("ObjectSpawner: LevelConfig is not set in LevelManager.");
-            return;
+            }
+            else
+            {
+                Debug.LogError("ObjectSpawner: LevelConfig is not set in LevelManager.");
+                return;
+            }
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        if (_spawnField == null)
+        {
+            Debug.LogError("ObjectSpawner: _spawnField is not assigned.");
+            return;
+        }
+        if (_objList == null || _objList.Count == 0)
+        {
+            Debug.LogWarning("ObjectSpawner: _objList is empty or null.");
+            return;
+        }
+
         foreach (ObjCount itemCount in _objList)
         {
             for (int i = 0; i < itemCount.amount; i++)

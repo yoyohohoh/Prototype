@@ -1,7 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.LowLevel;
-
+public enum Location
+{
+    Origin,
+    Destination
+}
 public class NPCController : MonoBehaviour
 {
     private NPCStateBase currentState;
@@ -21,13 +25,13 @@ public class NPCController : MonoBehaviour
         InvokePatrol();
     }
 
-    public Vector3 GetPosition(string location)
+    public Vector3 GetPosition(Location location)
     {
         switch(location)
         {
-            case "origin":
+            case Location.Origin:
                 return _origin.position;
-            case "destination":
+            case Location.Destination:
                 return _destination.position;
             default:
                 return Vector3.zero;

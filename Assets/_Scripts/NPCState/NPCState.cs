@@ -9,7 +9,7 @@ public class IdleState : NPCStateBase
     private Vector3 origin;
     public IdleState(NPCController npcController) : base(npcController)
     {
-        origin = npcController.GetPosition("origin");
+        origin = npcController.GetPosition(Location.Origin);
     }
 
     public override void Enter()
@@ -38,7 +38,7 @@ public class PatrolState : NPCStateBase
     private Vector3 destination;
     public PatrolState(NPCController npcController) : base(npcController) 
     {
-        destination = npcController.GetPosition("destination");
+        destination = npcController.GetPosition(Location.Destination);
     }
 
     public override void Enter()
@@ -87,14 +87,14 @@ public class DeadState : NPCStateBase
     private Vector3 origin;
     public DeadState(NPCController npcController) : base(npcController) 
     {
-        origin = npcController.GetPosition("origin");
+        origin = npcController.GetPosition(Location.Origin);
     }
 
     public override void Enter()
     {
         npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Dead;
         npcController.gameObject.transform.position = origin;
-        QuestManager.Instance.AddObjForQuest("npc", npcController.gameObject);
+        QuestManager.Instance.AddObjForQuest(QuestCategory.npc, npcController.gameObject);
     }
 
     public override void Exit()
