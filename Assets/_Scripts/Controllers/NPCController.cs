@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.LowLevel;
+using System.Collections;
+
 public enum Location
 {
     Origin,
@@ -9,13 +10,14 @@ public enum Location
 public class NPCController : MonoBehaviour
 {
     private NPCStateBase currentState;
+    private Coroutine currentCoroutine;
     [SerializeField] Transform _origin;
     [SerializeField] Transform _destination;
 
-    
+
     public void SetLocation(Location location, Transform transform)
     {
-        switch(location)
+        switch (location)
         {
             case Location.Origin:
                 _origin = transform;
@@ -28,23 +30,9 @@ public class NPCController : MonoBehaviour
                 break;
         }
     }
-
-    public void SetState(NPCStateBase newState)
-    {
-        currentState?.Exit();
-        currentState = newState;
-        currentState.Enter();
-    }
-
-    private void Start()
-    {
-        this.gameObject.transform.position = _origin.position;
-        InvokePatrol();
-    }
-
     public Vector3 GetPosition(Location location)
     {
-        switch(location)
+        switch (location)
         {
             case Location.Origin:
                 return _origin.position;
@@ -54,17 +42,40 @@ public class NPCController : MonoBehaviour
                 return Vector3.zero;
         }
     }
+    public void SetState(NPCStateBase newState)
+    {
+        currentState?.Exit();
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    private void Start()
+    {
+        SetState(new IdleState(this));
+    }
+
     public void InvokePatrol()
     {
-        Invoke("OnPatrol", 5f);
+        if (currentCoroutine == null)
+        {
+            currentCoroutine = StartCoroutine(DelayedPatrol());
+        }
     }
-    void OnPatrol()
+
+    private IEnumerator DelayedPatrol()
     {
+        yield return new WaitForSeconds(5f);
         SetState(new PatrolState(this));
+        currentCoroutine = null;
     }
 
     private void Update()
     {
+        if (this.gameObject.GetComponent<NPC>()._npcStatus == NPCStatus.Idle)
+        {
+            InvokePatrol();
+        }
+
         Vector3 velocity = this.gameObject.GetComponent<NavMeshAgent>().velocity;
         if (velocity.sqrMagnitude > 0.1f)
         {
