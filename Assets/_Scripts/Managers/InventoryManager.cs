@@ -65,7 +65,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                         {
                             if(gridSlot.item == null)
                             {
-                                gridSlot.item = Resources.Load<GameObject>($"Prefabs/BasicItem");
+                                gridSlot.item = Resources.Load<GameObject>($"Prefabs/Weapon");
                             }
                             GameObject weapon = Instantiate(gridSlot.item, new Vector3(0, 0, 0), Quaternion.identity);
                             weapon.name = gridSlot.item.name;

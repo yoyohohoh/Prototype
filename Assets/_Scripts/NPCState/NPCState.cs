@@ -16,7 +16,6 @@ public class IdleState : NPCStateBase
 
     public override void Enter()
     {
-        Debug.Log("NPCController: Entering Idle State");
         npcController.gameObject.SetActive(true);
         npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Idle;
         
@@ -52,7 +51,6 @@ public class PatrolState : NPCStateBase
 
     public override void Enter()
     {
-        Debug.Log("NPCController: Entering Patrol State");
         npcController.gameObject.SetActive(true);
         npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Patrol;
 

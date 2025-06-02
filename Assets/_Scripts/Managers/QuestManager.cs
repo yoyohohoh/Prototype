@@ -262,7 +262,6 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     }
     public void UpdateQuest()
     {
-        Debug.Log($"Player Level: {playerLevel}");
         currentQuestSetList.Clear();
 
         foreach (Transform child in questsContentPanel.transform)
