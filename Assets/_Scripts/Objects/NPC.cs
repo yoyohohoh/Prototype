@@ -23,6 +23,7 @@ public class NPC : MonoBehaviour
     public string _npcName;
     public string _npcDescription;
 
+    public float _npcSpeed;
     public int _npcLevel;
     public float _npcHp;
 

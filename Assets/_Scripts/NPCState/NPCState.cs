@@ -23,6 +23,8 @@ public class IdleState : NPCStateBase
         agent.isStopped = true;
         agent.ResetPath();
 
+        npcController.gameObject.GetComponent<NavMeshAgent>().speed = 0.0f;
+
         Vector3 offset = new Vector3(1, 0, 1);
         npcController.GetComponent<NavMeshAgent>().Warp(origin + offset);
     }
@@ -41,10 +43,12 @@ public class IdleState : NPCStateBase
 
 public class PatrolState : NPCStateBase
 {
+    private float speed;
     private Vector3 origin;
     private Vector3 destination;
     public PatrolState(NPCController npcController) : base(npcController)
     {
+        speed = npcController.gameObject.GetComponent<NPC>()._npcSpeed;
         origin = npcController.GetPosition(Location.Origin);
         destination = npcController.GetPosition(Location.Destination);
     }
@@ -59,7 +63,7 @@ public class PatrolState : NPCStateBase
         agent.ResetPath();
 
         npcController.GetComponent<NavMeshAgent>().destination = destination;
-        npcController.gameObject.GetComponent<NavMeshAgent>().speed = 10f;
+        npcController.gameObject.GetComponent<NavMeshAgent>().speed = speed;
     }
 
     public override void Exit()
@@ -73,31 +77,40 @@ public class PatrolState : NPCStateBase
         {
             npcController.GetComponent<NavMeshAgent>().destination = origin;
         }
-
-        if (Vector3.Distance(npcController.transform.position, origin) < 0.5f)
-        {
-            npcController.SetState(new IdleState(npcController));
-        }
     }
 }
 
 public class AttackState : NPCStateBase
 {
-    public AttackState(NPCController npcController) : base(npcController) { }
+    private float speed;
+    private float damage;
+    public AttackState(NPCController npcController) : base(npcController) 
+    {
+        speed = npcController.gameObject.GetComponent<NPC>()._npcSpeed;
+        damage = npcController.gameObject.GetComponent<NPC>()._npcDamage;
+    }
 
     public override void Enter()
     {
+        npcController.gameObject.SetActive(true);
         npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Attack;
+
+        var agent = npcController.GetComponent<NavMeshAgent>();
+        agent.isStopped = false;
+        agent.ResetPath();
+
+        npcController.GetComponent<NavMeshAgent>().destination = PlayerController.Instance.GetCurrentPosition();
+        npcController.gameObject.GetComponent<NavMeshAgent>().speed = speed * 2;
     }
 
     public override void Exit()
     {
-
+        
     }
 
     public override void Update()
     {
-
+        npcController.GetComponent<NavMeshAgent>().destination = PlayerController.Instance.GetCurrentPosition();
     }
 }
 

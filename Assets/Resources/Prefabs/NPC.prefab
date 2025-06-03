@@ -234,7 +234,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -262,6 +262,7 @@ MonoBehaviour:
   _npcID: 0
   _npcName: NPC
   _npcDescription: This is an NPC.
+  _npcSpeed: 5
   _npcLevel: 1
   _npcHp: 99
 --- !u!114 &3442068175292185757
@@ -278,6 +279,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _origin: {fileID: 0}
   _destination: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &2846050881058020096
 MonoBehaviour:
   m_ObjectHideFlags: 0

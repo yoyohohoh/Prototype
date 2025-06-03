@@ -101,6 +101,11 @@ public class PlayerController : Subject
         }
 
     }
+
+    public Vector3 GetCurrentPosition()
+    {
+        return _controller.transform.position;
+    }
     float GetCurrentSpeed(bool isDashing)
     {
         return isDashing ? _dashForce * _speed : _speed;
