@@ -49,7 +49,10 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
     }
     void OnDisable()
     {
-        PlayerController.Instance.RemoveObserver(this);
+        if (PlayerController.Instance != null)
+        {
+            PlayerController.Instance.RemoveObserver(this);
+        }
     }
 
     public void OnNotify(PlayerData playerData)
