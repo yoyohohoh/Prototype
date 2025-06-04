@@ -6,21 +6,34 @@
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
 
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : Subject
 {
-    [Header("Movements")]
+    [Header("Movement")]
     private CharacterController _controller;
-    [SerializeField] private bool isGround = false;
     private Vector2 _direction;
     [SerializeField] private Vector3 _velocity;
     [SerializeField] public float _speed;
     [SerializeField] public float _dashForce;
     [SerializeField] public float _jumpForce;
+    [SerializeField] public float _fallForce;
     [SerializeField] public float _damage;
     [SerializeField] public float _attackForce;
+
+    [Header("Jump")]
+    [SerializeField] bool _isGrounded;
+    [SerializeField] Transform _groundCheck;
+    [SerializeField] LayerMask _groundMask;
+    private float _groundRadius = 0.5f;
+
+    [Header("Attack & Skill")]
+    public bool isWeaponEquipped = false;
+    [SerializeField] private Transform weaponHolder;
+    [SerializeField] private Transform attackTarget;
+    [SerializeField] private Transform skillTarget;
 
     [Header("Control")]
     public GameObject _controlPanel;
@@ -34,10 +47,7 @@ public class PlayerController : Subject
     [SerializeField] public PlayerData _playerData;
     [SerializeField] private float _currentSpeed;
     public float _currentDamage;
-    [SerializeField] private Transform weaponHolder;
-    public bool isWeaponEquipped = false;
-    [SerializeField] private Transform attackTarget;
-    [SerializeField] private Transform skillTarget;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -70,22 +80,30 @@ public class PlayerController : Subject
 
         UpdatePlayerData(0f, 0f);
     }
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        // movement
         _direction = _joystick.Direction;
         _currentSpeed = GetCurrentSpeed(_dashButton.isPressed);
         _velocity = new Vector3(_direction.x * _currentSpeed * Time.fixedDeltaTime, 0.0f, _direction.y * _currentSpeed * Time.fixedDeltaTime);
         Movement(_velocity);
 
-        if (_jumpButton.isPressed)
+        // jump
+        _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
+        if (_jumpButton.isPressed && _isGrounded)
         {
-            Jump(isGround);
+            Jump();
         }
 
-        _currentDamage = GetAttackForce(_skillButton.isPressed);
+        _velocity.y += _fallForce * Physics.gravity.y * Time.fixedDeltaTime;
 
+        _controller.Move(_velocity * Time.fixedDeltaTime);
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        // attack & skill
+        _currentDamage = GetAttackForce(_skillButton.isPressed);
         if (_attackButton.isPressed)
         {
             Attack(_currentDamage, attackTarget);
@@ -95,13 +113,11 @@ public class PlayerController : Subject
             Attack(_currentDamage, skillTarget);
         }
 
-        if(!_attackButton.isPressed && !_skillButton.isPressed)
+        if (!_attackButton.isPressed && !_skillButton.isPressed)
         {
             ProjectilePoolManager.Instance.ResetAttack();
         }
-
     }
-
     public Vector3 GetCurrentPosition()
     {
         return _controller.transform.position;
@@ -114,11 +130,10 @@ public class PlayerController : Subject
     {
         _controller.Move(velocity);
     }
-    public void Jump(bool isGround)
+    void Jump()
     {
-        Debug.Log("Jump");
+        _velocity.y = Mathf.Sqrt(_jumpForce * 10f * -2.0f * Physics.gravity.y);
     }
-
     public void PutWeapon(GameObject weapon)
     {
         weapon.transform.SetParent(weaponHolder);
@@ -133,7 +148,7 @@ public class PlayerController : Subject
     }
     public void Attack(float damage, Transform target)
     {
-        if(isWeaponEquipped)
+        if (isWeaponEquipped)
         { ProjectilePoolManager.Instance.Initiate(weaponHolder, target); }
     }
 

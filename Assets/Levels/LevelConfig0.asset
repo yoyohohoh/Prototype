@@ -17,7 +17,7 @@ MonoBehaviour:
   levelDescription: This is the beginning of the journey.
   _npcList:
   - prefab: {fileID: 7855795043566248839, guid: df1ee14a5e491de4e8aa47060f70ccfe, type: 3}
-    amount: 3
+    amount: 0
   _collectibleList:
   - prefab: {fileID: 7095510722484666315, guid: 6ed282c152d976947aeb23248dc549d8, type: 3}
     amount: 10
