@@ -12,6 +12,11 @@ using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum Path 
+{
+    Prototype,
+    MGOT
+}
 public enum GridSlotType
 {
     Item,
@@ -19,6 +24,7 @@ public enum GridSlotType
 }
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
+    [SerializeField] Path path;
     List<GridSlot> items;
     List<GridSlot> weapons;
 
@@ -60,7 +66,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                         gridSlot.slotName = slotData.slotName;
                         gridSlot.icon = slotData.icon;
                         gridSlot.isEmpty = slotData.isEmpty;
-                        gridSlot.item = Resources.Load<GameObject>($"Prefabs/{slotData.itemName}");
+                        gridSlot.item = Resources.Load<GameObject>($"Prefabs/{path}/{slotData.itemName}");
                         if (!gridSlot.isEmpty && gridSlot.isWeapon)
                         {
                             if(gridSlot.item == null)
