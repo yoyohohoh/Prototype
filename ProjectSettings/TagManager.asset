@@ -15,6 +15,7 @@ TagManager:
   - StartPoint
   - EndPoint
   - MoneyTree
+  - Money
   layers:
   - Default
   - TransparentFX

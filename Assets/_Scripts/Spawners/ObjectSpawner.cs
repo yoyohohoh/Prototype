@@ -19,15 +19,18 @@ public enum ObjectType
 {
     NPC,
     Collectible,
-    Consumable
+    Consumable,
+    etc
 }
 public abstract class ObjectSpawner : MonoBehaviour
 {
     protected LevelManager levelManager => LevelManager.Instance;
     protected LevelConfig levelConfig => levelManager?._levelConfig;
     [SerializeField] ObjectType objType;
-    public List<ObjCount> _objList;
-    public GameObject _spawnField;
+    [SerializeField] List<ObjCount> _objList;
+    [SerializeField] GameObject _spawnField;
+    [SerializeField] float fieldOffset = 1;
+    [SerializeField] float spawnYOffset = 0;
 
     protected virtual void Awake()
     {
@@ -87,12 +90,12 @@ public abstract class ObjectSpawner : MonoBehaviour
     {
         Transform center = _spawnField.transform;
 
-        int width = (int)(Mathf.Abs(center.localScale.x) / 3) * 3;
-        int depth = (int)(Mathf.Abs(center.localScale.z) / 3) * 3;
+        int width = (int)(Mathf.Abs(center.localScale.x * fieldOffset) / 3) * 3;
+        int depth = (int)(Mathf.Abs(center.localScale.z * fieldOffset) / 3) * 3;
         float randomX = Random.Range(-width / 2f, width / 2f);
         float randomZ = Random.Range(-depth / 2f, depth / 2f);
 
-        Vector3 spawnPosition = new Vector3(randomX, 0.0f, randomZ);
+        Vector3 spawnPosition = new Vector3(randomX, -center.position.y + spawnYOffset, randomZ) + center.position;
         GameObject itemObj = Instantiate(itemCount.prefab, spawnPosition, Quaternion.identity);
         itemObj.name = itemCount.prefab.name;
     }

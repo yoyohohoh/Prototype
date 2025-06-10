@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CollisionModifier : MonoBehaviour
 {
-
+    [SerializeField] string newTag;
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -47,6 +47,12 @@ public class CollisionModifier : MonoBehaviour
         if (this.CompareTag("Checkpoint"))
         {
             QuestManager.Instance.AddCheckPoint(this.gameObject);
+        }
+
+        if (this.CompareTag(newTag))
+        {
+            Debug.Log($"Player collide {newTag}");
+            Destroy(this.gameObject);
         }
     }
 
