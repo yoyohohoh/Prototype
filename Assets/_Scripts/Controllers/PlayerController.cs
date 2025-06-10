@@ -172,4 +172,11 @@ public class PlayerController : Subject
 
         NotifyObservers(_playerData);
     }
+
+    public void UpdatePlayerData(float gold)
+    {
+        _playerData.gold += gold;
+
+        NotifyObservers(_playerData);
+    }
 }

@@ -14,6 +14,7 @@ public class PlayerData
 {
     public string name;
     public int level;
+    public float gold;
     public float hp;
     public float xp;
     public List<string> checkPoints;
@@ -25,6 +26,7 @@ public class PlayerData
     {
         name = "Yobisaboy";
         level = 1;
+        gold = 0f;
         hp = 100f;
         xp = 0f;
         checkPoints = new List<string>();

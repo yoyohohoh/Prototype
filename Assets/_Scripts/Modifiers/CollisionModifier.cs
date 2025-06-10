@@ -52,6 +52,7 @@ public class CollisionModifier : MonoBehaviour
         if (this.CompareTag(newTag))
         {
             Debug.Log($"Player collide {newTag}");
+            PlayerController.Instance.UpdatePlayerData(100f);
             Destroy(this.gameObject);
         }
     }

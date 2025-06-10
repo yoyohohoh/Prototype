@@ -21,6 +21,7 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
     
     private string playerName;
     private int level;
+    private float gold;
     private float hp;
     private float xp;
     private float maxXp;
@@ -41,6 +42,7 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
     {
         playerName = playerData.name;
         level = playerData.level;
+        gold = playerData.gold;
         hp = playerData.hp;
         xp = playerData.xp;
         maxXp = playerData.maxXp;
@@ -53,6 +55,7 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
     {
         TextMeshProUGUI nameTxt = panel.transform.Find("Name").GetComponent<TextMeshProUGUI>();
         TextMeshProUGUI levelTxt = panel.transform.Find("Level").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI goldTxt = panel.transform.Find("Gold").GetComponent<TextMeshProUGUI>();
         Slider hpBar = panel.transform.Find("HP").GetComponent<Slider>();
         Slider xpBar = panel.transform.Find("XP").GetComponent<Slider>();
         TextMeshProUGUI hpTxt = panel.transform.Find("HPTxt").GetComponent<TextMeshProUGUI>();
@@ -60,6 +63,7 @@ public class HUDManager : PersistentSingleton<HUDManager>, IObserver
 
         nameTxt.text = playerName;
         levelTxt.text = $"lv. {level}";
+        goldTxt.text = $"${gold}";
 
         hpBar.maxValue = 100f;
         hpBar.value = hp;
