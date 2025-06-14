@@ -8,6 +8,7 @@
 
 using Unity.Android.Gradle.Manifest;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerController : Subject
@@ -79,13 +80,19 @@ public class PlayerController : Subject
         }
 
         UpdatePlayerData(0f, 0f);
+
+        
     }
     void FixedUpdate()
     {
         // movement
         _direction = _joystick.Direction;
         _currentSpeed = GetCurrentSpeed(_dashButton.isPressed);
-        _velocity = new Vector3(_direction.x * _currentSpeed * Time.fixedDeltaTime, 0.0f, _direction.y * _currentSpeed * Time.fixedDeltaTime);
+
+
+        Vector3 moveDirection = transform.right * _direction.x + transform.forward * _direction.y;
+        _velocity = moveDirection.normalized * _currentSpeed * Time.fixedDeltaTime;
+
         Movement(_velocity);
 
         // jump
@@ -126,9 +133,20 @@ public class PlayerController : Subject
     {
         return isDashing ? _dashForce * _speed : _speed;
     }
+    void RotateHead()
+    {
+        Vector3 velocity = this.gameObject.GetComponent<CharacterController>().velocity;
+        if (velocity.sqrMagnitude > 0.1f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(velocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        }
+    }
     void Movement(Vector3 velocity)
     {
         _controller.Move(velocity);
+        RotateHead();
+
     }
     void Jump()
     {
