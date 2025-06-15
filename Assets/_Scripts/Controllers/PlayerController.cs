@@ -135,7 +135,6 @@ public class PlayerController : Subject
         if (_attackButton.isPressed)
         {
             Attack(_currentDamage, attackTarget);
-            _attackButton.isPressed = false;
         }
         else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
@@ -146,6 +145,10 @@ public class PlayerController : Subject
         {
             ProjectilePoolManager.Instance.ResetAttack();
         }
+    }
+    public float GetCurrentHealth()
+    {
+        return _playerData.hp;
     }
     public Vector3 GetCurrentPosition()
     {
@@ -203,7 +206,11 @@ public class PlayerController : Subject
     public void Attack(float damage, Transform target)
     {
         if (isWeaponEquipped)
-        { ProjectilePoolManager.Instance.Initiate(weaponHolder, target); }
+        { 
+            ProjectilePoolManager.Instance.Initiate(weaponHolder, target);
+            this.GetComponent<AnimationController>().SetAnimationTrigger("Attack");
+            _attackButton.DiscreteModeButtonPress(false);
+        }
     }
 
     public void UpdatePlayerData(float hpAdded, float xpAdded)
@@ -225,6 +232,8 @@ public class PlayerController : Subject
         _playerData.level = level;
 
         NotifyObservers(_playerData);
+
+        this.GetComponent<AnimationController>().SetAnimationTrigger("levelUp");
     }
 
     public void UpdatePlayerData(float gold)

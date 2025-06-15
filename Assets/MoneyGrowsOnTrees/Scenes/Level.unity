@@ -21899,6 +21899,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4533375021678429899, guid: bc3d8100cc421c8478f6ed48aee9e970, type: 3}
+      propertyPath: isPressed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533375021678429899, guid: bc3d8100cc421c8478f6ed48aee9e970, type: 3}
       propertyPath: rotationSpeed
       value: 600
       objectReference: {fileID: 0}

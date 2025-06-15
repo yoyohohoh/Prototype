@@ -28,5 +28,10 @@ public class NPC : MonoBehaviour
     public float _npcHp;
 
     public float _npcDamage => Mathf.Clamp(_npcLevel, 1, 99) * (Mathf.Clamp(_npcHp, 0, 100) / 100f);
+
+    public float GetHP()
+    {
+        return _npcHp;
+    }
 }
 

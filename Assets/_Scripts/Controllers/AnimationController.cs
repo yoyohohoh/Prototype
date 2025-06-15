@@ -56,6 +56,21 @@ public class AnimationController : MonoBehaviour
         animator.SetBool("isGrounded", characterController.isGrounded);
         animator.SetFloat("speed", sqrMagnitude);
 
+        animator.SetFloat("hp", GetHP());
+
+    }
+
+    float GetHP()
+    {
+        if (identity == identityType.Player)
+        {
+            return this.GetComponent<PlayerController>().GetCurrentHealth();
+        }
+        else if (identity == identityType.NPC)
+        {
+            return this.GetComponent<NPC>().GetHP();
+        }
+        return 0f;
     }
 
     Vector3 GetFlatVelocity()
@@ -69,5 +84,17 @@ public class AnimationController : MonoBehaviour
             return new Vector3(navMeshAgent.velocity.x, 0f, navMeshAgent.velocity.z);
         }
         return Vector3.zero;
+    }
+
+    public void SetAnimationTrigger(string triggerName)
+    {
+        if (animator != null && !string.IsNullOrEmpty(triggerName))
+        {
+            animator.SetTrigger(triggerName);
+        }
+        else
+        {
+            Debug.LogWarning("Animator or trigger name is not set correctly.");
+        }
     }
 }
