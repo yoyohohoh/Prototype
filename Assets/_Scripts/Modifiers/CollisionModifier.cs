@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class CollisionModifier : MonoBehaviour
 {
-    [SerializeField] string newTag;
+    [SerializeField] string newTag = "none";
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -49,7 +49,7 @@ public class CollisionModifier : MonoBehaviour
             QuestManager.Instance.AddCheckPoint(this.gameObject);
         }
 
-        if (this.CompareTag(newTag))
+        if (!string.IsNullOrEmpty(newTag) && this.CompareTag(newTag))
         {
             Debug.Log($"Player collide {newTag}");
             PlayerController.Instance.UpdatePlayerData(100f);

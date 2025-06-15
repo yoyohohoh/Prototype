@@ -7,48 +7,67 @@
 // -----------------------------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.AI;
 
+public enum identityType
+{
+    Player,
+    NPC,
+}
 public class AnimationController : MonoBehaviour
 {
+    [Header("Identity")]
+    [SerializeField] private identityType identity;
+    [Header("Data")]
+    private Vector3 flatVelocity = Vector3.zero;
+    [SerializeField] private float sqrMagnitude = 0.0f;
+
     [Header("Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private NavMeshAgent navMeshAgent;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        switch(identity)
+        {
+            case identityType.Player:
+                characterController = GetComponent<CharacterController>();
+                navMeshAgent = null;
+                break;
+            case identityType.NPC:
+                navMeshAgent = GetComponent<NavMeshAgent>();
+                characterController = null;
+                break;
+            default:
+                Debug.LogError("Identity type not set correctly. Please choose either Player or NPC.");
+                break;
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (characterController.isGrounded)
+
+        flatVelocity = GetFlatVelocity();
+        sqrMagnitude = flatVelocity.sqrMagnitude;
+
+        animator.SetBool("isGrounded", characterController.isGrounded);
+        animator.SetFloat("speed", sqrMagnitude);
+
+    }
+
+    Vector3 GetFlatVelocity()
+    {
+        if (identity == identityType.Player && characterController != null)
         {
-            if (characterController.velocity.magnitude < 0.1f)
-            {
-                animator.SetBool("isIdling", true);
-                animator.SetBool("isWalking", false);
-                animator.SetBool("isJumping", false);
-            }
-            else
-            {
-                animator.SetBool("isIdling", false);
-                animator.SetBool("isWalking", true);
-                animator.SetBool("isJumping", false);
-            }
+            return new Vector3(characterController.velocity.x, 0f, characterController.velocity.z);
         }
-        else
+        else if (identity == identityType.NPC && navMeshAgent != null)
         {
-            animator.SetBool("isIdling", false);
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isJumping", true);
+            return new Vector3(navMeshAgent.velocity.x, 0f, navMeshAgent.velocity.z);
         }
-
-
-
-        Debug.Log("Magnitude: " + characterController.velocity.magnitude);
-        Debug.Log("Velocity: " + characterController.velocity);
-
+        return Vector3.zero;
     }
 }

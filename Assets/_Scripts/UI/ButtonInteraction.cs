@@ -16,7 +16,7 @@ using System.Linq;
 public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public bool isPressed = false;
-
+    public bool isContinuous = false;
     [Header("Color")]
     private Color _originalFrameColor;
     private Color _originalImageColor;
@@ -172,8 +172,10 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
         }
     }
 
+
     public void OnPointerDown(PointerEventData eventData)
     {
+
         isPressed = true;
 
         if (isProgress)
@@ -187,20 +189,26 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 Invoke("ResetFireRing", progressTime * _progress.transform.childCount);
             }
         }
+
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        isPressed = false;
-
-        if (isRing)
+        if (isContinuous)
         {
-            _ring.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
-        }
+            isPressed = false;
 
-        if (isProgress)
-        {
-            StopFireRing();
+            if (isRing)
+            {
+                _ring.GetComponent<RectTransform>().eulerAngles = Vector3.zero;
+            }
+
+            if (isProgress)
+            {
+                StopFireRing();
+            }
         }
+        
+
     }
 }

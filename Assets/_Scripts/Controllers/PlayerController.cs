@@ -10,6 +10,8 @@ using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class PlayerController : Subject
 {
@@ -28,7 +30,9 @@ public class PlayerController : Subject
     [SerializeField] bool _isGrounded;
     [SerializeField] Transform _groundCheck;
     [SerializeField] LayerMask _groundMask;
-    private float _groundRadius = 0.5f;
+    private float _groundRadius = 0.6f;
+    private bool _isJumping = false;
+    private Coroutine jumpCoroutine;
 
     [Header("Attack & Skill")]
     public bool isWeaponEquipped = false;
@@ -81,7 +85,7 @@ public class PlayerController : Subject
 
         UpdatePlayerData(0f, 0f);
 
-        
+
     }
     void FixedUpdate()
     {
@@ -89,23 +93,40 @@ public class PlayerController : Subject
         _direction = _joystick.Direction;
         _currentSpeed = GetCurrentSpeed(_dashButton.isPressed);
 
-
-        Vector3 moveDirection = transform.right * _direction.x + transform.forward * _direction.y;
-        _velocity = moveDirection.normalized * _currentSpeed * Time.fixedDeltaTime;
-
-        Movement(_velocity);
+        Movement();
 
         // jump
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
+
         if (_jumpButton.isPressed && _isGrounded)
         {
-            Jump();
+            if (_direction == Vector2.zero)
+            {
+                if (jumpCoroutine == null)
+                {
+                    _velocity.y += 0.1f;
+                    _controller.Move(_velocity);
+                    _controller.height = 1.8f;
+                    jumpCoroutine = StartCoroutine(JumpWithDelay(0.4f));
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+            else
+            {
+                Jump();
+            }
+
         }
-
-        _velocity.y += _fallForce * Physics.gravity.y * Time.fixedDeltaTime;
-
+        _velocity.y += Physics.gravity.y * _fallForce * Time.fixedDeltaTime;
         _controller.Move(_velocity * Time.fixedDeltaTime);
+
+
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -114,6 +135,7 @@ public class PlayerController : Subject
         if (_attackButton.isPressed)
         {
             Attack(_currentDamage, attackTarget);
+            _attackButton.isPressed = false;
         }
         else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
@@ -136,21 +158,35 @@ public class PlayerController : Subject
     void RotateHead()
     {
         Vector3 velocity = this.gameObject.GetComponent<CharacterController>().velocity;
-        if (velocity.sqrMagnitude > 0.1f)
+        Vector3 horizontalVelocity = new Vector3(velocity.x, 0f, velocity.z);
+
+        if (horizontalVelocity.sqrMagnitude > 0.1f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(velocity.normalized);
+            Quaternion lookRotation = Quaternion.LookRotation(horizontalVelocity.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }
-    void Movement(Vector3 velocity)
-    {
-        _controller.Move(velocity);
-        RotateHead();
 
+    void Movement()
+    {
+        Vector3 moveDirection = transform.right * _direction.x + transform.forward * _direction.y;
+        _velocity = moveDirection.normalized * _currentSpeed;
+        RotateHead();
     }
     void Jump()
     {
         _velocity.y = Mathf.Sqrt(_jumpForce * 10f * -2.0f * Physics.gravity.y);
+        _controller.Move(_velocity * Time.fixedDeltaTime);
+        _jumpButton.isPressed = false;
+        _controller.height = 2.0f;
+    }
+
+    IEnumerator JumpWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Jump();
+        jumpCoroutine = null;
     }
     public void PutWeapon(GameObject weapon)
     {
