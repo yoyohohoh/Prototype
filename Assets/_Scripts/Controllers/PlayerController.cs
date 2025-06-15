@@ -177,7 +177,7 @@ public class PlayerController : Subject
     {
         _velocity.y = Mathf.Sqrt(_jumpForce * 10f * -2.0f * Physics.gravity.y);
         _controller.Move(_velocity * Time.fixedDeltaTime);
-        _jumpButton.isPressed = false;
+        _jumpButton.DiscreteModeButtonPress(false);
         _controller.height = 2.0f;
     }
 

@@ -151,6 +151,11 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
             StopFireRing();
         }
     }
+
+    public void DiscreteModeButtonPress(bool isButtonPressed)
+    {
+        isPressed = isButtonPressed;
+    }
     public void StopFireRing()
     {
         if (isProgress)
@@ -208,7 +213,5 @@ public class ButtonInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpH
                 StopFireRing();
             }
         }
-        
-
     }
 }
