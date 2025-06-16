@@ -236,7 +236,7 @@ public class PlayerController : Subject
 
         NotifyObservers(_playerData);
 
-        _animator.SetAnimationTrigger("levelUp");
+        _animator.SetAnimationTrigger("LevelUp");
     }
 
     public void UpdatePlayerData(float gold)

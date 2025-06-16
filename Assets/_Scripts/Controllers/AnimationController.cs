@@ -55,8 +55,11 @@ public class AnimationController : MonoBehaviour
 
         animator.SetBool("isGrounded", characterController.isGrounded);
         animator.SetFloat("speed", sqrMagnitude);
-
-        animator.SetFloat("hp", GetHP());
+        if (GetHP() <= 0)
+        {
+            SetAnimationTrigger("Dead");
+            this.enabled = false;
+        }
 
     }
 
