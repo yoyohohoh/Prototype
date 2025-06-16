@@ -208,9 +208,10 @@ public class PlayerController : Subject
         if (isWeaponEquipped)
         { 
             ProjectilePoolManager.Instance.Initiate(weaponHolder, target);
-            this.GetComponent<AnimationController>().SetAnimationTrigger("Attack");
-            _attackButton.DiscreteModeButtonPress(false);
+            this.GetComponent<AnimationController>().SetAnimationTrigger("Attack");            
         }
+
+        _attackButton.DiscreteModeButtonPress(false);
     }
 
     public void UpdatePlayerData(float hpAdded, float xpAdded)
