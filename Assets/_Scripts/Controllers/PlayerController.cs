@@ -16,6 +16,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : Subject
 {
     [Header("Movement")]
+    private AnimationController _animator;
     private CharacterController _controller;
     private Vector2 _direction;
     [SerializeField] private Vector3 _velocity;
@@ -63,7 +64,7 @@ public class PlayerController : Subject
         {
             _playerData = new PlayerData();
         }
-
+        _animator = GetComponent<AnimationController>();
         _controller = GetComponent<CharacterController>();
         if (_controller == null)
         {
@@ -130,15 +131,16 @@ public class PlayerController : Subject
     // Update is called once per frame
     void Update()
     {
+        _animator.SetArmed(isWeaponEquipped);
         // attack & skill
         _currentDamage = GetAttackForce(_skillButton.isPressed);
         if (_attackButton.isPressed)
         {
-            Attack(_currentDamage, attackTarget);
+            Attack("Attack", _attackButton, _currentDamage, attackTarget);
         }
         else if (_skillButton.isPressed && _skillButton.isProgressCompleted)
         {
-            Attack(_currentDamage, skillTarget);
+            Attack("Skill", _skillButton, _currentDamage, skillTarget);
         }
 
         if (!_attackButton.isPressed && !_skillButton.isPressed)
@@ -203,15 +205,15 @@ public class PlayerController : Subject
     {
         return isSkilling ? _attackForce * _damage : _damage;
     }
-    public void Attack(float damage, Transform target)
+    public void Attack(string type, ButtonInteraction button, float damage, Transform target)
     {
         if (isWeaponEquipped)
         { 
             ProjectilePoolManager.Instance.Initiate(weaponHolder, target);
-            this.GetComponent<AnimationController>().SetAnimationTrigger("Attack");            
+            _animator.SetAnimationTrigger(type);            
         }
 
-        _attackButton.DiscreteModeButtonPress(false);
+        button.DiscreteModeButtonPress(false);
     }
 
     public void UpdatePlayerData(float hpAdded, float xpAdded)
@@ -234,7 +236,7 @@ public class PlayerController : Subject
 
         NotifyObservers(_playerData);
 
-        this.GetComponent<AnimationController>().SetAnimationTrigger("levelUp");
+        _animator.SetAnimationTrigger("levelUp");
     }
 
     public void UpdatePlayerData(float gold)

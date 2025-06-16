@@ -60,6 +60,11 @@ public class AnimationController : MonoBehaviour
 
     }
 
+    public void SetArmed(bool isArmed)
+    {
+        animator.SetBool("isArmed", isArmed);
+    }
+
     float GetHP()
     {
         if (identity == identityType.Player)
