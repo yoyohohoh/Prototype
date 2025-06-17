@@ -299,6 +299,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             {
                 questSet._questSetStatus = QuestSetStatus.Completed;
                 LevelManager.Instance.GameSave();
+                
             }
         }
 

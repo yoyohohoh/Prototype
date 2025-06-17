@@ -142,8 +142,9 @@ public class PlayerController : Subject
     // Update is called once per frame
     void Update()
     {
-        _animatorController.SetArmed(isWeaponEquipped);
         // attack & skill
+        _animatorController.SetArmed(isWeaponEquipped);
+
         _currentDamage = GetAttackForce(_skillButton.isPressed);
         if (_attackButton.isPressed)
         {
