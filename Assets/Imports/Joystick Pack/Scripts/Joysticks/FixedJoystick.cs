@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 using UnityEngine.Windows;
+using UnityEngine.EventSystems;
 
 public class FixedJoystick : Joystick
 {

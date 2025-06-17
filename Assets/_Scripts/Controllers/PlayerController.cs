@@ -12,12 +12,15 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements.Experimental;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerController : Subject
 {
     [Header("Movement")]
     private AnimationController _animator;
     private CharacterController _controller;
+    private Transform _character;
     private Vector2 _direction;
     [SerializeField] private Vector3 _velocity;
     [SerializeField] public float _speed;
@@ -26,6 +29,7 @@ public class PlayerController : Subject
     [SerializeField] public float _fallForce;
     [SerializeField] public float _damage;
     [SerializeField] public float _attackForce;
+    bool isFlipped = false;
 
     [Header("Jump")]
     [SerializeField] bool _isGrounded;
@@ -44,6 +48,7 @@ public class PlayerController : Subject
     [Header("Control")]
     public GameObject _controlPanel;
     private Joystick _joystick;
+    private ButtonInteraction _joystickButton;
     private ButtonInteraction _attackButton;
     private ButtonInteraction _jumpButton;
     private ButtonInteraction _dashButton;
@@ -66,6 +71,7 @@ public class PlayerController : Subject
         }
         _animator = GetComponent<AnimationController>();
         _controller = GetComponent<CharacterController>();
+        _character = this.transform.Find("Character");
         if (_controller == null)
         {
             Debug.LogError("CharacterController component is missing from the GameObject.");
@@ -74,6 +80,7 @@ public class PlayerController : Subject
         if (_controlPanel)
         {
             _joystick = _controlPanel.transform.Find("Movement").GetComponent<Joystick>();
+            _joystickButton = _controlPanel.transform.Find("Movement").GetComponent<ButtonInteraction>();
             _attackButton = _controlPanel.transform.Find("Attack").GetComponent<ButtonInteraction>();
             _jumpButton = _controlPanel.transform.Find("Jump").GetComponent<ButtonInteraction>();
             _dashButton = _controlPanel.transform.Find("Dash").GetComponent<ButtonInteraction>();
@@ -162,14 +169,38 @@ public class PlayerController : Subject
     }
     void RotateHead()
     {
+        Filp(_joystickButton.isPressed);
+
         Vector3 velocity = this.gameObject.GetComponent<CharacterController>().velocity;
         Vector3 horizontalVelocity = new Vector3(velocity.x, 0f, velocity.z);
+        int facing = _direction.y >= 0f ? 1 : -1;
 
         if (horizontalVelocity.sqrMagnitude > 0.1f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(horizontalVelocity.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            Quaternion lookRotation = Quaternion.LookRotation(facing * horizontalVelocity.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
         }
+    }
+
+    void Filp(bool isPressed)
+    {
+        Vector3 currentEuler = _character.rotation.eulerAngles;
+        Vector3 targetEuler = new Vector3(0f, 180f, 0f);
+
+        if (isPressed && !isFlipped && _direction.y <= -0.5f)
+        {
+            isFlipped = true;
+            _character.rotation = Quaternion.Euler(currentEuler - targetEuler);
+        }
+        else if (!isPressed || isPressed && _direction.y >= 0.5f)
+        {
+            if (isFlipped)
+            {
+                isFlipped = false;
+                _character.rotation = Quaternion.Euler(currentEuler + targetEuler);
+            }
+        }
+
     }
 
     void Movement()
@@ -208,9 +239,9 @@ public class PlayerController : Subject
     public void Attack(string type, ButtonInteraction button, float damage, Transform target)
     {
         if (isWeaponEquipped)
-        { 
+        {
             ProjectilePoolManager.Instance.Initiate(weaponHolder, target);
-            _animator.SetAnimationTrigger(type);            
+            _animator.SetAnimationTrigger(type);
         }
 
         button.DiscreteModeButtonPress(false);
