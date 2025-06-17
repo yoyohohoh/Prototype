@@ -271,7 +271,7 @@ public class PlayerController : Subject
 
         NotifyObservers(_playerData);
 
-        _animatorController.SetAnimationTrigger("LevelUp");
+        _animatorController.SetAnimationTrigger("Cheer");
     }
 
     public void UpdatePlayerData(float gold)
@@ -294,9 +294,9 @@ public class PlayerController : Subject
             // weapon animation
         }
 
-        if (this.CompareTag("Checkpoint"))
+        if (other.CompareTag("Checkpoint"))
         {
-            _animatorController.SetAnimationTrigger("Win");
+            _animatorController.SetAnimationTrigger("Cheer");
         }
     }
 }
