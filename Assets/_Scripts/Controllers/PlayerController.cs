@@ -18,9 +18,9 @@ using static UnityEngine.Rendering.DebugUI;
 public class PlayerController : Subject
 {
     [Header("Movement")]
-    private AnimationController _animator;
-    private CharacterController _controller;
-    private Transform _character;
+    private AnimationController _animatorController;
+    private CharacterController _characterController;
+    private Transform _characterTransform;
     private Vector2 _direction;
     [SerializeField] private Vector3 _velocity;
     [SerializeField] public float _speed;
@@ -41,9 +41,12 @@ public class PlayerController : Subject
 
     [Header("Attack & Skill")]
     public bool isWeaponEquipped = false;
-    [SerializeField] private Transform weaponHolder;
     [SerializeField] private Transform attackTarget;
     [SerializeField] private Transform skillTarget;
+
+    [Header("Hand")]
+    [SerializeField] public Transform weaponHolder;
+    [SerializeField] private Transform pickUpHolder;
 
     [Header("Control")]
     public GameObject _controlPanel;
@@ -69,10 +72,10 @@ public class PlayerController : Subject
         {
             _playerData = new PlayerData();
         }
-        _animator = GetComponent<AnimationController>();
-        _controller = GetComponent<CharacterController>();
-        _character = this.transform.Find("Character");
-        if (_controller == null)
+        _animatorController = GetComponent<AnimationController>();
+        _characterController = GetComponent<CharacterController>();
+        _characterTransform = this.transform.Find("Character");
+        if (_characterController == null)
         {
             Debug.LogError("CharacterController component is missing from the GameObject.");
         }
@@ -113,8 +116,8 @@ public class PlayerController : Subject
                 if (jumpCoroutine == null)
                 {
                     _velocity.y += 0.1f;
-                    _controller.Move(_velocity);
-                    _controller.height = 1.8f;
+                    _characterController.Move(_velocity);
+                    _characterController.height = 1.8f;
                     jumpCoroutine = StartCoroutine(JumpWithDelay(0.4f));
                 }
                 else
@@ -130,7 +133,8 @@ public class PlayerController : Subject
 
         }
         _velocity.y += Physics.gravity.y * _fallForce * Time.fixedDeltaTime;
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        if(_characterController.enabled)
+        { _characterController.Move(_velocity * Time.fixedDeltaTime); }
 
 
     }
@@ -138,7 +142,7 @@ public class PlayerController : Subject
     // Update is called once per frame
     void Update()
     {
-        _animator.SetArmed(isWeaponEquipped);
+        _animatorController.SetArmed(isWeaponEquipped);
         // attack & skill
         _currentDamage = GetAttackForce(_skillButton.isPressed);
         if (_attackButton.isPressed)
@@ -161,7 +165,7 @@ public class PlayerController : Subject
     }
     public Vector3 GetCurrentPosition()
     {
-        return _controller.transform.position;
+        return _characterController.transform.position;
     }
     float GetCurrentSpeed(bool isDashing)
     {
@@ -184,20 +188,20 @@ public class PlayerController : Subject
 
     void Filp(bool isPressed)
     {
-        Vector3 currentEuler = _character.rotation.eulerAngles;
+        Vector3 currentEuler = _characterTransform.rotation.eulerAngles;
         Vector3 targetEuler = new Vector3(0f, 180f, 0f);
 
         if (isPressed && !isFlipped && _direction.y <= -0.5f)
         {
             isFlipped = true;
-            _character.rotation = Quaternion.Euler(currentEuler - targetEuler);
+            _characterTransform.rotation = Quaternion.Euler(currentEuler - targetEuler);
         }
         else if (!isPressed || isPressed && _direction.y >= 0.5f)
         {
             if (isFlipped)
             {
                 isFlipped = false;
-                _character.rotation = Quaternion.Euler(currentEuler + targetEuler);
+                _characterTransform.rotation = Quaternion.Euler(currentEuler + targetEuler);
             }
         }
 
@@ -212,9 +216,9 @@ public class PlayerController : Subject
     void Jump()
     {
         _velocity.y = Mathf.Sqrt(_jumpForce * 10f * -2.0f * Physics.gravity.y);
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+        _characterController.Move(_velocity * Time.fixedDeltaTime);
         _jumpButton.DiscreteModeButtonPress(false);
-        _controller.height = 2.0f;
+        _characterController.height = 2.0f;
     }
 
     IEnumerator JumpWithDelay(float delay)
@@ -241,7 +245,7 @@ public class PlayerController : Subject
         if (isWeaponEquipped)
         {
             ProjectilePoolManager.Instance.Initiate(weaponHolder, target);
-            _animator.SetAnimationTrigger(type);
+            _animatorController.SetAnimationTrigger(type);
         }
 
         button.DiscreteModeButtonPress(false);
@@ -267,7 +271,7 @@ public class PlayerController : Subject
 
         NotifyObservers(_playerData);
 
-        _animator.SetAnimationTrigger("LevelUp");
+        _animatorController.SetAnimationTrigger("LevelUp");
     }
 
     public void UpdatePlayerData(float gold)
@@ -275,5 +279,24 @@ public class PlayerController : Subject
         _playerData.gold += gold;
 
         NotifyObservers(_playerData);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collectible") || other.CompareTag("Consumable"))
+        {
+            StartCoroutine(_animatorController.PlayCollectAnimation("Collect", other.gameObject, pickUpHolder));
+        }
+
+
+        if (other.CompareTag("Weapon"))
+        {
+            // weapon animation
+        }
+
+        if (this.CompareTag("Checkpoint"))
+        {
+            _animatorController.SetAnimationTrigger("Win");
+        }
     }
 }

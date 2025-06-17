@@ -8,28 +8,39 @@
 
 using UnityEngine;
 using UnityEngine.AI;
-
+using System.Collections;
+using NUnit.Framework;
+using System.Collections.Generic;
 public enum identityType
 {
     Player,
     NPC,
 }
+
+[System.Serializable]
+public class AnimationModifier
+{
+    public string animationParameter;
+    public float delay = 0.0f;
+}
 public class AnimationController : MonoBehaviour
 {
     [Header("Identity")]
     [SerializeField] private identityType identity;
+
     [Header("Data")]
     private Vector3 flatVelocity = Vector3.zero;
     [SerializeField] private float sqrMagnitude = 0.0f;
 
     [Header("Animation")]
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private NavMeshAgent navMeshAgent;
+    [SerializeField] private List <AnimationModifier> animationModifiers;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        switch(identity)
+        switch (identity)
         {
             case identityType.Player:
                 characterController = GetComponent<CharacterController>();
@@ -104,5 +115,28 @@ public class AnimationController : MonoBehaviour
         {
             Debug.LogWarning("Animator or trigger name is not set correctly.");
         }
+    }
+
+    public IEnumerator PlayCollectAnimation(string triggerName, GameObject other, Transform hand)
+    {
+        AnimationModifier modifier = animationModifiers.Find(mod => mod.animationParameter == triggerName);
+        float delay = 0.0f;
+        if (modifier != null)
+        {
+            delay = modifier.delay;
+        }
+        else
+        {
+            Debug.LogWarning("Animation trigger not found: " + triggerName);
+        }
+
+        this.GetComponent<CharacterController>().enabled = false;
+        SetAnimationTrigger(triggerName);
+        yield return new WaitForSeconds(delay);
+        other.transform.SetParent(hand);
+        other.transform.localPosition = Vector3.zero;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length - delay);
+
+        this.GetComponent<CharacterController>().enabled = true;
     }
 }

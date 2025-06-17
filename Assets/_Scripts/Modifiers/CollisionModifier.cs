@@ -17,24 +17,23 @@ public class CollisionModifier : MonoBehaviour
 
         if (this.CompareTag("Collectible"))
         {
+            this.GetComponent<Collider>().enabled = false;
             Item thisItem = this.GetComponent<Item>();
             PlayerController.Instance.UpdatePlayerData(thisItem._hp, thisItem._xp);
-            InventoryManager.Instance.AddItem(this.gameObject);
-            QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
+            Invoke("Stocking", 1.5f);
         }
 
         if (this.CompareTag("Consumable"))
         {
-            InventoryManager.Instance.AddItem(this.gameObject);
-            QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
+            this.GetComponent<Collider>().enabled = false;
+            Invoke("Stocking", 1.5f);
         }
 
         if (this.CompareTag("Weapon"))
         {
             if (this.GetComponent<Weapon>()._status == WeaponStatus.Available)
             {
-                InventoryManager.Instance.AddItem(this.gameObject);
-                QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
+                Invoke("Stocking", 0.5f);
             }
         }
 
@@ -57,4 +56,9 @@ public class CollisionModifier : MonoBehaviour
         }
     }
 
+    void Stocking()
+    {
+        InventoryManager.Instance.AddItem(this.gameObject);
+        QuestManager.Instance.AddObjForQuest(QuestCategory.item, this.gameObject);
+    }
 }
