@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
   m_Name: Quest0
   m_EditorClassIdentifier: 
-  _questStatus: 0
+  _questStatus: 1
   _questID: 0
   _questName: Initiate's Visit
   _questDescription: Go to Checkpoints 1 and 2, and acquire your first weapon.

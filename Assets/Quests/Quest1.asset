@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
   m_Name: Quest1
   m_EditorClassIdentifier: 
-  _questStatus: 0
+  _questStatus: 1
   _questID: 1
   _questName: Test of Courage
   _questDescription: "Prove your worth by killing at least one NPC. You\u2019ll be

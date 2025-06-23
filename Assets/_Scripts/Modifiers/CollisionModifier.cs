@@ -11,6 +11,7 @@ using UnityEngine;
 public class CollisionModifier : MonoBehaviour
 {
     [SerializeField] string newTag = "none";
+    [SerializeField] float delayDestroy = 0.5f;
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Player")) return;
@@ -20,20 +21,20 @@ public class CollisionModifier : MonoBehaviour
             this.GetComponent<Collider>().enabled = false;
             Item thisItem = this.GetComponent<Item>();
             PlayerController.Instance.UpdatePlayerData(thisItem._hp, thisItem._xp);
-            Invoke("Stocking", 1.5f);
+            Invoke("Stocking", delayDestroy);
         }
 
         if (this.CompareTag("Consumable"))
         {
             this.GetComponent<Collider>().enabled = false;
-            Invoke("Stocking", 1.5f);
+            Invoke("Stocking", delayDestroy);
         }
 
         if (this.CompareTag("Weapon"))
         {
             if (this.GetComponent<Weapon>()._status == WeaponStatus.Available)
             {
-                Invoke("Stocking", 0.5f);
+                Invoke("Stocking", delayDestroy);
             }
         }
 
