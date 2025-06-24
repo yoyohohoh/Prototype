@@ -156,7 +156,7 @@ MonoBehaviour:
   _npcName: NPC
   _npcDescription: This is an NPC.
   _npcSpeed: 5
-  _npcLevel: 1
+  _npcLevel: 20
   _npcHp: 99
 --- !u!114 &1064814129773432368
 MonoBehaviour:

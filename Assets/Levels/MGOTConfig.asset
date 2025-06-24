@@ -15,7 +15,15 @@ MonoBehaviour:
   levelID: 0
   levelName: Level 0
   levelDescription: This is the beginning of the journey.
-  _npcList: []
+  _npcList:
+  - prefab: {fileID: 5885482534285459557, guid: 72c83ef0d4de58e499e8e5142385dbb9, type: 3}
+    amount: 1
+  - prefab: {fileID: 8921136777891062312, guid: 6bc18a91571c6644b96d32c585c78f34, type: 3}
+    amount: 1
+  - prefab: {fileID: 8415666350846331042, guid: 7f61bd5881ce3374e95bc8252ac2ad88, type: 3}
+    amount: 1
+  - prefab: {fileID: 402827124147587130, guid: e9faa897beccd824d84f2e2472fbdf60, type: 3}
+    amount: 1
   _collectibleList:
   - prefab: {fileID: 4552998765497471712, guid: 809937ba60cf24047b7c6e3f77c05306, type: 3}
     amount: 4
@@ -27,11 +35,11 @@ MonoBehaviour:
     amount: 20
   _consumableList:
   - prefab: {fileID: 4727892032499648671, guid: 84f967b67516f354e956df31512efb3b, type: 3}
-    amount: 0
+    amount: 3
   - prefab: {fileID: 6132983780070050315, guid: ba52a29619138444b8735fffb5c14f9b, type: 3}
-    amount: 0
+    amount: 9
   - prefab: {fileID: 611011278841456799, guid: 49a72344a7b17a646a8b85e3d1b98728, type: 3}
-    amount: 0
+    amount: 6
   - prefab: {fileID: 8133890630073970461, guid: 740485ceb913edc42b25e18d8a59ea17, type: 3}
-    amount: 0
+    amount: 2
   questSet: {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
