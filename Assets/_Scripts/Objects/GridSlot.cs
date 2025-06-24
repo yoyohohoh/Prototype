@@ -44,9 +44,9 @@ public class GridSlot : MonoBehaviour
         // MGOT
         if(item != null)
         {
-            if (item.GetComponentInChildren<WeaponMaterialModifier>())
+            if (item.GetComponentInChildren<MaterialModifier>())
             {
-                thisImage.color = item.GetComponentInChildren<WeaponMaterialModifier>().GetColorByName();
+                thisImage.color = item.GetComponentInChildren<MaterialModifier>().GetColorByName();
             }
         }
         

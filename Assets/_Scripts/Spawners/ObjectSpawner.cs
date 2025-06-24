@@ -79,6 +79,10 @@ public abstract class ObjectSpawner : MonoBehaviour
 
         foreach (ObjCount itemCount in _objList)
         {
+            if (itemCount.amount <= 0)
+            {
+                itemCount.amount = Random.Range(1, 10);
+            }
             for (int i = 0; i < itemCount.amount; i++)
             {
                 SpawnObject(itemCount);
@@ -98,5 +102,6 @@ public abstract class ObjectSpawner : MonoBehaviour
         Vector3 spawnPosition = new Vector3(randomX, -center.position.y + spawnYOffset, randomZ) + center.position;
         GameObject itemObj = Instantiate(itemCount.prefab, spawnPosition, Quaternion.identity);
         itemObj.name = itemCount.prefab.name;
+
     }
 }

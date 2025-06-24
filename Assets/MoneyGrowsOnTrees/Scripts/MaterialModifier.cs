@@ -11,16 +11,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class  WeaponMaterial
+public class  ItemMaterial
 {
     public string name;
     public Color color;
     public Material material;
 }
-public class WeaponMaterialModifier : MonoBehaviour
+public class MaterialModifier : MonoBehaviour
 {
-    [SerializeField] List<WeaponMaterial> weaponMaterials;
-    [SerializeField] string currentOption;
+    [SerializeField] List<ItemMaterial> itemMaterials;
+    public string currentOption;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,7 +29,7 @@ public class WeaponMaterialModifier : MonoBehaviour
 
     Material GetMaterialByName(string name)
     {
-        foreach (var wm in weaponMaterials)
+        foreach (var wm in itemMaterials)
         {
             if (wm.name == name)
                 return wm.material;
@@ -39,7 +39,7 @@ public class WeaponMaterialModifier : MonoBehaviour
 
     public Color GetColorByName()
     {
-        foreach (var wm in weaponMaterials)
+        foreach (var wm in itemMaterials)
         {
             if (wm.name == currentOption)
                 return wm.color;

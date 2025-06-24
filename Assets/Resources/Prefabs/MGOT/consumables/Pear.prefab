@@ -128,7 +128,7 @@ MonoBehaviour:
   _name: Apple
   _description: It is an apple giving you 5 hp.
   _icon: {fileID: 21300000, guid: 63570cb299ade784b92b2cc5812b39d2, type: 3}
-  _hp: 5
+  _hp: 2
   _xp: 0
 --- !u!114 &7721969733499015116
 MonoBehaviour:
