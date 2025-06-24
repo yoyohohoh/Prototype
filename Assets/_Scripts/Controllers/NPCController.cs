@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 using static UnityEngine.UI.Image;
+using Unity.VisualScripting;
 
 public enum Location
 {
@@ -15,7 +16,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] Transform _destination;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LayerMask obstacleLayer;
-    [SerializeField] Animator animator;
+    [SerializeField] public Animator animator;
 
     private NPCStateBase currentState;
     private Coroutine currentCoroutine;
@@ -68,7 +69,7 @@ public class NPCController : MonoBehaviour
 
     public void InvokePatrol(float timeGap)
     {
-        if (currentCoroutine == null)
+        if (currentCoroutine == null && this.gameObject.GetComponent<NPC>()._npcStatus != NPCStatus.Dead)
         {
             currentCoroutine = StartCoroutine(DelayedPatrol(timeGap));
         }
@@ -83,11 +84,10 @@ public class NPCController : MonoBehaviour
 
     private void Update()
     {
-
-
-        if (this.gameObject.GetComponent<NPC>()._npcHp <= 0)
+        if (this.gameObject.GetComponent<NPC>()._npcHp <= 0 && this.gameObject.GetComponent<NPC>()._npcStatus != NPCStatus.Dead)
         {
             SetState(new DeadState(this));
+            return;
         }
         RotateHead();
 
@@ -149,7 +149,7 @@ public class NPCController : MonoBehaviour
                 if (hitInfo.collider.CompareTag("Player"))
                 {
                     isChasing = true;
-                    SetState(new AttackState(this));
+                    SetState(new ChaseState(this));
                     return;
                 }
             }
