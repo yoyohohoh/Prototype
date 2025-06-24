@@ -34,6 +34,7 @@ public class CollisionModifier : MonoBehaviour
         {
             if (this.GetComponent<Weapon>()._status == WeaponStatus.Available)
             {
+                this.GetComponent<Collider>().enabled = false;
                 Invoke("Stocking", delayDestroy);
             }
         }

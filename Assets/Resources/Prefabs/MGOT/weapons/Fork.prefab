@@ -130,7 +130,7 @@ MonoBehaviour:
   _id: 0
   _name: Iron Sword
   _description: It is a basic weapon.
-  _icon: {fileID: 21300000, guid: 341e9e1a366537e47bf2bc4b096de207, type: 3}
+  _icon: {fileID: 21300000, guid: 9f055ba7f3ebbe54aaf020be961ba964, type: 3}
   _damage: 10
 --- !u!114 &2814631373660871594
 MonoBehaviour:
@@ -208,7 +208,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3130642566695800128, guid: d9ac6e15a8c199648b527e59eaf4a1a2, type: 3}
   m_PrefabInstance: {fileID: 1776596050413630713}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6155709129805421248
+--- !u!1001 &4943895033718453472
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -216,51 +216,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1203297696579415534}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.21
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dc7738a8898ee45489cbc1ea02df257f, type: 2}
-    - target: {fileID: 919132149155446097, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+    - target: {fileID: 2103233054833660785, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
       propertyPath: m_Name
       value: ForkHead
       objectReference: {fileID: 0}
@@ -268,9 +264,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
 --- !u!4 &5973956373733653803 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1a16fe60b9144c046b09c5ec367567ee, type: 3}
-  m_PrefabInstance: {fileID: 6155709129805421248}
+  m_CorrespondingSourceObject: {fileID: 1620169954999929291, guid: 19003c255c2f1d642b70ab84de6fee3e, type: 3}
+  m_PrefabInstance: {fileID: 4943895033718453472}
   m_PrefabAsset: {fileID: 0}

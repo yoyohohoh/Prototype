@@ -127,6 +127,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 slot.isEmpty = false;
                 slot.icon = icon;
                 slot.item = itemObj;
+                
                 break;
             }
         }

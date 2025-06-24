@@ -40,6 +40,16 @@ public class GridSlot : MonoBehaviour
             thisImage.sprite = icon;
             thisImage.color = isEmpty ? new Color(1, 1, 1, 0) : new Color(1, 1, 1, 1);
         }
+
+        // MGOT
+        if(item != null)
+        {
+            if (item.GetComponentInChildren<WeaponMaterialModifier>())
+            {
+                thisImage.color = item.GetComponentInChildren<WeaponMaterialModifier>().GetColorByName();
+            }
+        }
+        
     }
 
     public void RemoveGridSlot()
