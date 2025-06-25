@@ -159,6 +159,12 @@ public class PlayerController : Subject
         {
             ProjectilePoolManager.Instance.ResetAttack();
         }
+
+        // dead
+        if (GetCurrentHealth() <= 0)
+        {
+            _characterController.enabled = false;
+        }
     }
     public float GetCurrentHealth()
     {
