@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1064814129773432368}
   - component: {fileID: 2660325258001845221}
   m_Layer: 0
-  m_Name: Chili
+  m_Name: NPC_Chilli
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ PrefabInstance:
     - target: {fileID: 179989591327052142, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f709880d39c7a5d4692200dae30cf62c, type: 2}
+      objectReference: {fileID: 22100000, guid: d3dc35fd1026d2a4f88eef4fc1eaab80, type: 2}
     - target: {fileID: 429472443343999348, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
       propertyPath: m_LocalScale.x
       value: 2

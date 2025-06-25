@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 7229798945956108801}
   - component: {fileID: 1135451204608538279}
   m_Layer: 0
-  m_Name: Banana
+  m_Name: NPC_Banana
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
