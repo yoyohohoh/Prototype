@@ -166,7 +166,7 @@ public class PlayerController : Subject
     }
     public Vector3 GetCurrentPosition()
     {
-        return _characterController.transform.position;
+        return this.gameObject.transform.position;
     }
     float GetCurrentSpeed(bool isDashing)
     {

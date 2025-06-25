@@ -12,7 +12,8 @@ public enum NPCStatus
     Idle,
     Patrol,
     Attack,
-    Dead
+    Dead,
+    Win
 }
 
 public class NPC : MonoBehaviour

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using static UnityEngine.UI.Image;
 
 public class IdleState : NPCStateBase
 {
@@ -87,12 +88,12 @@ public class PatrolState : NPCStateBase
     }
 }
 
-public class ChaseState : NPCStateBase
+public class AttackState : NPCStateBase
 {
     private float speed;
     private float damage;
     private Animator animator;
-    public ChaseState(NPCController npcController) : base(npcController) 
+    public AttackState(NPCController npcController) : base(npcController) 
     {
         speed = npcController.gameObject.GetComponent<NPC>()._npcSpeed;
         damage = npcController.gameObject.GetComponent<NPC>()._npcDamage;
@@ -122,6 +123,11 @@ public class ChaseState : NPCStateBase
     public override void Update()
     {
         npcController.GetComponent<NavMeshAgent>().destination = PlayerController.Instance.GetCurrentPosition();
+
+        if (Vector3.Distance(npcController.transform.position, PlayerController.Instance.GetCurrentPosition()) <= 0.5f)
+        {
+            animator.SetTrigger("Attack");
+        }
     }
 }
 
@@ -172,4 +178,50 @@ public class DeadState : NPCStateBase
             npcController.gameObject.SetActive(false);
         }
     }
+}
+
+public class WinState : NPCStateBase
+{
+    private Animator animator;
+    private NavMeshAgent agent;
+    public WinState(NPCController npcController) : base(npcController)
+    {
+        animator = npcController.animator;
+        agent = npcController.GetComponent<NavMeshAgent>();
+    }
+
+    public override void Enter()
+    {
+        npcController.gameObject.GetComponent<NPC>()._npcStatus = NPCStatus.Win;
+
+        agent.isStopped = true;
+        agent.ResetPath();
+
+        Vector3 endPos = GetRandomPointInFront(PlayerController.Instance.GetCurrentPosition(), PlayerController.Instance.transform.forward, 2f);
+        npcController.gameObject.transform.position = endPos;
+        npcController.gameObject.transform.LookAt(PlayerController.Instance.transform.position);
+
+        animator.SetTrigger("Win");
+    }
+
+    Vector3 GetRandomPointInFront(Vector3 origin, Vector3 forward, float radius)
+    {
+        float angle = Random.Range(-90f, 90f);
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);
+
+        Vector3 direction = rotation * forward.normalized;
+
+        return origin + direction * radius;
+    }
+
+    public override void Exit()
+    {
+        
+    }
+
+    public override void Update()
+    {
+        
+    }
+
 }

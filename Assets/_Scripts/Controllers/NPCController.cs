@@ -70,7 +70,7 @@ public class NPCController : MonoBehaviour
 
     public void InvokePatrol(float timeGap)
     {
-        if (currentCoroutine == null && this.gameObject.GetComponent<NPC>()._npcStatus != NPCStatus.Dead)
+        if (currentCoroutine == null && !(currentState is DeadState))
         {
             currentCoroutine = StartCoroutine(DelayedPatrol(timeGap));
         }
@@ -85,33 +85,41 @@ public class NPCController : MonoBehaviour
 
     private void Update()
     {
-        if (this.gameObject.GetComponent<NPC>()._npcHp <= 0 && this.gameObject.GetComponent<NPC>()._npcStatus != NPCStatus.Dead)
+        if (!(currentState is DeadState) && !(currentState is WinState))
         {
-            SetState(new DeadState(this));
-            return;
-        }
-        RotateHead();
+            if (this.gameObject.GetComponent<NPC>()._npcHp <= 0)
+            {
+                SetState(new DeadState(this));
+            }
 
-        if (this.gameObject.GetComponent<NPC>()._npcStatus == NPCStatus.Patrol && 
-            Vector3.Distance(this.transform.position, _origin.position) < 0.1f)
-        {
-            SetState(new IdleState(this));
-        }
+            RotateHead();
 
-        if (this.gameObject.GetComponent<NPC>()._npcStatus == NPCStatus.Idle)
-        {
-            InvokePatrol(5f);
-        }
-        else if(!isChasing && this.gameObject.GetComponent<NPC>()._npcStatus != NPCStatus.Patrol)
-        {
-            InvokePatrol(0f);
-        }
-        DetectPlayer();
-        
+            if (currentState is PatrolState &&
+                Vector3.Distance(this.transform.position, _origin.position) < 0.1f)
+            {
+                SetState(new IdleState(this));
+            }
+
+            if (currentState is IdleState)
+            {
+                InvokePatrol(5f);
+            }
+            else if (!isChasing && !(currentState is PatrolState))
+            {
+                InvokePatrol(0f);
+            }
+            DetectPlayer();
+
+            if (PlayerController.Instance.GetCurrentHealth() <= 0f)
+            {
+                SetState(new WinState(this));
+            }
 
             
+        }
         destinationIndicator = _destination.position;
         currentState?.Update();
+
     }
 
     void RotateHead()
@@ -119,7 +127,7 @@ public class NPCController : MonoBehaviour
         Vector3 velocity = this.gameObject.GetComponent<NavMeshAgent>().velocity;
         if (velocity.sqrMagnitude > 0.1f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(velocity.normalized);// movement direction
+            Quaternion lookRotation = Quaternion.LookRotation(velocity.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
     }
@@ -150,7 +158,7 @@ public class NPCController : MonoBehaviour
                 if (hitInfo.collider.CompareTag("Player"))
                 {
                     isChasing = true;
-                    SetState(new ChaseState(this));
+                    SetState(new AttackState(this));
                     return;
                 }
             }
