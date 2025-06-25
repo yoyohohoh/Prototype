@@ -26,20 +26,20 @@ MonoBehaviour:
     amount: 1
   _collectibleList:
   - prefab: {fileID: 4552998765497471712, guid: 809937ba60cf24047b7c6e3f77c05306, type: 3}
-    amount: 4
+    amount: 3
   - prefab: {fileID: 7039541587320736471, guid: 5963b32054ba086448ef521f3cf868bf, type: 3}
-    amount: 7
+    amount: 3
   - prefab: {fileID: 2661124953969145109, guid: 9f1f5695f21693f4e98f4961ab3744aa, type: 3}
-    amount: 10
+    amount: 6
   - prefab: {fileID: 691549675455114117, guid: 9f970ed0b5d1f444e99fb3710a96ff6a, type: 3}
-    amount: 20
+    amount: 8
   _consumableList:
   - prefab: {fileID: 4727892032499648671, guid: 84f967b67516f354e956df31512efb3b, type: 3}
-    amount: 3
+    amount: 2
   - prefab: {fileID: 6132983780070050315, guid: ba52a29619138444b8735fffb5c14f9b, type: 3}
-    amount: 9
+    amount: 2
   - prefab: {fileID: 611011278841456799, guid: 49a72344a7b17a646a8b85e3d1b98728, type: 3}
-    amount: 6
+    amount: 2
   - prefab: {fileID: 8133890630073970461, guid: 740485ceb913edc42b25e18d8a59ea17, type: 3}
     amount: 2
   questSet: {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
