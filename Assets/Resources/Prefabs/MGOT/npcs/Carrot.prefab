@@ -453,7 +453,7 @@ PrefabInstance:
     - target: {fileID: 4935849765613957186, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: eea6b1ddb5a092048aff63112f5777b9, type: 2}
+      objectReference: {fileID: 22100000, guid: 4c042b66e975bcc42aebc4b6ce4a2443, type: 2}
     - target: {fileID: 5241839102500630312, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
       propertyPath: m_Name
       value: Carrot
