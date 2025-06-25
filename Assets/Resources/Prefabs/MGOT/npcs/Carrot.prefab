@@ -374,6 +374,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  animator: {fileID: 4407851773215677053}
+  reward: {fileID: 7849210402892700598, guid: addf1802eff2a4f48b4cbb288e37a92c, type: 3}
 --- !u!114 &2097405229121480403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +450,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4935849765613957186, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: eea6b1ddb5a092048aff63112f5777b9, type: 2}
     - target: {fileID: 5241839102500630312, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
       propertyPath: m_Name
       value: Carrot
@@ -460,5 +466,10 @@ PrefabInstance:
 --- !u!4 &4224777394897608621 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4896838074228356498, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
+  m_PrefabInstance: {fileID: 8742750080647686719}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4407851773215677053 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4935849765613957186, guid: 0e1de6ee081d74a63bba08a065ff3ae2, type: 3}
   m_PrefabInstance: {fileID: 8742750080647686719}
   m_PrefabAsset: {fileID: 0}

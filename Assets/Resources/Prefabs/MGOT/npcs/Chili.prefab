@@ -155,7 +155,7 @@ MonoBehaviour:
   _npcID: 0
   _npcName: NPC
   _npcDescription: This is an NPC.
-  _npcSpeed: 5
+  _npcSpeed: 10
   _npcLevel: 20
   _npcHp: 99
 --- !u!114 &1064814129773432368
@@ -179,6 +179,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  animator: {fileID: 5349409169411462803}
+  reward: {fileID: 4954121039292680095, guid: fbb98581fe2d88e4183b9e3d0b5d840c, type: 3}
 --- !u!114 &2660325258001845221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +398,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2413774756547266774}
     m_Modifications:
+    - target: {fileID: 179989591327052142, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f709880d39c7a5d4692200dae30cf62c, type: 2}
     - target: {fileID: 429472443343999348, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -457,6 +463,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
+--- !u!95 &5349409169411462803 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 179989591327052142, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}
+  m_PrefabInstance: {fileID: 5207173649574774781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5599753557507790473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 429472443343999348, guid: 1d2d680a5475d4ed9acf6f3f50d07041, type: 3}

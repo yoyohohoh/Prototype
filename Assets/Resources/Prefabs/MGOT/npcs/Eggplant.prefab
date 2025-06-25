@@ -374,6 +374,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  animator: {fileID: 1495294539722438621}
+  reward: {fileID: 630199875369456600, guid: 4bb71b5a859722a48ab9cff6bee24628, type: 3}
 --- !u!114 &2963045108752795265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,6 +454,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6646447509668819660, guid: ebed69b60863349589b5f6f288e9a211, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 998ccb7deeb574546a0d8ef3a73ade6c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -460,5 +466,10 @@ PrefabInstance:
 --- !u!4 &1390173073219008241 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6608563747665638368, guid: ebed69b60863349589b5f6f288e9a211, type: 3}
+  m_PrefabInstance: {fileID: 5259279390187603217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1495294539722438621 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6646447509668819660, guid: ebed69b60863349589b5f6f288e9a211, type: 3}
   m_PrefabInstance: {fileID: 5259279390187603217}
   m_PrefabAsset: {fileID: 0}

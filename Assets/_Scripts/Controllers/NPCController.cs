@@ -17,6 +17,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LayerMask obstacleLayer;
     [SerializeField] public Animator animator;
+    [SerializeField] public GameObject reward;
 
     private NPCStateBase currentState;
     private Coroutine currentCoroutine;

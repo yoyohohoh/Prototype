@@ -1,8 +1,5 @@
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.FilePathAttribute;
-using static UnityEngine.UI.Image;
 using System.Collections;
 
 public class IdleState : NPCStateBase
@@ -158,6 +155,7 @@ public class DeadState : NPCStateBase
     IEnumerator GoHome()
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length + 2.0f);
+        GameObject reward = UnityEngine.Object.Instantiate(npcController.reward, npcController.gameObject.transform.position, Quaternion.identity);
         npcController.GetComponent<NavMeshAgent>().destination = origin;
         agent.isStopped = false;
     }

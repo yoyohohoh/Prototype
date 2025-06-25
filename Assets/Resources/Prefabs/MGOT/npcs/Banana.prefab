@@ -350,7 +350,7 @@ MonoBehaviour:
   _npcID: 0
   _npcName: NPC
   _npcDescription: This is an NPC.
-  _npcSpeed: 5
+  _npcSpeed: 1
   _npcLevel: 1
   _npcHp: 99
 --- !u!114 &7229798945956108801
@@ -375,6 +375,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   animator: {fileID: 4490955884747771226}
+  reward: {fileID: 3620716194476706492, guid: 96312b8bd7946e14d8eb39a7f42da778, type: 3}
 --- !u!114 &1135451204608538279
 MonoBehaviour:
   m_ObjectHideFlags: 0
