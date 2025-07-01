@@ -83,6 +83,7 @@ public class PatrolState : NPCStateBase
     {
         if (Vector3.Distance(npcController.transform.position, destination) < 1.5f)
         {
+            Debug.Log($"NPC Destination acheived.");
             npcController.GetComponent<NavMeshAgent>().destination = origin;
         }
     }

@@ -16,8 +16,9 @@ public class NPCController : MonoBehaviour
     [SerializeField] Transform _destination;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] LayerMask obstacleLayer;
-    [SerializeField] public Animator animator;
-    [SerializeField] public GameObject reward;
+    [SerializeField] float patrolOffset = 5f;
+    public Animator animator;
+    public GameObject reward;
 
     private NPCStateBase currentState;
     private Coroutine currentCoroutine;
@@ -95,19 +96,20 @@ public class NPCController : MonoBehaviour
             RotateHead();
 
             if (currentState is PatrolState &&
-                Vector3.Distance(this.transform.position, _origin.position) < 0.1f)
+                Vector3.Distance(this.transform.position, _origin.position) < 0.5f)
             {
                 SetState(new IdleState(this));
             }
 
             if (currentState is IdleState)
             {
-                InvokePatrol(5f);
+                InvokePatrol(patrolOffset);
             }
             else if (!isChasing && !(currentState is PatrolState))
             {
                 InvokePatrol(0f);
             }
+
             DetectPlayer();
 
             if (PlayerController.Instance.GetCurrentHealth() <= 0f)
