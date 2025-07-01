@@ -138,7 +138,7 @@ public class NPCController : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapSphere(
             transform.position,
-            50.0f,
+            15.0f,
             playerLayer
         );
 

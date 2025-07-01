@@ -374,6 +374,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512
+  patrolOffset: 5
   animator: {fileID: 4407851773215677053}
   reward: {fileID: 7849210402892700598, guid: addf1802eff2a4f48b4cbb288e37a92c, type: 3}
 --- !u!114 &2097405229121480403
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newTag: 
-  delayDestroy: 0.5
+  delayDestroy: 0
 --- !u!1001 &8742750080647686719
 PrefabInstance:
   m_ObjectHideFlags: 0

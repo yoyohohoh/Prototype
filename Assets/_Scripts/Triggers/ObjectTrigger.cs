@@ -6,60 +6,62 @@
 // Contact: yobisaboy@gmail.com
 // -----------------------------------------------------------------------------
 
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
 
 public abstract class ObjectTrigger : MonoBehaviour
 {
     [SerializeField] List<GameObject> destinatedObjs;
 
-    void WakeUp()
+    IEnumerator WakeUp(GameObject obj, float timeGap)
     {
-        foreach (GameObject obj in destinatedObjs)
+        if (obj == null)
         {
-            if (obj == null)
-            {
-                Debug.LogError("NPCTrigger: One of the destinated NPCs is null.");
-                continue;
-            }
-
-            NPCController controller = obj.GetComponent<NPCController>();
-            if (controller == null)
-            {
-                Debug.LogError("NPCTrigger: The GameObject does not have an NPCController component.");
-                continue;
-            }
-            NavMeshAgent agent = controller.GetComponent<NavMeshAgent>();
-            if (agent == null)
-            {
-                Debug.LogError("NPCTrigger: The NPCController does not have a NavMeshAgent component.");
-                continue;
-            }
-            Animator animator = controller.animator;
-            if (animator == null)
-            {
-                Debug.LogError("NPCTrigger: The NPCController does not have an Animator component.");
-                continue;
-            }
-
-            obj.SetActive(true);
-
-            if (controller)
-            { controller.enabled = true; }
-            if (agent)
-            { agent.enabled = true; }
-            if (animator)
-            { animator.enabled = true; }
+            Debug.LogError("NPCTrigger: One of the destinated NPCs is null.");
         }
+
+        NPCController controller = obj.GetComponent<NPCController>();
+        if (controller == null)
+        {
+            Debug.LogError("NPCTrigger: The GameObject does not have an NPCController component.");
+        }
+        NavMeshAgent agent = controller.GetComponent<NavMeshAgent>();
+        if (agent == null)
+        {
+            Debug.LogError("NPCTrigger: The NPCController does not have a NavMeshAgent component.");
+        }
+        Animator animator = controller.animator;
+        if (animator == null)
+        {
+            Debug.LogError("NPCTrigger: The NPCController does not have an Animator component.");
+        }
+
+        Debug.Log($"NPCTrigger: Activating {obj.name} after {timeGap} seconds.");
+
+        yield return new WaitForSeconds(timeGap);
+
+        obj.SetActive(true);
+        if (controller)
+        { controller.enabled = true; }
+        if (agent)
+        { agent.enabled = true; }
+        if (animator)
+        { animator.enabled = true; }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Invoke("WakeUp", 1.0f);
+            foreach (GameObject obj in destinatedObjs)
+            {
+                float randomTime = Random.Range(1f, 9f);
+                StartCoroutine(WakeUp(obj, randomTime));
+            }
+
         }
     }
 
