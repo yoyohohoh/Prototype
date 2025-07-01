@@ -23,7 +23,7 @@ public class NPCController : MonoBehaviour
     private NPCStateBase currentState;
     private Coroutine currentCoroutine;
 
-    private bool isChasing = false;
+    public bool isChasing = false;
 
     public bool IsChasing
     {

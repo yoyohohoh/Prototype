@@ -43,6 +43,7 @@ public abstract class ObjectTrigger : MonoBehaviour
         yield return new WaitForSeconds(timeGap);
 
         obj.SetActive(true);
+        obj.transform.Find("Marker").gameObject.SetActive(true);
         if (controller)
         { controller.enabled = true; }
         if (agent)
@@ -50,6 +51,7 @@ public abstract class ObjectTrigger : MonoBehaviour
         if (animator)
         { animator.enabled = true; }
 
+        this.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
