@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcee5fe8c0b6da74db27e1074b921e1e, type: 3}
+  m_Name: Quest1
+  m_EditorClassIdentifier: 
+  _questStatus: 0
+  _questID: 1
+  _questName: Seeds of Strength
+  _questDescription: The world is ripe with adventure, but you'll need a weapon to
+    protect yourself. Start your journey by gathering the right materials to craft
+    your very first tool.
+  _checkPoints: []
+  _itemList:
+  - obj: {fileID: 691549675455114117, guid: 9f970ed0b5d1f444e99fb3710a96ff6a, type: 3}
+    count: 1
+  - obj: {fileID: 2661124953969145109, guid: 9f1f5695f21693f4e98f4961ab3744aa, type: 3}
+    count: 1
+  _npcKillList: []
+  _hpReward: 0
+  _xpReward: 50
+  _questReward: {fileID: 1562654906975686215, guid: c2e2fdb88de7aa54d8e57bcd090f332e, type: 3}
