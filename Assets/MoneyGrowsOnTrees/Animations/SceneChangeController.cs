@@ -12,10 +12,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneChangeController : MonoBehaviour
 {
-    Animator animator;
+    [SerializeField] Animator animator;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        
     }
 
     public void SceneLoad(int sceneID)
@@ -26,7 +26,7 @@ public class SceneChangeController : MonoBehaviour
     IEnumerator SceneLoadDelay(int sceneID)
     {
         animator.SetTrigger("Exit");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene(sceneID);
     }
 }
