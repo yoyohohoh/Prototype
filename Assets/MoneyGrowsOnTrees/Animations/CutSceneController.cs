@@ -41,7 +41,7 @@ public class CutSceneController : MonoBehaviour
         for (int i = 0; i < animators.Count; i++)
         {
             animators[i].animator.enabled = true;
-            yield return new WaitForSeconds(animators[i].gap);
+            yield return new WaitForSeconds(animators[i].gap);         
         }
 
         Fading.SetTrigger("Exit");
