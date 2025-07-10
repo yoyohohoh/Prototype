@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 301629809}
   - component: {fileID: 301629808}
   - component: {fileID: 301629807}
+  - component: {fileID: 301629811}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -469,6 +470,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &301629811
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301629806}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eea73fc472f833b44a202a2db021db76, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &419406864
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,11 +524,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 301629810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1600, y: 50}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -1600, y: -347.99997}
+  m_SizeDelta: {x: 3300, y: 50}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &419406866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,8 +549,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Credit Credits Credits Credits Credits Credits Credits Credits Credits
-    Credits Credits Credits Credits '
+  m_text: Credits Credits Credits Credits Credits Credits Credits Credits Credits
+    Credits Credits Credits Credits Credits Credits Credits Credits Credits Credits
+    Credits Credits Credits Credits Credits Credits Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -797,11 +821,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animators:
   - animator: {fileID: 1968578745}
+    gap: 0
+  - animator: {fileID: 301629811}
     gap: 4
   - animator: {fileID: 74068816}
     gap: 4
   - animator: {fileID: 549773850}
-    gap: 0
+    gap: 0.5
 --- !u!4 &615776498
 Transform:
   m_ObjectHideFlags: 0
