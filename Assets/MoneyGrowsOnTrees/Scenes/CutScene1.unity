@@ -823,11 +823,11 @@ MonoBehaviour:
   - animator: {fileID: 1968578745}
     gap: 0
   - animator: {fileID: 301629811}
-    gap: 4
-  - animator: {fileID: 74068816}
-    gap: 4
+    gap: 6
   - animator: {fileID: 549773850}
-    gap: 0.5
+    gap: 0
+  - animator: {fileID: 74068816}
+    gap: 7.25
 --- !u!4 &615776498
 Transform:
   m_ObjectHideFlags: 0
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.098039225, g: 0.10588236, b: 0.1137255, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

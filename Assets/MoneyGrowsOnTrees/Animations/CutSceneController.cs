@@ -45,7 +45,7 @@ public class CutSceneController : MonoBehaviour
         }
 
         Fading.SetTrigger("Exit");
-        yield return new WaitForSeconds(Fading.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(Fading.GetCurrentAnimatorStateInfo(0).length + 2.0f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
