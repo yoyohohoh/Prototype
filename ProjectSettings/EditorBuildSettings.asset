@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MoneyGrowsOnTrees/Scenes/CutScene2.unity
     guid: 52a249544e84d2c45811c2b4f73dc9d2
+  - enabled: 1
+    path: Assets/MoneyGrowsOnTrees/Scenes/Level.unity
+    guid: a6c7b1c8c49098348abfe8a9851874e8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

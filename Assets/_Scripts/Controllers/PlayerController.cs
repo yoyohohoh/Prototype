@@ -67,12 +67,13 @@ public class PlayerController : Subject
     void Start()
     {
         _playerData = GameSaveManager.Instance().LoadPlayerData();
-
+        _animatorController = GetComponent<AnimationController>();
         if (_playerData == null)
         {
             _playerData = new PlayerData();
+            _animatorController.SetAnimationTrigger("StartGame");
         }
-        _animatorController = GetComponent<AnimationController>();
+        
         _characterController = GetComponent<CharacterController>();
         _characterTransform = this.transform.Find("Character");
         if (_characterController == null)
