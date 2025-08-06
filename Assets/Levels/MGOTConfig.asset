@@ -42,4 +42,4 @@ MonoBehaviour:
     amount: 2
   - prefab: {fileID: 8133890630073970461, guid: 740485ceb913edc42b25e18d8a59ea17, type: 3}
     amount: 2
-  questSet: {fileID: 11400000, guid: a51d49e07754f734aa40b4010e03f5d4, type: 2}
+  questSet: {fileID: 11400000, guid: cb71fb06536bf2744bf1ac5333ce8010, type: 2}

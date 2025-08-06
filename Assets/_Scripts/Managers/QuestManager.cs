@@ -243,7 +243,7 @@ public class QuestManager : PersistentSingleton<QuestManager>, IObserver
             newQuest.name = quest._questName;
             newQuest.transform.Find("QuestName").GetComponent<TextMeshProUGUI>().text = $"{currentQuestSet._questSetName}: {quest._questName}";
             newQuest.transform.Find("QuestDescription").GetComponent<TextMeshProUGUI>().text = quest._questDescription;
-            newQuest.transform.Find("QuestStatus").GetComponent<Image>().sprite = quest._questStatus == QuestStatus.OnProgress ? Resources.Load<Sprite>("Sprites/blankBadge") : Resources.Load<Sprite>("Sprites/badge");
+            newQuest.transform.Find("QuestStatus").GetComponent<Image>().sprite = quest._questStatus == QuestStatus.OnProgress ? Resources.Load<Sprite>("Sprites/Prototype/blankBadge") : Resources.Load<Sprite>("Sprites/badge");
             RectTransform questRT = newQuest.GetComponent<RectTransform>();
             questRT.localScale = Vector3.one;
             questRT.anchoredPosition = new Vector2(0f, questsScrollbarPosY);
