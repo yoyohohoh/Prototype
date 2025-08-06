@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MoneyGrowsOnTrees/Scenes/Opening.unity
+    guid: 6db4dc0ae26242245b4cf26fe0a3cb4b
+  - enabled: 1
     path: Assets/MoneyGrowsOnTrees/Scenes/CutScene1.unity
     guid: b7f80423c91abad48886b6f6fcc70924
   - enabled: 1
@@ -14,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MoneyGrowsOnTrees/Scenes/Level.unity
     guid: a6c7b1c8c49098348abfe8a9851874e8
+  - enabled: 1
+    path: Assets/MoneyGrowsOnTrees/Scenes/Menu.unity
+    guid: 8b6485d62a2ffd74c9c886f6e2b71e66
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

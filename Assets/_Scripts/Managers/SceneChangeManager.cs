@@ -7,9 +7,29 @@
 // -----------------------------------------------------------------------------
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneChangeManager : PersistentSingleton<SceneChangeManager>
 {
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            GameDataLoad();
+        }
+    }
+    public void GameDataLoad()
+    {
+        PlayerData playerData = GameSaveManager.Instance().LoadPlayerData();
+        if (playerData == null)
+        {
+            LoadSceneByName("CutScene1");
+        }
+        else
+        {
+            LoadSceneByName("Menu");
+        }
+    }
     public void LoadSceneByName(string sceneName)
     {
 
