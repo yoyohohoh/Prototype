@@ -23,15 +23,23 @@ public class AudioController : MonoBehaviour
     [SerializeField] List<AudioConfig> audios;
     void Awake()
     {
-        foreach (AudioConfig config in audios)
+        PlayerData playerData = GameSaveManager.Instance().LoadPlayerData();
+        if (playerData == null)
         {
-            if (config.audioSource == null)
+            foreach (AudioConfig config in audios)
             {
-                Debug.LogError("AudioController: One of the audios is not assigned.");
+                if (config.audioSource == null)
+                {
+                    Debug.LogError("AudioController: One of the audios is not assigned.");
+                }
             }
-        }
 
-        StartCoroutine(AudioStart());
+            StartCoroutine(AudioStart());
+        }
+        else
+        { 
+            Destroy(gameObject);
+        }
     }
 
     private IEnumerator AudioStart()
@@ -41,6 +49,8 @@ public class AudioController : MonoBehaviour
         {
             if (audios[i].audioSource != null)
             {
+                if (i > 0)
+                { audios[i - 1].audioSource.enabled = false; }
                 audios[i].audioSource.enabled = true;
             }
 

@@ -146,10 +146,10 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 72bfc8c167be00247b558083f5fd577b, type: 3}
-  m_Resource: {fileID: 8300000, guid: 72bfc8c167be00247b558083f5fd577b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5875eb70c8bb7744bad47e6fa7bc9e4b, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5875eb70c8bb7744bad47e6fa7bc9e4b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -193,7 +193,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1080,7 +1080,7 @@ MonoBehaviour:
   startDelay: 0.5
   audios:
   - audioSource: {fileID: 356451659}
-    gap: 6.5
+    gap: 7
   - audioSource: {fileID: 16845902}
     gap: 0
 --- !u!4 &596952359
